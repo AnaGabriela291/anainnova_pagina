@@ -83,6 +83,57 @@
     });
   }
 
+  /* Project modal */
+  var modal = document.getElementById('projectModal');
+  var modalMedia = document.getElementById('projectModalMedia');
+  var modalTag = document.getElementById('projectModalTag');
+  var modalTitle = document.getElementById('projectModalTitle');
+  var modalDesc = document.getElementById('projectModalDesc');
+  var lastTrigger = null;
+
+  function openProjectModal(card) {
+    var mediaEl = card.querySelector('.project-card__media');
+    var mediaMatch = mediaEl && mediaEl.className.match(/project-card__media--(\d)/);
+
+    modalMedia.className = 'project-modal__media' + (mediaMatch ? ' project-modal__media--' + mediaMatch[1] : '');
+    modalTag.textContent = card.getAttribute('data-tag') || '';
+    modalTitle.textContent = card.getAttribute('data-title') || card.querySelector('h3').textContent;
+    modalDesc.textContent = card.getAttribute('data-desc') || card.querySelector('p').textContent;
+
+    lastTrigger = card;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('is-locked');
+    modal.querySelector('.project-modal__close').focus();
+  }
+
+  function closeProjectModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-locked');
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  if (modal && projects.length) {
+    projects.forEach(function (card) {
+      card.addEventListener('click', function () { openProjectModal(card); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openProjectModal(card);
+        }
+      });
+    });
+
+    modal.querySelectorAll('[data-modal-close]').forEach(function (el) {
+      el.addEventListener('click', closeProjectModal);
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeProjectModal();
+    });
+  }
+
   /* Process step pills */
   var stepFilters = document.getElementById('stepFilters');
   var stepDesc = document.getElementById('stepDesc');

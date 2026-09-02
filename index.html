@@ -25,6 +25,7 @@
       <a href="#proceso">Proceso</a>
       <a href="#proyectos">Proyectos</a>
       <a href="#contacto">Contacto</a>
+      <a href="#contacto" class="nav__cta btn btn--pink btn--block">Hablemos</a>
     </nav>
 
     <div class="header__actions">
@@ -306,10 +307,12 @@
         <button class="filter" data-filter="video">Video</button>
       </div>
 
-      <!-- Reemplaza cada .project-card con tu proyecto real: cambia la imagen de fondo,
-           el título y la descripción. Mantén el atributo data-cat para que el filtro siga funcionando. -->
+      <!-- Reemplaza cada .project-card con tu proyecto real: cambia la imagen de fondo (o pon una <img> real
+           dentro de .project-card__media), el título, la descripción y data-desc (el texto que se ve en la
+           ventana emergente al hacer click). Mantén el atributo data-cat para que el filtro siga funcionando. -->
       <div class="projects" id="projects">
-        <article class="project-card" data-cat="web">
+        <article class="project-card" data-cat="web" data-title="Próximamente" data-tag="Web"
+                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: una landing page a medida, diseñada y desarrollada desde cero. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--1"></div>
           <div class="project-card__body">
             <span class="project-card__tag">Web</span>
@@ -317,7 +320,8 @@
             <p>Landing page a medida</p>
           </div>
         </article>
-        <article class="project-card" data-cat="identidad">
+        <article class="project-card" data-cat="identidad" data-title="Próximamente" data-tag="Identidad visual"
+                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: una identidad de marca completa, con logo, colores y aplicaciones. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--2"></div>
           <div class="project-card__body">
             <span class="project-card__tag">Identidad visual</span>
@@ -325,7 +329,8 @@
             <p>Marca completa</p>
           </div>
         </article>
-        <article class="project-card" data-cat="carrusel">
+        <article class="project-card" data-cat="carrusel" data-title="Próximamente" data-tag="Carrusel"
+                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: un carrusel de contenido para Instagram. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--3"></div>
           <div class="project-card__body">
             <span class="project-card__tag">Carrusel</span>
@@ -333,7 +338,8 @@
             <p>Contenido para Instagram</p>
           </div>
         </article>
-        <article class="project-card" data-cat="logo">
+        <article class="project-card" data-cat="logo" data-title="Próximamente" data-tag="Logo"
+                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: un diseño de logo y marca. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--4"></div>
           <div class="project-card__body">
             <span class="project-card__tag">Logo</span>
@@ -341,7 +347,8 @@
             <p>Diseño de marca</p>
           </div>
         </article>
-        <article class="project-card" data-cat="post">
+        <article class="project-card" data-cat="post" data-title="Próximamente" data-tag="Post"
+                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: una pieza gráfica para redes sociales. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--5"></div>
           <div class="project-card__body">
             <span class="project-card__tag">Post</span>
@@ -349,7 +356,8 @@
             <p>Pieza para redes</p>
           </div>
         </article>
-        <article class="project-card" data-cat="video">
+        <article class="project-card" data-cat="video" data-title="Próximamente" data-tag="Video"
+                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: la edición de un reel. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--6"></div>
           <div class="project-card__body">
             <span class="project-card__tag">Video</span>
@@ -419,6 +427,22 @@
     <a href="#top" class="footer__top">Volver arriba ↑</a>
   </div>
 </footer>
+
+<div class="project-modal" id="projectModal" aria-hidden="true">
+  <div class="project-modal__scrim" data-modal-close></div>
+  <div class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <button class="project-modal__close" type="button" data-modal-close aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <div class="project-modal__media" id="projectModalMedia"></div>
+    <div class="project-modal__body">
+      <span class="project-modal__tag" id="projectModalTag"></span>
+      <h3 id="projectModalTitle"></h3>
+      <p id="projectModalDesc"></p>
+      <a href="#contacto" class="btn btn--pink" data-modal-close>Quiero un proyecto así</a>
+    </div>
+  </div>
+</div>
 
 <script src="js/script.js"></script>
 </body>
