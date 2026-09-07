@@ -295,7 +295,7 @@
     <div class="wrap">
       <p class="eyebrow eyebrow--center">Portafolio</p>
       <h2 class="section__title">Algunos <span class="hl">proyectos</span></h2>
-      <p class="section__sub">Estoy subiendo mis trabajos por categoría. Muy pronto vas a poder ver cada proyecto aquí.</p>
+      <p class="section__sub">Una muestra de mis trabajos reales. Sigo subiendo más por categoría.</p>
 
       <div class="filters" id="filters">
         <button class="filter is-active" data-filter="all">Todos</button>
@@ -307,28 +307,88 @@
         <button class="filter" data-filter="video">Video</button>
       </div>
 
-      <!-- Reemplaza cada .project-card con tu proyecto real: cambia la imagen de fondo (o pon una <img> real
-           dentro de .project-card__media), el título, la descripción y data-desc (el texto que se ve en la
-           ventana emergente al hacer click). Mantén el atributo data-cat para que el filtro siga funcionando. -->
+      <!-- Para agregar un proyecto nuevo: copia un <article class="project-card">, cambia data-cat (para el filtro),
+           data-title, data-tag, data-desc (lo que se ve en la ventana emergente), la imagen dentro de
+           .project-card__media, y el título/descripción cortos del cuerpo de la tarjeta. -->
       <div class="projects" id="projects">
-        <article class="project-card" data-cat="web" data-title="Próximamente" data-tag="Web"
-                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: una landing page a medida, diseñada y desarrollada desde cero. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--1"></div>
+        <article class="project-card" data-cat="logo" data-title="Chicas Fuego — Logo" data-tag="Logo"
+                  data-desc="Diseño de logotipo y paleta de color para Chicas Fuego, un colectivo de baile. Tipografía con carácter y una paleta cálida (rojo, naranja y amarillo) que transmite energía y fuerza."
+                  data-img="assets/projects/chicas-fuego-logo.png" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="project-card__media has-image">
+            <img src="assets/projects/chicas-fuego-logo.png" alt="Logo y paleta de color de Chicas Fuego" loading="lazy">
+          </div>
           <div class="project-card__body">
-            <span class="project-card__tag">Web</span>
-            <h3>Próximamente</h3>
-            <p>Landing page a medida</p>
+            <span class="project-card__tag">Logo</span>
+            <h3>Chicas Fuego</h3>
+            <p>Logotipo y paleta de color</p>
           </div>
         </article>
-        <article class="project-card" data-cat="identidad" data-title="Próximamente" data-tag="Identidad visual"
-                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: una identidad de marca completa, con logo, colores y aplicaciones. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--2"></div>
+
+        <article class="project-card" data-cat="identidad" data-title="Amelia Nails Studio — Identidad visual" data-tag="Identidad visual"
+                  data-desc="Identidad de marca completa para Amelia Nails Studio: logo y variaciones, paleta de color, tipografías y aplicaciones (letrero, tarjetas de presentación y empaque de producto)."
+                  data-img="assets/projects/amelia-nails-identidad.png" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="project-card__media has-image">
+            <img src="assets/projects/amelia-nails-identidad.png" alt="Identidad visual de Amelia Nails Studio" loading="lazy">
+          </div>
           <div class="project-card__body">
             <span class="project-card__tag">Identidad visual</span>
-            <h3>Próximamente</h3>
-            <p>Marca completa</p>
+            <h3>Amelia Nails Studio</h3>
+            <p>Marca completa para salón de uñas</p>
           </div>
         </article>
+
+        <article class="project-card" data-cat="identidad" data-title="Dra. Camila Ávila — Identidad visual" data-tag="Identidad visual"
+                  data-desc="Branding para un consultorio de odontología integral: logo con carácter amigable, paleta de color, tipografías, moodboard y aplicaciones (tarjetas, vitrina del consultorio)."
+                  data-img="assets/projects/camila-avila-identidad.png" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="project-card__media has-image">
+            <img src="assets/projects/camila-avila-identidad.png" alt="Identidad visual de Dra. Camila Ávila, Odontología Integral" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__tag">Identidad visual</span>
+            <h3>Dra. Camila Ávila</h3>
+            <p>Branding para consultorio odontológico</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-cat="identidad" data-title="Consultores Escuela & Asociados — Identidad visual" data-tag="Identidad visual"
+                  data-desc="Identidad corporativa para una firma de consultoría: logo modular, tipografía, pantones oficiales y aplicaciones de marca (tarjetas de presentación, tote bag, mousepad)."
+                  data-img="assets/projects/consultores-identidad.png" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="project-card__media has-image">
+            <img src="assets/projects/consultores-identidad.png" alt="Identidad visual de Consultores Escuela & Asociados" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__tag">Identidad visual</span>
+            <h3>Consultores Escuela & Asociados</h3>
+            <p>Identidad corporativa</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-cat="post" data-title="Flyers 2025" data-tag="Post"
+                  data-desc="Selección de flyers para redes sociales: eventos de baile, rifas, servicios de video/marketing y promociones de gimnasio. Diseñados para captar atención y comunicar la info clave de un vistazo."
+                  data-img="assets/projects/flyers-2025.png" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="project-card__media has-image">
+            <img src="assets/projects/flyers-2025.png" alt="Colección de flyers para redes sociales" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__tag">Post</span>
+            <h3>Flyers 2025</h3>
+            <p>Piezas para eventos y promociones</p>
+          </div>
+        </article>
+
+        <article class="project-card" data-cat="web" data-title="ApexDesk" data-tag="Web"
+                  data-desc="ApexDesk: una herramienta para simplificar la gestión de negocios tecnológicos. Registra ventas, gestiona clientes, procesa pagos con distintos métodos y controla el inventario, todo desde una interfaz simple."
+                  data-img="assets/projects/apexdesk-web.png" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="project-card__media has-image">
+            <img src="assets/projects/apexdesk-web.png" alt="Interfaz de la aplicación ApexDesk" loading="lazy">
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__tag">Web</span>
+            <h3>ApexDesk</h3>
+            <p>App de ventas e inventario</p>
+          </div>
+        </article>
+
         <article class="project-card" data-cat="carrusel" data-title="Próximamente" data-tag="Carrusel"
                   data-desc="Estoy preparando este proyecto para mostrártelo aquí: un carrusel de contenido para Instagram. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--3"></div>
@@ -338,24 +398,7 @@
             <p>Contenido para Instagram</p>
           </div>
         </article>
-        <article class="project-card" data-cat="logo" data-title="Próximamente" data-tag="Logo"
-                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: un diseño de logo y marca. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--4"></div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Logo</span>
-            <h3>Próximamente</h3>
-            <p>Diseño de marca</p>
-          </div>
-        </article>
-        <article class="project-card" data-cat="post" data-title="Próximamente" data-tag="Post"
-                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: una pieza gráfica para redes sociales. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--5"></div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Post</span>
-            <h3>Próximamente</h3>
-            <p>Pieza para redes</p>
-          </div>
-        </article>
+
         <article class="project-card" data-cat="video" data-title="Próximamente" data-tag="Video"
                   data-desc="Estoy preparando este proyecto para mostrártelo aquí: la edición de un reel. Mientras tanto, escríbeme si quieres ver ejemplos de mi trabajo." tabindex="0" role="button" aria-haspopup="dialog">
           <div class="project-card__media project-card__media--6"></div>

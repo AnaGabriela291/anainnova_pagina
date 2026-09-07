@@ -92,10 +92,18 @@
   var lastTrigger = null;
 
   function openProjectModal(card) {
-    var mediaEl = card.querySelector('.project-card__media');
-    var mediaMatch = mediaEl && mediaEl.className.match(/project-card__media--(\d)/);
+    var imgSrc = card.getAttribute('data-img');
 
-    modalMedia.className = 'project-modal__media' + (mediaMatch ? ' project-modal__media--' + mediaMatch[1] : '');
+    if (imgSrc) {
+      modalMedia.className = 'project-modal__media has-image';
+      modalMedia.innerHTML = '<img src="' + imgSrc + '" alt="">';
+    } else {
+      var mediaEl = card.querySelector('.project-card__media');
+      var mediaMatch = mediaEl && mediaEl.className.match(/project-card__media--(\d)/);
+      modalMedia.className = 'project-modal__media' + (mediaMatch ? ' project-modal__media--' + mediaMatch[1] : '');
+      modalMedia.innerHTML = '';
+    }
+
     modalTag.textContent = card.getAttribute('data-tag') || '';
     modalTitle.textContent = card.getAttribute('data-title') || card.querySelector('h3').textContent;
     modalDesc.textContent = card.getAttribute('data-desc') || card.querySelector('p').textContent;
