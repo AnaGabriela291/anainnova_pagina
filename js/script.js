@@ -36,7 +36,7 @@
 
   /* Scroll reveal */
   var revealTargets = document.querySelectorAll(
-    '.shield-card, .project-card, .audience-card, .detail-card, .about__media, .about__text, .contact__intro, .contact__form, .hero__text, .hero__media'
+    '.shield-card, .project-card, .web-project-card, .audience-card, .detail-card, .about__media, .about__text, .contact__intro, .contact__form, .hero__text, .hero__media'
   );
   revealTargets.forEach(function (el) { el.classList.add('reveal'); });
 
@@ -192,5 +192,24 @@
       var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(texto);
       window.open(url, '_blank', 'noopener');
     });
+  }
+
+  /* Scale live iframe previews of web projects to fit their card */
+  var webPreviews = document.querySelectorAll('.web-project-card__preview');
+  var PREVIEW_DESIGN_WIDTH = 1440;
+
+  function scaleWebPreviews() {
+    webPreviews.forEach(function (box) {
+      var iframe = box.querySelector('iframe');
+      if (!iframe) return;
+      var scale = box.clientWidth / PREVIEW_DESIGN_WIDTH;
+      iframe.style.transform = 'scale(' + scale + ')';
+    });
+  }
+
+  if (webPreviews.length) {
+    scaleWebPreviews();
+    window.addEventListener('resize', scaleWebPreviews);
+    window.addEventListener('load', scaleWebPreviews);
   }
 })();

@@ -1,0 +1,3493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Registro de Postgrado — UNEFA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0d1b4b;
+      --navy2:   #162260;
+      --red:     #b91c1c;
+      --gold:    #d4a017;
+      --light:   #f2f4f8;
+      --white:   #ffffff;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --border:  #dde2ec;
+      --online:  #22c55e;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Partículas del header */
+    .header-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    @keyframes floatParticle {
+      0%,100% { transform: translateY(0) translateX(0) scale(1); opacity: .2; }
+      25%      { transform: translateY(-12px) translateX(8px) scale(1.4); opacity: .45; }
+      50%      { transform: translateY(-6px) translateX(-6px) scale(.8); opacity: .15; }
+      75%      { transform: translateY(-18px) translateX(4px) scale(1.2); opacity: .35; }
+    }
+    .hparticle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.6);
+      animation: floatParticle linear infinite;
+      filter: blur(1px);
+    }
+    .hparticle.gold { background: rgba(212,160,23,.8); }
+    .hparticle.red  { background: rgba(185,28,28,.7); }
+
+    /* ── HEADER ANIMACIÓN DE FONDO ── */
+    @keyframes headerBgShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes headerParticle {
+      0%   { transform: translateY(0) translateX(0) scale(1); opacity: .15; }
+      33%  { transform: translateY(-18px) translateX(12px) scale(1.3); opacity: .25; }
+      66%  { transform: translateY(-8px) translateX(-10px) scale(.8); opacity: .1; }
+      100% { transform: translateY(0) translateX(0) scale(1); opacity: .15; }
+    }
+    @keyframes scanLine {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    header {
+      background: linear-gradient(135deg, #0d1b4b 0%, #1a2f7a 30%, #0d1b4b 60%, #1f1050 100%);
+      background-size: 300% 300%;
+      animation: headerBgShift 10s ease infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Partículas decorativas */
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(212,160,23,.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(185,28,28,.12) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(255,255,255,.06) 0%, transparent 35%);
+      animation: headerParticle 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* Línea de scan animada */
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+      animation: scanLine 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* Grid de puntos sutil */
+    .header-bg {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 1;
+      animation: fadeIn 1s .3s both;
+    }
+    .header-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      gap: 16px;
+      z-index: 1;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    @keyframes logoPulse {
+      0%,100% { filter: drop-shadow(0 1px 3px rgba(0,0,0,.4)); transform: scale(1); }
+      50%      { filter: drop-shadow(0 2px 12px rgba(212,160,23,.5)); transform: scale(1.04); }
+    }
+    .header-brand img {
+      height: 52px;
+      width: auto;
+      animation: logoPulse 4s ease-in-out infinite;
+    }
+    .header-brand-text {
+      color: var(--white);
+      line-height: 1.25;
+    }
+    @keyframes textGlow {
+      0%,100% { text-shadow: none; }
+      50%      { text-shadow: 0 0 20px rgba(212,160,23,.3); }
+    }
+    .header-brand-text strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      animation: textGlow 4s ease-in-out infinite;
+    }
+    .header-brand-text span {
+      font-size: .72rem;
+      opacity: .82;
+      font-weight: 400;
+    }
+    .btn-logout {
+      background: var(--navy2);
+      border: 1.5px solid rgba(255,255,255,.22);
+      color: var(--white);
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .18s, border-color .18s;
+      white-space: nowrap;
+    }
+    .btn-logout:hover { background: var(--red); border-color: var(--red); }
+
+    /* ── WELCOME BANNER ── */
+    .welcome-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+    }
+    .welcome-bar {
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .welcome-bar-left h2 {
+      color: var(--white);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .welcome-bar-left p {
+      color: rgba(255,255,255,.7);
+      font-size: .8rem;
+      margin-top: 2px;
+    }
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: 6px 14px;
+      color: var(--white);
+      font-size: .82rem;
+      font-weight: 500;
+    }
+    .status-dot {
+      width: 9px; height: 9px;
+      background: var(--online);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(34,197,94,.25);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.25); }
+      50%      { box-shadow: 0 0 0 6px rgba(34,197,94,.1); }
+    }
+
+    /* ── NAV TABS ── */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 0 32px;
+      background: var(--white);
+      border-bottom: 2px solid var(--border);
+    }
+    .nav-tab {
+      padding: 11px 18px;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      transition: color .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .nav-tab:hover { color: var(--navy); }
+    .nav-tab.active { color: var(--navy); border-color: var(--navy); font-weight: 600; }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      flex: 1;
+      padding: 28px 32px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── INFO STATS ROW ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .stat-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .stat-icon.blue  { background: rgba(13,27,75,.1);  color: var(--navy); }
+    .stat-icon.red   { background: rgba(185,28,28,.1); color: var(--red); }
+    .stat-icon.gold  { background: rgba(212,160,23,.12); color: var(--gold); }
+    .stat-icon.green { background: rgba(34,197,94,.12); color: #16a34a; }
+    .stat-info strong { display: block; font-size: 1.35rem; font-weight: 800; color: var(--text); }
+    .stat-info span   { font-size: .75rem; color: var(--muted); font-weight: 500; }
+
+    /* ── MODULE CARDS ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .module-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      cursor: pointer;
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent, var(--navy));
+      border-radius: 12px 12px 0 0;
+    }
+    .module-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(13,27,75,.12);
+      border-color: rgba(13,27,75,.2);
+    }
+    .module-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--icon-bg, rgba(13,27,75,.08));
+      color: var(--accent, var(--navy));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+    .module-card h3 {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .module-card p {
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .module-arrow {
+      position: absolute;
+      bottom: 16px; right: 16px;
+      color: var(--muted);
+      font-size: .85rem;
+      opacity: 0;
+      transition: opacity .18s, transform .18s;
+    }
+    .module-card:hover .module-arrow { opacity: 1; transform: translateX(3px); }
+
+    /* ── NOTICES ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-header h4 { font-size: .88rem; font-weight: 700; color: var(--text); }
+    .panel-header a  { font-size: .76rem; color: var(--navy); text-decoration: none; font-weight: 500; }
+    .panel-body { padding: 4px 0; }
+
+    .notice-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background .12s;
+    }
+    .notice-item:last-child { border-bottom: none; }
+    .notice-item:hover { background: var(--light); }
+    .notice-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .notice-dot.red  { background: var(--red); }
+    .notice-dot.gold { background: var(--gold); }
+    .notice-dot.blue { background: var(--navy); }
+    .notice-text strong { display: block; font-size: .8rem; font-weight: 600; color: var(--text); }
+    .notice-text span   { font-size: .73rem; color: var(--muted); }
+
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .schedule-item:last-child { border-bottom: none; }
+    .schedule-day {
+      min-width: 40px;
+      text-align: center;
+      background: rgba(13,27,75,.06);
+      border-radius: 8px;
+      padding: 6px 4px;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .schedule-info strong { display: block; font-size: .8rem; font-weight: 600; }
+    .schedule-info span   { font-size: .73rem; color: var(--muted); }
+
+    /* ── INPUT ICON ROW ── */
+    .input-icon-row { display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 7px; overflow: hidden; transition: border-color .15s; }
+    .input-icon-row:focus-within { border-color: var(--navy); }
+    .input-icon { padding: 0 10px; font-size: .85rem; color: var(--muted); background: var(--light); border-right: 1px solid var(--border); height: 38px; display: flex; align-items: center; font-weight: 700; }
+    .input-icon-row input { border: none !important; border-radius: 0 !important; flex: 1; }
+    .input-icon-row input:focus { outline: none; }
+
+    /* ── BAREMO TABLE ── */
+    .baremo-table-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+    .baremo-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .baremo-table thead tr { background: var(--navy); color: var(--white); }
+    .baremo-table thead th { padding: 11px 16px; text-align: left; font-weight: 600; font-size: .78rem; }
+    .baremo-table thead th:nth-child(2),
+    .baremo-table thead th:nth-child(3) { text-align: center; width: 60px; }
+    .baremo-table tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+    .baremo-table tbody tr:last-child { border-bottom: none; }
+    .baremo-table tbody tr:hover:not(.baremo-category) { background: var(--light); }
+    .baremo-table td { padding: 10px 16px; color: var(--text); }
+    .baremo-table td:nth-child(2),
+    .baremo-table td:nth-child(3) { text-align: center; }
+    .baremo-table input[type=radio] { width: 16px; height: 16px; accent-color: var(--navy); cursor: pointer; }
+    .baremo-category td { background: rgba(13,27,75,.06); color: var(--navy); font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; padding: 8px 16px; }
+
+    /* ── DOCS INSTRUCTIONS ── */
+    .docs-instructions { background: rgba(212,160,23,.08); border: 1px solid rgba(212,160,23,.25); border-radius: 8px; padding: 12px 16px; font-size: .78rem; color: var(--text); }
+    .docs-instructions strong { color: var(--navy); display: block; margin-bottom: 6px; }
+    .docs-instructions ul { padding-left: 18px; }
+    .docs-instructions li { margin-bottom: 3px; }
+
+    /* ── FILE UPLOAD ── */
+    .file-upload-box input[type=file] { display: none; }
+    .file-upload-label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .file-btn { background: var(--navy); color: var(--white); padding: 7px 14px; border-radius: 6px; font-size: .78rem; font-weight: 600; white-space: nowrap; transition: background .15s; }
+    .file-btn:hover { background: var(--navy2); }
+    .file-name { font-size: .78rem; color: var(--muted); }
+    .file-upload-box small { display: block; margin-top: 4px; font-size: .7rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,.65);
+      text-align: center;
+      padding: 18px 32px;
+      font-size: .75rem;
+      line-height: 1.8;
+      border-top: 3px solid var(--navy);
+    }
+    footer strong { color: rgba(255,255,255,.9); }
+
+    /* ── DOCUMENTOS ── */
+    .docs-header-banner {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 20px 26px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+    .docs-header-icon { font-size: 2rem; }
+    .docs-header-banner h2 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .docs-header-banner p  { font-size: .78rem; opacity: .8; }
+
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .docs-layout { grid-template-columns: 1fr; } }
+
+    .docs-grid-cards { display: flex; flex-direction: column; gap: 10px; }
+
+    .doc-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: box-shadow .15s, border-color .15s;
+    }
+    .doc-card:hover { border-color: var(--navy); box-shadow: 0 3px 12px rgba(13,27,75,.08); }
+    .doc-card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .doc-card-info { flex: 1; }
+    .doc-card-info strong { display: block; font-size: .85rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .doc-card-info span   { font-size: .74rem; color: var(--muted); line-height: 1.4; }
+
+    .doc-dl-btn {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 7px;
+      padding: 8px 14px;
+      font-size: .76rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s;
+      flex-shrink: 0;
+    }
+    .doc-dl-btn:hover:not(.disabled) { background: var(--navy2); }
+    .doc-dl-btn.disabled {
+      background: var(--light);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      cursor: not-allowed;
+      font-size: .7rem;
+    }
+
+    .historial-doc-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .historial-doc-row:last-child { border-bottom: none; }
+    .hd-icono { font-size: 1.2rem; }
+    .hd-info { flex: 1; }
+    .hd-info strong { display: block; font-size: .8rem; font-weight: 600; color: var(--text); }
+    .hd-info span   { font-size: .72rem; color: var(--muted); }
+
+    .docs-instrucciones {
+      background: rgba(212,160,23,.07);
+      border: 1px solid rgba(212,160,23,.25);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: .76rem;
+    }
+    .docs-instrucciones strong { display: block; color: var(--navy); font-weight: 700; margin-bottom: 6px; }
+    .docs-instrucciones ul { padding-left: 16px; }
+    .docs-instrucciones li { margin-bottom: 3px; color: var(--text); }
+
+    .docs-subidos-titulo {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted);
+      margin: 16px 0 8px;
+    }
+    .docs-subidos-lista { display: flex; flex-direction: column; gap: 6px; }
+    .doc-subido-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 12px;
+      background: var(--light);
+      border-radius: 7px;
+      font-size: .76rem;
+    }
+    .doc-subido-tipo { font-weight: 600; color: var(--text); }
+    .doc-subido-estado { font-size: .7rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+    .doc-subido-estado.aprobado { background: rgba(22,163,74,.1); color: #15803d; }
+    .doc-subido-estado.pendiente-doc { background: rgba(212,160,23,.12); color: #92610a; }
+
+    /* ── PAGOS ── */
+    .pagos-solvencia-banner {
+      border-radius: 12px;
+      padding: 20px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .pagos-solvencia-banner.solvente { background: #15803d; color: var(--white); }
+    .pagos-solvencia-banner.insolvente { background: var(--red); color: var(--white); }
+    .solvencia-left { display: flex; align-items: center; gap: 16px; }
+    .solvencia-icon { font-size: 2rem; width: 50px; height: 50px; background: rgba(255,255,255,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+    .solvencia-left h2 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .solvencia-left p  { font-size: .78rem; opacity: .85; }
+
+    .pagos-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px,1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .pago-stat {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pago-stat-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .pago-stat strong { display: block; font-size: 1.1rem; font-weight: 800; color: var(--text); }
+    .pago-stat span   { font-size: .72rem; color: var(--muted); }
+
+    .pagos-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .pagos-layout { grid-template-columns: 1fr; } }
+
+    .aranceles-tabla {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      font-size: .8rem;
+    }
+    .arancel-row {
+      display: grid;
+      grid-template-columns: 1fr 100px 110px 100px;
+      gap: 8px;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .arancel-row:last-child { border-bottom: none; }
+    .arancel-row.header-row {
+      background: var(--navy);
+      color: var(--white);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .arancel-monto { font-weight: 700; color: var(--navy); }
+
+    .historial-pago-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .historial-pago-row:last-child { border-bottom: none; }
+    .hp-fecha { font-size: .72rem; color: var(--muted); min-width: 75px; font-weight: 600; }
+    .hp-info { flex: 1; }
+    .hp-info strong { display: block; font-size: .8rem; font-weight: 600; color: var(--text); }
+    .hp-info span   { font-size: .72rem; color: var(--muted); }
+    .hp-monto { font-size: .85rem; font-weight: 800; color: var(--navy); min-width: 80px; text-align: right; }
+    .hp-estado { min-width: 80px; text-align: center; }
+    .hp-recibo {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: .72rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--navy);
+      transition: background .12s;
+    }
+    .hp-recibo:hover { background: var(--border); }
+
+    /* Registrar pago card */
+    .registrar-pago-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .rp-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 13px 18px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    .rp-body { padding: 18px; }
+
+    .datos-bancarios {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 4px;
+    }
+    .db-title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 10px; }
+    .banco-tab-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+    .banco-tab {
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .banco-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .banco-datos { }
+    .db-row { display: flex; justify-content: space-between; font-size: .76rem; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .db-row:last-child { border-bottom: none; }
+    .db-row span { color: var(--muted); }
+    .db-row strong { color: var(--text); }
+
+    /* ── INSCRIPCIONES ── */
+    .insc-periodo-banner {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 20px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+    .insc-periodo-badge {
+      display: inline-block;
+      background: #16a34a;
+      color: var(--white);
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      letter-spacing: .05em;
+    }
+    .insc-periodo-banner h2 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .insc-periodo-banner p  { font-size: .78rem; opacity: .8; }
+    .insc-periodo-banner strong { color: var(--gold); }
+    .insc-countdown { display: flex; align-items: center; gap: 6px; }
+    .countdown-block { text-align: center; background: rgba(255,255,255,.1); border-radius: 8px; padding: 8px 14px; min-width: 54px; }
+    .countdown-block span { display: block; font-size: 1.4rem; font-weight: 800; line-height: 1; }
+    .countdown-block small { font-size: .65rem; opacity: .7; }
+    .countdown-sep { font-size: 1.4rem; font-weight: 800; opacity: .5; }
+
+    .insc-requisitos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .req-item {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: .76rem;
+      font-weight: 600;
+      border: 1.5px solid;
+    }
+    .req-item.ok { background: rgba(22,163,74,.08); border-color: rgba(22,163,74,.3); color: #15803d; }
+    .req-item.pendiente-req { background: rgba(212,160,23,.08); border-color: rgba(212,160,23,.3); color: #92610a; }
+    .req-icon { font-size: .85rem; }
+
+    .insc-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .insc-layout { grid-template-columns: 1fr; } }
+
+    .insc-filtros {
+      display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .insc-select, .insc-search {
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: .8rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color .15s;
+    }
+    .insc-select { min-width: 160px; }
+    .insc-search { flex: 1; min-width: 160px; }
+    .insc-select:focus, .insc-search:focus { outline: none; border-color: var(--navy); }
+
+    .insc-lista-header {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .insc-uc-info { font-weight: 600; color: var(--text); }
+
+    .insc-materias { display: flex; flex-direction: column; gap: 10px; }
+
+    .materia-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color .15s, box-shadow .15s;
+      cursor: pointer;
+    }
+    .materia-card:hover { border-color: var(--navy); box-shadow: 0 3px 12px rgba(13,27,75,.08); }
+    .materia-card.selected { border-color: var(--navy); background: rgba(13,27,75,.03); }
+
+    .materia-check-wrap input[type=checkbox] { display: none; }
+    .materia-check-wrap label {
+      width: 20px; height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all .15s;
+      flex-shrink: 0;
+    }
+    .materia-check-wrap input:checked + label {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .materia-check-wrap input:checked + label::after {
+      content: '✓';
+      color: var(--white);
+      font-size: .7rem;
+      font-weight: 800;
+    }
+
+    .materia-info { flex: 1; }
+    .materia-top { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+    .materia-codigo { font-size: .72rem; font-weight: 700; color: var(--navy); background: rgba(13,27,75,.08); padding: 2px 8px; border-radius: 4px; }
+    .materia-uc { font-size: .72rem; font-weight: 700; color: var(--gold); background: rgba(212,160,23,.1); padding: 2px 8px; border-radius: 4px; }
+    .materia-sec { font-size: .72rem; color: var(--muted); background: var(--light); padding: 2px 8px; border-radius: 4px; }
+    .materia-nombre { font-size: .85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .materia-detalles { display: flex; gap: 12px; flex-wrap: wrap; font-size: .72rem; color: var(--muted); }
+
+    .materia-cupos { text-align: center; flex-shrink: 0; }
+    .materia-cupos strong { display: block; font-size: 1.1rem; font-weight: 800; color: var(--text); }
+    .materia-cupos small { font-size: .65rem; color: var(--muted); }
+
+    /* Panel derecho */
+    .insc-resumen {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .insc-resumen-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 16px;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    #insc-seleccionadas { padding: 8px 0; min-height: 60px; }
+    .insc-empty { padding: 16px; font-size: .78rem; color: var(--muted); text-align: center; }
+    .insc-sel-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: .78rem;
+    }
+    .insc-sel-item:last-child { border-bottom: none; }
+    .insc-sel-nombre { font-weight: 600; color: var(--text); }
+    .insc-sel-uc { font-size: .72rem; color: var(--gold); font-weight: 700; }
+    .insc-resumen-footer {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .insc-uc-total { font-size: .82rem; font-weight: 600; }
+    #total-uc { font-size: 1.1rem; color: var(--navy); margin-left: 6px; }
+    .btn-inscribir {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 9px 18px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-inscribir:hover:not(:disabled) { background: var(--navy2); }
+    .btn-inscribir:disabled { opacity: .4; cursor: not-allowed; }
+
+    .insc-horario-titulo {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted); margin-bottom: 10px;
+    }
+    .insc-horario {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      min-height: 100px;
+    }
+    .horario-vacio { font-size: .78rem; color: var(--muted); text-align: center; padding: 20px 0; }
+    .horario-pill {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px;
+      border-radius: 7px;
+      margin-bottom: 7px;
+      font-size: .76rem;
+      font-weight: 600;
+      border-left: 3px solid;
+    }
+
+    .historial-row {
+      display: flex; align-items: center; gap: 14px; padding: 12px 20px;
+      border-bottom: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .historial-row:last-child { border-bottom: none; }
+    .historial-term { font-size: .78rem; font-weight: 700; color: var(--navy); min-width: 130px; }
+    .historial-materias { flex: 1; font-size: .76rem; color: var(--muted); }
+    .historial-badge { font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .historial-badge.aprobado { background: rgba(22,163,74,.1); color: #15803d; }
+
+    /* ── EXPEDIENTE ── */
+    .exp-header-card {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .exp-header-left { display: flex; align-items: center; gap: 16px; color: var(--white); }
+    .exp-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .exp-header-left h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+    .exp-header-left p  { font-size: .75rem; opacity: .8; line-height: 1.6; }
+    .exp-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .exp-btn { padding: 9px 18px; border-radius: 8px; font-size: .82rem; font-weight: 600; cursor: pointer; transition: all .15s; border: none; }
+    .exp-btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,.4); color: var(--white); }
+    .exp-btn-outline:hover { background: rgba(255,255,255,.1); }
+    .exp-btn-solid { background: var(--gold); color: var(--navy); }
+    .exp-btn-solid:hover { background: #c49010; }
+
+    .exp-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .exp-stat {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .exp-stat-val { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .exp-stat-label { font-size: .72rem; color: var(--muted); font-weight: 500; margin-bottom: 10px; }
+    .exp-stat-bar { height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .exp-stat-fill { height: 100%; border-radius: 99px; transition: width .4s ease; }
+
+    .exp-section-title {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--muted); margin-bottom: 12px;
+    }
+
+    .exp-avance-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .exp-avance-row { display: flex; align-items: center; gap: 12px; font-size: .8rem; }
+    .exp-avance-row > span:first-child { min-width: 160px; color: var(--text); font-weight: 500; }
+    .exp-avance-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .exp-avance-bar { height: 100%; background: #16a34a; border-radius: 99px; transition: width .4s; }
+    .exp-avance-pct { min-width: 90px; text-align: right; font-size: .75rem; font-weight: 600; color: #16a34a; }
+
+    /* Term tabs */
+    .exp-term-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .exp-term-tab {
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .exp-term-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .exp-term-tab:hover:not(.active) { border-color: var(--navy); color: var(--navy); }
+
+    .exp-term-panel { }
+    .exp-en-curso-banner {
+      background: rgba(212,160,23,.1);
+      border: 1px solid rgba(212,160,23,.3);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: .78rem;
+      color: #92610a;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    /* Notas table */
+    .notas-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: .81rem;
+    }
+    .notas-table thead tr { background: var(--navy); color: var(--white); }
+    .notas-table thead th { padding: 11px 14px; text-align: left; font-size: .76rem; font-weight: 600; }
+    .notas-table tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+    .notas-table tbody tr:last-child { border-bottom: none; }
+    .notas-table tbody tr:hover { background: var(--light); }
+    .notas-table td { padding: 11px 14px; color: var(--text); }
+    .notas-table tfoot tr { background: var(--light); border-top: 2px solid var(--border); }
+    .notas-table tfoot td { padding: 10px 14px; font-size: .82rem; }
+
+    .nota-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .8rem;
+    }
+    .nota-badge.aprobado { background: rgba(22,163,74,.12); color: #15803d; }
+    .nota-badge.reprobado { background: rgba(185,28,28,.12); color: var(--red); }
+    .nota-badge.pendiente { background: var(--light); color: var(--muted); }
+
+    .estado-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+    .estado-badge.aprobado { background: rgba(22,163,74,.1); color: #15803d; }
+    .estado-badge.reprobado { background: rgba(185,28,28,.1); color: var(--red); }
+    .estado-badge.en-curso { background: rgba(212,160,23,.12); color: #92610a; }
+
+    /* Tesis */
+    .tesis-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 4px;
+    }
+    .tesis-estado {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .pendiente-tesis { background: var(--light); color: var(--muted); border: 1px solid var(--border); }
+    .tesis-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-size: .8rem;
+    }
+    .tesis-info-grid label { display: block; color: var(--muted); font-weight: 600; font-size: .72rem; margin-bottom: 2px; }
+    .tesis-info-grid span { color: var(--text); }
+    .tesis-pasos { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tesis-paso {
+      display: flex; align-items: center; gap: 7px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      background: var(--light);
+    }
+    .tpaso-num {
+      width: 20px; height: 20px;
+      background: var(--border);
+      color: var(--muted);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700;
+    }
+
+    .obs-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .obs-empty { font-size: .82rem; color: var(--muted); text-align: center; padding: 12px 0; }
+
+    .exp-info-nota {
+      background: rgba(13,27,75,.04);
+      border-left: 4px solid var(--navy);
+      border-radius: 0 8px 8px 0;
+      padding: 11px 16px;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    /* ══════════════════════════════════════
+       ANIMACIONES MODERNAS
+    ══════════════════════════════════════ */
+
+    /* Fade + slide base */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-18px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(.93); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    @keyframes barGrow {
+      from { width: 0 !important; }
+    }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(22,163,74,.4); }
+      70%  { box-shadow: 0 0 0 10px rgba(22,163,74,0); }
+      100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+    }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-4px); }
+    }
+
+    /* Tab content entra con animación */
+    .tab-content.active {
+      animation: fadeUp .35s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    /* Header brand */
+    .header-brand { animation: slideInLeft .5s cubic-bezier(.22,1,.36,1) both; }
+    .btn-logout   { animation: fadeIn .5s .2s both; }
+
+    /* Welcome bar */
+    .welcome-bar { animation: fadeUp .4s .05s cubic-bezier(.22,1,.36,1) both; }
+
+    /* Nav tabs */
+    .nav-tab {
+      animation: fadeIn .3s both;
+      position: relative;
+    }
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 50%; right: 50%;
+      height: 2px;
+      background: var(--navy);
+      transition: left .25s cubic-bezier(.22,1,.36,1), right .25s cubic-bezier(.22,1,.36,1);
+    }
+    .nav-tab.active::after { left: 0; right: 0; }
+
+    /* Stat cards stagger */
+    .stat-card:nth-child(1) { animation: fadeUp .4s .08s both; }
+    .stat-card:nth-child(2) { animation: fadeUp .4s .15s both; }
+    .stat-card:nth-child(3) { animation: fadeUp .4s .22s both; }
+    .stat-card:nth-child(4) { animation: fadeUp .4s .29s both; }
+
+    /* Module cards stagger */
+    .module-card { transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s, border-color .2s; }
+    .module-card:nth-child(1) { animation: scaleIn .4s .1s both; }
+    .module-card:nth-child(2) { animation: scaleIn .4s .17s both; }
+    .module-card:nth-child(3) { animation: scaleIn .4s .24s both; }
+    .module-card:nth-child(4) { animation: scaleIn .4s .31s both; }
+    .module-card:nth-child(5) { animation: scaleIn .4s .38s both; }
+    .module-card:nth-child(6) { animation: scaleIn .4s .45s both; }
+    .module-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(13,27,75,.14);
+    }
+
+    /* Panels */
+    .panel { animation: fadeUp .4s .1s both; }
+
+    /* Status dot pulse */
+    .status-dot { animation: pulse 2s infinite, pulse-ring 2s infinite; }
+
+    /* Stat bars animate on load */
+    .exp-stat-fill { animation: barGrow .8s .3s cubic-bezier(.22,1,.36,1) both; }
+    .exp-avance-bar { animation: barGrow .9s .4s cubic-bezier(.22,1,.36,1) both; }
+
+    /* Expediente header */
+    .exp-header-card { animation: fadeUp .4s both; }
+    .exp-stats .exp-stat:nth-child(1) { animation: fadeUp .4s .07s both; }
+    .exp-stats .exp-stat:nth-child(2) { animation: fadeUp .4s .14s both; }
+    .exp-stats .exp-stat:nth-child(3) { animation: fadeUp .4s .21s both; }
+    .exp-stats .exp-stat:nth-child(4) { animation: fadeUp .4s .28s both; }
+
+    /* Notas table rows */
+    .notas-table tbody tr {
+      animation: slideInLeft .35s both;
+    }
+    .notas-table tbody tr:nth-child(1) { animation-delay: .05s; }
+    .notas-table tbody tr:nth-child(2) { animation-delay: .12s; }
+    .notas-table tbody tr:nth-child(3) { animation-delay: .19s; }
+
+    /* Materia cards */
+    .materia-card { transition: transform .18s, box-shadow .18s, border-color .18s, background .18s; }
+    .materia-card:hover { transform: translateX(4px); }
+    .materia-card.selected { transform: translateX(4px); }
+    .insc-materias .materia-card:nth-child(1) { animation: fadeUp .35s .06s both; }
+    .insc-materias .materia-card:nth-child(2) { animation: fadeUp .35s .12s both; }
+    .insc-materias .materia-card:nth-child(3) { animation: fadeUp .35s .18s both; }
+    .insc-materias .materia-card:nth-child(4) { animation: fadeUp .35s .24s both; }
+    .insc-materias .materia-card:nth-child(5) { animation: fadeUp .35s .30s both; }
+    .insc-materias .materia-card:nth-child(6) { animation: fadeUp .35s .36s both; }
+
+    /* Horario pills */
+    .horario-pill { animation: slideInLeft .3s both; transition: transform .15s; }
+    .horario-pill:hover { transform: translateX(3px); }
+
+    /* Doc cards */
+    .doc-card { transition: transform .18s, box-shadow .18s, border-color .18s; }
+    .doc-card:hover { transform: translateX(4px); }
+    .docs-grid-cards .doc-card:nth-child(odd)  { animation: slideInLeft .35s both; }
+    .docs-grid-cards .doc-card:nth-child(even) { animation: fadeUp .35s both; }
+
+    /* Botones con ripple */
+    .btn-siguiente, .btn-enviar, .btn-inscribir, .doc-dl-btn, .exp-btn {
+      position: relative; overflow: hidden;
+    }
+    .btn-siguiente::after, .btn-enviar::after, .btn-inscribir::after,
+    .doc-dl-btn::after, .exp-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,.2);
+      opacity: 0;
+      transition: opacity .15s;
+      border-radius: inherit;
+    }
+    .btn-siguiente:active::after, .btn-enviar:active::after,
+    .btn-inscribir:active::after, .doc-dl-btn:active::after,
+    .exp-btn:active::after { opacity: 1; }
+
+    /* Countdown blocks */
+    .countdown-block {
+      transition: transform .2s;
+    }
+    .countdown-block:hover { transform: scale(1.08); }
+
+    /* Periodo badge float */
+    .insc-periodo-badge { animation: floatBadge 3s ease-in-out infinite; }
+
+    /* Solvencia banner */
+    .pagos-solvencia-banner { animation: scaleIn .4s both; }
+    .pagos-stats .pago-stat:nth-child(1) { animation: fadeUp .35s .06s both; }
+    .pagos-stats .pago-stat:nth-child(2) { animation: fadeUp .35s .12s both; }
+    .pagos-stats .pago-stat:nth-child(3) { animation: fadeUp .35s .18s both; }
+    .pagos-stats .pago-stat:nth-child(4) { animation: fadeUp .35s .24s both; }
+
+    /* Arancel rows */
+    .arancel-row:not(.header-row) { transition: background .15s; }
+    .arancel-row:not(.header-row):hover { background: var(--light); }
+
+    /* Historial pago rows */
+    .historial-pago-row { transition: background .15s; }
+    .historial-pago-row:hover { background: var(--light); }
+
+    /* Preinscripción intro */
+    .preinsc-intro { animation: fadeUp .4s both; }
+    .stepper      { animation: fadeIn .5s .1s both; }
+    .form-card    { animation: fadeUp .4s .08s both; }
+
+    /* ══════════════════════════════════════
+       FIN ANIMACIONES
+    ══════════════════════════════════════ */
+
+    .tab-preinscripcion {
+      color: var(--red) !important;
+      font-weight: 600 !important;
+      border-color: transparent;
+    }
+    .tab-preinscripcion.active {
+      border-color: var(--red) !important;
+      color: var(--red) !important;
+    }
+
+    /* ── PRE-INSCRIPCIÓN ── */
+    .preinsc-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin-bottom: 28px;
+    }
+    .preinsc-intro-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .preinsc-intro h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .preinsc-intro p  { font-size: .82rem; opacity: .85; line-height: 1.6; }
+    .preinsc-intro strong { color: var(--gold); }
+
+    /* Stepper */
+    .stepper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 28px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 90px;
+      cursor: default;
+    }
+    .step-circle {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; font-weight: 700;
+      transition: background .2s, color .2s;
+    }
+    .step.active .step-circle { background: var(--navy); color: var(--white); }
+    .step.done .step-circle   { background: #16a34a; color: var(--white); }
+    .step span { font-size: .7rem; color: var(--muted); font-weight: 500; text-align: center; }
+    .step.active span { color: var(--navy); font-weight: 700; }
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      min-width: 30px;
+      margin-top: -14px;
+    }
+
+    /* Form card */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .form-card-header {
+      background: var(--light);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+    }
+    .form-step-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      letter-spacing: .04em;
+    }
+    .form-card-header h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .form-card-header p  { font-size: .78rem; color: var(--muted); }
+
+    .form-body { padding: 24px; }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .form-grid-2 { grid-template-columns: 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: .78rem; font-weight: 600; color: var(--text); }
+    .req { color: var(--red); }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      padding: 9px 12px;
+      font-size: .82rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color .15s;
+      resize: vertical;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+    }
+    .cedula-row { display: flex; gap: 8px; }
+    .cedula-row select { width: 70px; flex-shrink: 0; }
+    .cedula-row input  { flex: 1; }
+
+    .sub-section {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--navy);
+      margin: 20px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--navy);
+    }
+
+    .baremo-info-box {
+      background: rgba(13,27,75,.05);
+      border-left: 4px solid var(--navy);
+      border-radius: 0 8px 8px 0;
+      padding: 11px 16px;
+      font-size: .79rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .baremo-info-box strong { color: var(--navy); }
+    .baremo-info-box b { color: var(--red); }
+
+    .radio-row { display: flex; gap: 20px; margin-top: 4px; }
+    .radio-opt { display: flex; align-items: center; gap: 6px; font-size: .82rem; cursor: pointer; font-weight: 400; }
+    .radio-opt input { width: auto; }
+
+    /* Form actions */
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .btn-siguiente, .btn-anterior, .btn-enviar {
+      padding: 10px 26px;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background .15s, transform .1s;
+    }
+    .btn-siguiente { background: var(--navy); color: var(--white); }
+    .btn-siguiente:hover { background: var(--navy2); }
+    .btn-anterior  { background: var(--light); color: var(--text); border: 1.5px solid var(--border); }
+    .btn-anterior:hover { background: var(--border); }
+    .btn-enviar    { background: #16a34a; color: var(--white); padding: 10px 32px; }
+    .btn-enviar:hover { background: #15803d; }
+
+    /* Baremo resultado */
+    .baremo-resultado {
+      text-align: center;
+      padding: 32px 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    .baremo-score-total { font-size: 4rem; font-weight: 800; line-height: 1; }
+    .baremo-score-total small { font-size: 1.2rem; font-weight: 400; opacity: .7; }
+    .score-label {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 18px;
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: 700;
+      background: rgba(255,255,255,.15);
+    }
+
+    .baremo-desglose {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .desglose-header {
+      background: var(--light);
+      padding: 11px 18px;
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .desglose-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: .82rem;
+    }
+    .desglose-row:last-child { border-bottom: none; }
+    .desglose-row span:last-child { font-weight: 600; color: var(--navy); }
+    .total-row { background: rgba(13,27,75,.04); }
+    .total-row strong:last-child { color: var(--navy); font-size: .9rem; }
+
+    .baremo-docs { background: var(--light); border-radius: 10px; padding: 18px; margin-bottom: 20px; }
+    .docs-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 12px; }
+    .docs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .doc-item { font-size: .8rem; display: flex; align-items: center; gap: 8px; }
+    .doc-check { color: var(--muted); font-size: .9rem; }
+
+    /* ── TWEAKS PANEL ── */
+    #tweaks-panel {
+      display: none;
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.15);
+      padding: 20px;
+      width: 240px;
+      z-index: 9999;
+      font-size: .82rem;
+    }
+    #tweaks-panel h5 { font-size: .85rem; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+    #tweaks-panel label { display: block; color: var(--muted); margin-bottom: 4px; font-weight: 500; }
+    #tweaks-panel select, #tweaks-panel input[type=range] {
+      width: 100%; margin-bottom: 14px;
+      border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px;
+      font-size: .8rem; font-family: inherit; color: var(--text);
+    }
+    #tweaks-panel input[type=range] { padding: 0; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-bg"></div>
+  <!-- Partículas flotantes -->
+  <div class="header-particles">
+    <div class="hparticle" style="left:8%;top:20%;width:6px;height:6px;animation-delay:0s;animation-duration:6s"></div>
+    <div class="hparticle" style="left:25%;top:60%;width:4px;height:4px;animation-delay:1s;animation-duration:8s"></div>
+    <div class="hparticle" style="left:50%;top:30%;width:8px;height:8px;animation-delay:2s;animation-duration:7s"></div>
+    <div class="hparticle" style="left:70%;top:70%;width:5px;height:5px;animation-delay:.5s;animation-duration:9s"></div>
+    <div class="hparticle" style="left:85%;top:25%;width:6px;height:6px;animation-delay:1.5s;animation-duration:6.5s"></div>
+    <div class="hparticle gold" style="left:40%;top:75%;width:5px;height:5px;animation-delay:3s;animation-duration:7.5s"></div>
+    <div class="hparticle gold" style="left:90%;top:55%;width:4px;height:4px;animation-delay:.8s;animation-duration:8.5s"></div>
+    <div class="hparticle red" style="left:15%;top:80%;width:5px;height:5px;animation-delay:2.2s;animation-duration:7s"></div>
+    <div class="hparticle red" style="left:60%;top:15%;width:4px;height:4px;animation-delay:1.8s;animation-duration:9s"></div>
+  </div>
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-brand-text">
+        <strong>Universidad Nacional Experimental Politécnica</strong>
+        <span>de la Fuerza Armada Nacional Bolivariana (UNEFA)</span>
+      </div>
+    </div>
+    <button class="btn-logout">Cerrar Sesión</button>
+  </div>
+</header>
+
+<!-- WELCOME BANNER -->
+<div class="welcome-wrap">
+  <div class="welcome-bar">
+    <div class="welcome-bar-left">
+      <h2>Bienvenido, Ana Gabriela Cardozo Peña</h2>
+      <p>Sistema de Registro de Postgrado &nbsp;·&nbsp; Lunes, 20 de Abril de 2026</p>
+    </div>
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      En Línea
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <div class="nav-tab active" data-tab="inicio">Inicio</div>
+  <div class="nav-tab" data-tab="expediente">Mi Expediente</div>
+  <div class="nav-tab" data-tab="inscripciones">Inscripciones</div>
+  <div class="nav-tab" data-tab="pagos">Pagos</div>
+  <div class="nav-tab" data-tab="documentos">Documentos</div>
+
+  <div class="nav-tab tab-preinscripcion" data-tab="preinscripcion">Pre-Inscripción / Baremo</div>
+</nav>
+
+<!-- MAIN -->
+<main>
+<div id="tab-inicio" class="tab-content active">
+
+  <!-- STATS -->
+  <div class="section-title">Resumen Académico</div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon blue">📚</div>
+      <div class="stat-info">
+        <strong>6</strong>
+        <span>Materias Inscritas</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon gold">🎓</div>
+      <div class="stat-info">
+        <strong>18 UC</strong>
+        <span>Unidades Crédito</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">✔</div>
+      <div class="stat-info">
+        <strong>Al día</strong>
+        <span>Estado de Solvencia</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">📋</div>
+      <div class="stat-info">
+        <strong>2</strong>
+        <span>Solicitudes Pendientes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="section-title">Módulos del Sistema</div>
+  <div class="modules-grid">
+
+    <div class="module-card" style="--accent:#0d1b4b; --icon-bg:rgba(13,27,75,.08)">
+      <div class="module-icon">📝</div>
+      <h3>Inscripción de Materias</h3>
+      <p>Registra y gestiona tu carga académica del período vigente.</p>
+      <span class="module-arrow">→</span>
+    </div>
+
+    <div class="module-card" style="--accent:#b91c1c; --icon-bg:rgba(185,28,28,.08)">
+      <div class="module-icon">💳</div>
+      <h3>Pagos y Aranceles</h3>
+      <p>Consulta y registra tus pagos, solvencias y recibos.</p>
+      <span class="module-arrow">→</span>
+    </div>
+
+    <div class="module-card" style="--accent:#d4a017; --icon-bg:rgba(212,160,23,.1)">
+      <div class="module-icon">📄</div>
+      <h3>Expediente Académico</h3>
+      <p>Revisa tus notas, historial y estado de avance del programa.</p>
+      <span class="module-arrow">→</span>
+    </div>
+
+    <div class="module-card" style="--accent:#0d1b4b; --icon-bg:rgba(13,27,75,.08)">
+      <div class="module-icon">🗂</div>
+      <h3>Documentos</h3>
+      <p>Descarga constancias, certificados y recaudos requeridos.</p>
+      <span class="module-arrow">→</span>
+    </div>
+
+    <div class="module-card" style="--accent:#16a34a; --icon-bg:rgba(34,197,94,.08)">
+      <div class="module-icon">📅</div>
+      <h3>Horarios</h3>
+      <p>Consulta el horario de clases y calendario académico.</p>
+      <span class="module-arrow">→</span>
+    </div>
+
+
+
+  </div>
+
+  <!-- NOTICES + SCHEDULE -->
+  <div class="two-col">
+    <div>
+      <div class="section-title">Avisos y Notificaciones</div>
+      <div class="panel">
+        <div class="panel-header">
+          <h4>Recientes</h4>
+          <a href="#">Ver todos →</a>
+        </div>
+        <div class="panel-body">
+          <div class="notice-item">
+            <span class="notice-dot red"></span>
+            <div class="notice-text">
+              <strong>Período de inscripción abierto</strong>
+              <span>Vence el 30 de Abril de 2026</span>
+            </div>
+          </div>
+          <div class="notice-item">
+            <span class="notice-dot gold"></span>
+            <div class="notice-text">
+              <strong>Pago de arancel pendiente</strong>
+              <span>Segundo trimestre 2026</span>
+            </div>
+          </div>
+          <div class="notice-item">
+            <span class="notice-dot blue"></span>
+            <div class="notice-text">
+              <strong>Actualización de datos personales</strong>
+              <span>Requerida por Secretaría</span>
+            </div>
+          </div>
+          <div class="notice-item">
+            <span class="notice-dot blue"></span>
+            <div class="notice-text">
+              <strong>Calendario académico publicado</strong>
+              <span>Trimestre Abril–Julio 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Próximas Clases</div>
+      <div class="panel">
+        <div class="panel-header">
+          <h4>Esta semana</h4>
+          <a href="#">Ver horario →</a>
+        </div>
+        <div class="panel-body">
+          <div class="schedule-item">
+            <div class="schedule-day">Lun<br/>21</div>
+            <div class="schedule-info">
+              <strong>Metodología de la Investigación</strong>
+              <span>8:00 am – 12:00 m &nbsp;·&nbsp; Aula 304</span>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-day">Mar<br/>22</div>
+            <div class="schedule-info">
+              <strong>Gerencia Estratégica</strong>
+              <span>2:00 pm – 6:00 pm &nbsp;·&nbsp; Aula 201</span>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-day">Jue<br/>24</div>
+            <div class="schedule-info">
+              <strong>Estadística Aplicada</strong>
+              <span>8:00 am – 12:00 m &nbsp;·&nbsp; Lab. Cómputo</span>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <div class="schedule-day">Vie<br/>25</div>
+            <div class="schedule-info">
+              <strong>Derecho Administrativo</strong>
+              <span>2:00 pm – 6:00 pm &nbsp;·&nbsp; Aula 104</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-inicio -->
+
+<!-- ══════════════════════════════════════════════════
+     TAB: EXPEDIENTE ACADÉMICO
+══════════════════════════════════════════════════ -->
+<div id="tab-expediente" class="tab-content" style="display:none">
+
+  <!-- Cabecera del expediente -->
+  <div class="exp-header-card">
+    <div class="exp-header-left">
+      <div class="exp-avatar">ACG</div>
+      <div>
+        <h2>Ana Gabriela Cardozo Peña</h2>
+        <p>C.I.: V-28.310.291 &nbsp;·&nbsp; Maestría en Gerencia de Empresas</p>
+        <p>Núcleo Caracas &nbsp;·&nbsp; Cohorte 2024-I</p>
+      </div>
+    </div>
+    <div class="exp-header-actions">
+      <button class="exp-btn exp-btn-outline" onclick="alert('Generando constancia de notas...')">Ver Constancia</button>
+      <button class="exp-btn exp-btn-solid" onclick="alert('Descargando expediente en PDF...')">Descargar PDF</button>
+    </div>
+  </div>
+
+  <!-- Stats del expediente -->
+  <div class="exp-stats">
+    <div class="exp-stat">
+      <div class="exp-stat-val">17.2</div>
+      <div class="exp-stat-label">Promedio General</div>
+      <div class="exp-stat-bar"><div class="exp-stat-fill" style="width:86%; background:var(--navy)"></div></div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-stat-val">18 / 36</div>
+      <div class="exp-stat-label">UC Cursadas / Requeridas</div>
+      <div class="exp-stat-bar"><div class="exp-stat-fill" style="width:50%; background:var(--gold)"></div></div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-stat-val">6 / 6</div>
+      <div class="exp-stat-label">Materias Aprobadas</div>
+      <div class="exp-stat-bar"><div class="exp-stat-fill" style="width:100%; background:#16a34a"></div></div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-stat-val">50%</div>
+      <div class="exp-stat-label">Avance del Programa</div>
+      <div class="exp-stat-bar">
+        <div class="exp-stat-fill" style="width:50%; background:var(--red)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Avance del programa visual -->
+  <div class="exp-section-title">Estado de Avance del Programa</div>
+  <div class="exp-avance-card">
+    <div class="exp-avance-row">
+      <span>Término I — 2024</span>
+      <div class="exp-avance-bar-wrap"><div class="exp-avance-bar" style="width:100%"></div></div>
+      <span class="exp-avance-pct">Completado</span>
+    </div>
+    <div class="exp-avance-row">
+      <span>Término II — 2024</span>
+      <div class="exp-avance-bar-wrap"><div class="exp-avance-bar" style="width:100%"></div></div>
+      <span class="exp-avance-pct">Completado</span>
+    </div>
+    <div class="exp-avance-row">
+      <span>Término III — 2025</span>
+      <div class="exp-avance-bar-wrap"><div class="exp-avance-bar" style="width:60%; background:var(--gold)"></div></div>
+      <span class="exp-avance-pct" style="color:var(--gold)">En curso</span>
+    </div>
+    <div class="exp-avance-row">
+      <span>Término IV — 2025</span>
+      <div class="exp-avance-bar-wrap"><div class="exp-avance-bar" style="width:0%; background:var(--border)"></div></div>
+      <span class="exp-avance-pct" style="color:var(--muted)">Pendiente</span>
+    </div>
+    <div class="exp-avance-row">
+      <span>Trabajo de Grado</span>
+      <div class="exp-avance-bar-wrap"><div class="exp-avance-bar" style="width:0%; background:var(--border)"></div></div>
+      <span class="exp-avance-pct" style="color:var(--muted)">Pendiente</span>
+    </div>
+  </div>
+
+  <!-- Tabla de notas por término -->
+  <div class="exp-section-title">Historial de Notas por Término</div>
+
+  <!-- Selector de término -->
+  <div class="exp-term-tabs">
+    <button class="exp-term-tab active" onclick="showTerm(this,'term1')">Término I</button>
+    <button class="exp-term-tab" onclick="showTerm(this,'term2')">Término II</button>
+    <button class="exp-term-tab" onclick="showTerm(this,'term3')">Término III</button>
+  </div>
+
+  <!-- Término I -->
+  <div id="term1" class="exp-term-panel">
+    <table class="notas-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Asignatura</th>
+          <th>UC</th>
+          <th>Profesor</th>
+          <th>Nota</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PG-101</td><td>Metodología de la Investigación</td><td>3</td><td>Dr. Ramírez</td>
+          <td><span class="nota-badge aprobado">18</span></td>
+          <td><span class="estado-badge aprobado">Aprobado</span></td>
+        </tr>
+        <tr>
+          <td>PG-102</td><td>Gerencia Estratégica I</td><td>3</td><td>Dra. Morales</td>
+          <td><span class="nota-badge aprobado">16</span></td>
+          <td><span class="estado-badge aprobado">Aprobado</span></td>
+        </tr>
+        <tr>
+          <td>PG-103</td><td>Estadística Aplicada</td><td>3</td><td>Dr. Hernández</td>
+          <td><span class="nota-badge aprobado">17</span></td>
+          <td><span class="estado-badge aprobado">Aprobado</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="2"><strong>Promedio del Término</strong></td><td colspan="2"></td><td colspan="2"><strong>17.0</strong></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Término II -->
+  <div id="term2" class="exp-term-panel" style="display:none">
+    <table class="notas-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Asignatura</th>
+          <th>UC</th>
+          <th>Profesor</th>
+          <th>Nota</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PG-201</td><td>Gerencia Estratégica II</td><td>3</td><td>Dra. Morales</td>
+          <td><span class="nota-badge aprobado">17</span></td>
+          <td><span class="estado-badge aprobado">Aprobado</span></td>
+        </tr>
+        <tr>
+          <td>PG-202</td><td>Derecho Administrativo</td><td>3</td><td>Dr. Gutiérrez</td>
+          <td><span class="nota-badge aprobado">18</span></td>
+          <td><span class="estado-badge aprobado">Aprobado</span></td>
+        </tr>
+        <tr>
+          <td>PG-203</td><td>Finanzas Corporativas</td><td>3</td><td>Dra. Castillo</td>
+          <td><span class="nota-badge aprobado">17</span></td>
+          <td><span class="estado-badge aprobado">Aprobado</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="2"><strong>Promedio del Término</strong></td><td colspan="2"></td><td colspan="2"><strong>17.3</strong></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Término III (en curso) -->
+  <div id="term3" class="exp-term-panel" style="display:none">
+    <div class="exp-en-curso-banner">Término en curso — Notas definitivas disponibles al finalizar el período</div>
+    <table class="notas-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Asignatura</th>
+          <th>UC</th>
+          <th>Profesor</th>
+          <th>Nota</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PG-301</td><td>Liderazgo y Gestión del Talento</td><td>3</td><td>Dr. Pérez</td>
+          <td><span class="nota-badge pendiente">—</span></td>
+          <td><span class="estado-badge en-curso">En curso</span></td>
+        </tr>
+        <tr>
+          <td>PG-302</td><td>Innovación y Emprendimiento</td><td>3</td><td>Dra. López</td>
+          <td><span class="nota-badge pendiente">—</span></td>
+          <td><span class="estado-badge en-curso">En curso</span></td>
+        </tr>
+        <tr>
+          <td>PG-303</td><td>Sistemas de Información Gerencial</td><td>3</td><td>Dr. Flores</td>
+          <td><span class="nota-badge pendiente">—</span></td>
+          <td><span class="estado-badge en-curso">En curso</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Trabajo de Grado -->
+  <div class="exp-section-title" style="margin-top:28px">Trabajo de Grado / Tesis</div>
+  <div class="tesis-card">
+    <div class="tesis-estado pendiente-tesis">
+      <span>Estado: <strong>No iniciado</strong></span>
+    </div>
+    <div class="tesis-info-grid">
+      <div><label>Título tentativo</label><span>Por definir</span></div>
+      <div><label>Tutor asignado</label><span>Por asignar</span></div>
+      <div><label>Línea de investigación</label><span>Por definir</span></div>
+      <div><label>Fecha estimada de defensa</label><span>Por definir</span></div>
+    </div>
+    <div class="tesis-pasos">
+      <div class="tesis-paso pendiente-paso"><span class="tpaso-num">1</span> Propuesta de tema</div>
+      <div class="tesis-paso pendiente-paso"><span class="tpaso-num">2</span> Aprobación del tutor</div>
+      <div class="tesis-paso pendiente-paso"><span class="tpaso-num">3</span> Desarrollo del proyecto</div>
+      <div class="tesis-paso pendiente-paso"><span class="tpaso-num">4</span> Entrega del trabajo</div>
+      <div class="tesis-paso pendiente-paso"><span class="tpaso-num">5</span> Defensa pública</div>
+    </div>
+  </div>
+
+  <!-- Observaciones -->
+  <div class="exp-section-title" style="margin-top:28px">Observaciones Académicas</div>
+  <div class="obs-card">
+    <div class="obs-empty">Sin observaciones ni sanciones registradas en el expediente.</div>
+  </div>
+
+  <!-- Nota informativa -->
+  <div class="exp-info-nota">
+    Para solicitar notas certificadas o copia oficial del expediente, diríjase a la Secretaría de la Coordinación de Postgrado de su núcleo de forma presencial.
+  </div>
+
+</div><!-- /tab-expediente -->
+
+</div><!-- /tab-expediente -->
+
+<!-- ══════════════════════════════════════════════════
+     TAB: INSCRIPCIONES
+══════════════════════════════════════════════════ -->
+<div id="tab-inscripciones" class="tab-content" style="display:none">
+
+  <!-- Banner período -->
+  <div class="insc-periodo-banner">
+    <div class="insc-periodo-left">
+      <span class="insc-periodo-badge">Período abierto</span>
+      <h2>Inscripción — Término III · 2025</h2>
+      <p>Período de inscripción: <strong>20 de Abril al 30 de Abril de 2026</strong></p>
+    </div>
+    <div class="insc-countdown">
+      <div class="countdown-block"><span id="cd-dias">07</span><small>días</small></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-block"><span id="cd-horas">14</span><small>horas</small></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-block"><span id="cd-mins">32</span><small>min</small></div>
+    </div>
+  </div>
+
+  <!-- Requisitos -->
+  <div class="insc-requisitos">
+    <div class="req-item ok"><span class="req-icon">✔</span><span>Solvencia de pago</span></div>
+    <div class="req-item ok"><span class="req-icon">✔</span><span>Sin materias reprobadas pendientes</span></div>
+    <div class="req-item ok"><span class="req-icon">✔</span><span>Documentos completos</span></div>
+    <div class="req-item ok"><span class="req-icon">✔</span><span>Período de inscripción abierto</span></div>
+    <div class="req-item pendiente-req"><span class="req-icon">⏳</span><span>Aprobación del coordinador</span></div>
+  </div>
+
+  <!-- Layout principal: lista + resumen -->
+  <div class="insc-layout">
+
+    <!-- Panel izquierdo: materias disponibles -->
+    <div class="insc-panel-left">
+
+      <!-- Filtros -->
+      <div class="insc-filtros">
+        <select class="insc-select" onchange="filtrarMaterias(this.value)">
+          <option value="todas">Todas las secciones</option>
+          <option value="A">Sección A</option>
+          <option value="B">Sección B</option>
+          <option value="C">Sección C</option>
+        </select>
+        <input class="insc-search" type="text" placeholder="Buscar materia..." oninput="buscarMateria(this.value)" />
+      </div>
+
+      <div class="insc-lista-header">
+        <span>Materias disponibles</span>
+        <span class="insc-uc-info">UC seleccionadas: <strong id="uc-sel">0</strong></span>
+      </div>
+
+      <!-- Lista de materias -->
+      <div class="insc-materias" id="lista-materias">
+
+        <div class="materia-card" data-codigo="PG-301" data-uc="3" data-seccion="A">
+          <div class="materia-check-wrap">
+            <input type="checkbox" id="m1" class="materia-chk" onchange="toggleMateria(this,'PG-301','Liderazgo y Gestión del Talento',3,'Lun/Mié 8:00–10:00am','Dr. Pérez','A')" />
+            <label for="m1"></label>
+          </div>
+          <div class="materia-info">
+            <div class="materia-top">
+              <span class="materia-codigo">PG-301</span>
+              <span class="materia-uc">3 UC</span>
+              <span class="materia-sec">Sec. A</span>
+            </div>
+            <div class="materia-nombre">Liderazgo y Gestión del Talento</div>
+            <div class="materia-detalles">
+              <span>👨‍🏫 Dr. Pérez</span>
+              <span>📅 Lun/Mié · 8:00–10:00 am</span>
+              <span>🏛 Aula 304</span>
+            </div>
+          </div>
+          <div class="materia-cupos"><strong>22</strong><small>cupos</small></div>
+        </div>
+
+        <div class="materia-card" data-codigo="PG-302" data-uc="3" data-seccion="A">
+          <div class="materia-check-wrap">
+            <input type="checkbox" id="m2" class="materia-chk" onchange="toggleMateria(this,'PG-302','Innovación y Emprendimiento',3,'Mar/Jue 2:00–4:00pm','Dra. López','A')" />
+            <label for="m2"></label>
+          </div>
+          <div class="materia-info">
+            <div class="materia-top">
+              <span class="materia-codigo">PG-302</span>
+              <span class="materia-uc">3 UC</span>
+              <span class="materia-sec">Sec. A</span>
+            </div>
+            <div class="materia-nombre">Innovación y Emprendimiento</div>
+            <div class="materia-detalles">
+              <span>👨‍🏫 Dra. López</span>
+              <span>📅 Mar/Jue · 2:00–4:00 pm</span>
+              <span>🏛 Aula 201</span>
+            </div>
+          </div>
+          <div class="materia-cupos"><strong>18</strong><small>cupos</small></div>
+        </div>
+
+        <div class="materia-card" data-codigo="PG-303" data-uc="3" data-seccion="B">
+          <div class="materia-check-wrap">
+            <input type="checkbox" id="m3" class="materia-chk" onchange="toggleMateria(this,'PG-303','Sistemas de Información Gerencial',3,'Vie 8:00am–12:00m','Dr. Flores','B')" />
+            <label for="m3"></label>
+          </div>
+          <div class="materia-info">
+            <div class="materia-top">
+              <span class="materia-codigo">PG-303</span>
+              <span class="materia-uc">3 UC</span>
+              <span class="materia-sec">Sec. B</span>
+            </div>
+            <div class="materia-nombre">Sistemas de Información Gerencial</div>
+            <div class="materia-detalles">
+              <span>👨‍🏫 Dr. Flores</span>
+              <span>📅 Vie · 8:00 am–12:00 m</span>
+              <span>🏛 Lab. Cómputo</span>
+            </div>
+          </div>
+          <div class="materia-cupos"><strong>30</strong><small>cupos</small></div>
+        </div>
+
+        <div class="materia-card" data-codigo="PG-304" data-uc="3" data-seccion="B">
+          <div class="materia-check-wrap">
+            <input type="checkbox" id="m4" class="materia-chk" onchange="toggleMateria(this,'PG-304','Derecho Laboral y Empresarial',3,'Sáb 8:00am–12:00m','Dra. Castillo','B')" />
+            <label for="m4"></label>
+          </div>
+          <div class="materia-info">
+            <div class="materia-top">
+              <span class="materia-codigo">PG-304</span>
+              <span class="materia-uc">3 UC</span>
+              <span class="materia-sec">Sec. B</span>
+            </div>
+            <div class="materia-nombre">Derecho Laboral y Empresarial</div>
+            <div class="materia-detalles">
+              <span>👨‍🏫 Dra. Castillo</span>
+              <span>📅 Sáb · 8:00 am–12:00 m</span>
+              <span>🏛 Aula 104</span>
+            </div>
+          </div>
+          <div class="materia-cupos"><strong>25</strong><small>cupos</small></div>
+        </div>
+
+        <div class="materia-card" data-codigo="PG-305" data-uc="3" data-seccion="C">
+          <div class="materia-check-wrap">
+            <input type="checkbox" id="m5" class="materia-chk" onchange="toggleMateria(this,'PG-305','Economía Internacional',3,'Lun/Mié 4:00–6:00pm','Dr. Rodríguez','C')" />
+            <label for="m5"></label>
+          </div>
+          <div class="materia-info">
+            <div class="materia-top">
+              <span class="materia-codigo">PG-305</span>
+              <span class="materia-uc">3 UC</span>
+              <span class="materia-sec">Sec. C</span>
+            </div>
+            <div class="materia-nombre">Economía Internacional</div>
+            <div class="materia-detalles">
+              <span>👨‍🏫 Dr. Rodríguez</span>
+              <span>📅 Lun/Mié · 4:00–6:00 pm</span>
+              <span>🏛 Aula 210</span>
+            </div>
+          </div>
+          <div class="materia-cupos"><strong>20</strong><small>cupos</small></div>
+        </div>
+
+        <div class="materia-card" data-codigo="PG-306" data-uc="3" data-seccion="C">
+          <div class="materia-check-wrap">
+            <input type="checkbox" id="m6" class="materia-chk" onchange="toggleMateria(this,'PG-306','Gestión de Proyectos',3,'Mar/Jue 6:00–8:00pm','Dra. Montilla','C')" />
+            <label for="m6"></label>
+          </div>
+          <div class="materia-info">
+            <div class="materia-top">
+              <span class="materia-codigo">PG-306</span>
+              <span class="materia-uc">3 UC</span>
+              <span class="materia-sec">Sec. C</span>
+            </div>
+            <div class="materia-nombre">Gestión de Proyectos</div>
+            <div class="materia-detalles">
+              <span>👨‍🏫 Dra. Montilla</span>
+              <span>📅 Mar/Jue · 6:00–8:00 pm</span>
+              <span>🏛 Aula 305</span>
+            </div>
+          </div>
+          <div class="materia-cupos"><strong>15</strong><small>cupos</small></div>
+        </div>
+
+      </div><!-- /insc-materias -->
+    </div><!-- /insc-panel-left -->
+
+    <!-- Panel derecho: resumen + horario -->
+    <div class="insc-panel-right">
+
+      <div class="insc-resumen">
+        <div class="insc-resumen-header">Resumen de Inscripción</div>
+        <div id="insc-seleccionadas">
+          <div class="insc-empty">Ninguna materia seleccionada</div>
+        </div>
+        <div class="insc-resumen-footer">
+          <div class="insc-uc-total">
+            <span>Total UC:</span>
+            <strong id="total-uc">0</strong>
+          </div>
+          <button class="btn-inscribir" id="btn-inscribir" onclick="confirmarInscripcion()" disabled>Confirmar Inscripción</button>
+        </div>
+      </div>
+
+      <!-- Mini horario visual -->
+      <div class="insc-horario-titulo">Vista previa del horario</div>
+      <div class="insc-horario" id="horario-preview">
+        <div class="horario-vacio">Selecciona materias para ver tu horario</div>
+      </div>
+
+    </div><!-- /insc-panel-right -->
+  </div><!-- /insc-layout -->
+
+  <!-- Historial de inscripciones -->
+  <div class="exp-section-title" style="margin-top:32px">Historial de Inscripciones</div>
+  <div class="panel">
+    <div class="panel-header">
+      <h4>Períodos anteriores</h4>
+    </div>
+    <div class="panel-body">
+      <div class="historial-row">
+        <div class="historial-term">Término I · 2024</div>
+        <div class="historial-materias">Metodología de la Investigación, Gerencia Estratégica I, Estadística Aplicada</div>
+        <div class="historial-badge aprobado">3 materias · 9 UC</div>
+      </div>
+      <div class="historial-row">
+        <div class="historial-term">Término II · 2024</div>
+        <div class="historial-materias">Gerencia Estratégica II, Derecho Administrativo, Finanzas Corporativas</div>
+        <div class="historial-badge aprobado">3 materias · 9 UC</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-inscripciones -->
+
+</div><!-- /tab-inscripciones -->
+
+<!-- ══════════════════════════════════════════════════
+     TAB: PAGOS
+══════════════════════════════════════════════════ -->
+<div id="tab-pagos" class="tab-content" style="display:none">
+
+  <!-- Estado de solvencia -->
+  <div class="pagos-solvencia-banner solvente">
+    <div class="solvencia-left">
+      <div class="solvencia-icon">✔</div>
+      <div>
+        <h2>Estudiante Solvente</h2>
+        <p>Todos los aranceles del período vigente han sido cancelados y verificados.</p>
+      </div>
+    </div>
+    <div class="solvencia-right">
+      <button class="exp-btn exp-btn-solid" onclick="alert('Generando constancia de solvencia...')">Descargar Solvencia</button>
+    </div>
+  </div>
+
+  <!-- Resumen de pagos -->
+  <div class="pagos-stats">
+    <div class="pago-stat">
+      <div class="pago-stat-icon" style="background:rgba(22,163,74,.1);color:#16a34a">✔</div>
+      <div>
+        <strong>3</strong>
+        <span>Pagos registrados</span>
+      </div>
+    </div>
+    <div class="pago-stat">
+      <div class="pago-stat-icon" style="background:rgba(13,27,75,.08);color:var(--navy)">💰</div>
+      <div>
+        <strong>Bs. 450.00</strong>
+        <span>Total cancelado</span>
+      </div>
+    </div>
+    <div class="pago-stat">
+      <div class="pago-stat-icon" style="background:rgba(212,160,23,.1);color:var(--gold)">📋</div>
+      <div>
+        <strong>0</strong>
+        <span>Pagos pendientes</span>
+      </div>
+    </div>
+    <div class="pago-stat">
+      <div class="pago-stat-icon" style="background:rgba(185,28,28,.08);color:var(--red)">📅</div>
+      <div>
+        <strong>Término IV</strong>
+        <span>Próximo arancel</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout: aranceles pendientes + registrar pago -->
+  <div class="pagos-layout">
+
+    <!-- Izquierda: aranceles y historial -->
+    <div class="pagos-left">
+
+      <!-- Aranceles del período vigente -->
+      <div class="exp-section-title">Aranceles — Término III · 2025</div>
+      <div class="aranceles-tabla">
+        <div class="arancel-row header-row">
+          <span>Concepto</span>
+          <span>Monto (Bs.)</span>
+          <span>Fecha límite</span>
+          <span>Estado</span>
+        </div>
+        <div class="arancel-row">
+          <span>Arancel de Inscripción</span>
+          <span class="arancel-monto">150.00</span>
+          <span>30/04/2026</span>
+          <span><span class="estado-badge aprobado">Pagado</span></span>
+        </div>
+        <div class="arancel-row">
+          <span>Material de Estudio</span>
+          <span class="arancel-monto">50.00</span>
+          <span>30/04/2026</span>
+          <span><span class="estado-badge aprobado">Pagado</span></span>
+        </div>
+        <div class="arancel-row">
+          <span>Otros Aranceles</span>
+          <span class="arancel-monto">25.00</span>
+          <span>30/04/2026</span>
+          <span><span class="estado-badge aprobado">Pagado</span></span>
+        </div>
+      </div>
+
+      <!-- Próximos aranceles -->
+      <div class="exp-section-title" style="margin-top:24px">Próximos Aranceles</div>
+      <div class="aranceles-tabla">
+        <div class="arancel-row header-row">
+          <span>Concepto</span>
+          <span>Monto (Bs.)</span>
+          <span>Fecha límite</span>
+          <span>Estado</span>
+        </div>
+        <div class="arancel-row">
+          <span>Arancel de Inscripción — Término IV</span>
+          <span class="arancel-monto">150.00</span>
+          <span>31/07/2026</span>
+          <span><span class="estado-badge en-curso">Pendiente</span></span>
+        </div>
+        <div class="arancel-row">
+          <span>Arancel de Grado</span>
+          <span class="arancel-monto">200.00</span>
+          <span>Por definir</span>
+          <span><span class="estado-badge en-curso">Pendiente</span></span>
+        </div>
+        <div class="arancel-row">
+          <span>Constancias y Certificados</span>
+          <span class="arancel-monto">30.00</span>
+          <span>A solicitud</span>
+          <span><span class="estado-badge en-curso">Pendiente</span></span>
+        </div>
+      </div>
+
+      <!-- Historial de pagos -->
+      <div class="exp-section-title" style="margin-top:24px">Historial de Pagos</div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="historial-pago-row">
+            <div class="hp-fecha">15/02/2026</div>
+            <div class="hp-info">
+              <strong>Arancel de Inscripción — Término III</strong>
+              <span>Transferencia · Banco de Venezuela · Ref: 00123456</span>
+            </div>
+            <div class="hp-monto">Bs. 150.00</div>
+            <div class="hp-estado"><span class="estado-badge aprobado">Verificado</span></div>
+            <button class="hp-recibo" onclick="alert('Descargando recibo...')">↓ Recibo</button>
+          </div>
+          <div class="historial-pago-row">
+            <div class="hp-fecha">16/02/2026</div>
+            <div class="hp-info">
+              <strong>Material de Estudio — Término III</strong>
+              <span>Pago móvil · Banesco · Ref: 98712340</span>
+            </div>
+            <div class="hp-monto">Bs. 50.00</div>
+            <div class="hp-estado"><span class="estado-badge aprobado">Verificado</span></div>
+            <button class="hp-recibo" onclick="alert('Descargando recibo...')">↓ Recibo</button>
+          </div>
+          <div class="historial-pago-row">
+            <div class="hp-fecha">17/02/2026</div>
+            <div class="hp-info">
+              <strong>Otros Aranceles — Término III</strong>
+              <span>Depósito bancario · BANFANB · Ref: 55443322</span>
+            </div>
+            <div class="hp-monto">Bs. 25.00</div>
+            <div class="hp-estado"><span class="estado-badge aprobado">Verificado</span></div>
+            <button class="hp-recibo" onclick="alert('Descargando recibo...')">↓ Recibo</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /pagos-left -->
+
+    <!-- Derecha: registrar nuevo pago -->
+    <div class="pagos-right">
+
+      <div class="registrar-pago-card">
+        <div class="rp-header">Registrar Comprobante de Pago</div>
+        <div class="rp-body">
+
+          <!-- Datos bancarios -->
+          <div class="datos-bancarios">
+            <div class="db-title">Datos para realizar el pago</div>
+
+            <div class="banco-tab-row">
+              <button class="banco-tab active" onclick="selBanco(this,'bv')">Banco Venezuela</button>
+              <button class="banco-tab" onclick="selBanco(this,'banesco')">Banesco</button>
+              <button class="banco-tab" onclick="selBanco(this,'banfanb')">BANFANB</button>
+            </div>
+
+            <div id="datos-bv" class="banco-datos">
+              <div class="db-row"><span>Banco</span><strong>Banco de Venezuela</strong></div>
+              <div class="db-row"><span>Cuenta corriente</span><strong>0102-0000-00-0000000001</strong></div>
+              <div class="db-row"><span>RIF</span><strong>G-20005482-1</strong></div>
+              <div class="db-row"><span>A nombre de</span><strong>UNEFA Postgrado</strong></div>
+            </div>
+            <div id="datos-banesco" class="banco-datos" style="display:none">
+              <div class="db-row"><span>Banco</span><strong>Banesco</strong></div>
+              <div class="db-row"><span>Cuenta corriente</span><strong>0134-0000-00-0000000002</strong></div>
+              <div class="db-row"><span>RIF</span><strong>G-20005482-1</strong></div>
+              <div class="db-row"><span>A nombre de</span><strong>UNEFA Postgrado</strong></div>
+            </div>
+            <div id="datos-banfanb" class="banco-datos" style="display:none">
+              <div class="db-row"><span>Banco</span><strong>BANFANB</strong></div>
+              <div class="db-row"><span>Cuenta corriente</span><strong>0151-0000-00-0000000003</strong></div>
+              <div class="db-row"><span>RIF</span><strong>G-20005482-1</strong></div>
+              <div class="db-row"><span>A nombre de</span><strong>UNEFA Postgrado</strong></div>
+            </div>
+          </div>
+
+          <!-- Formulario -->
+          <div class="form-group" style="margin-top:16px">
+            <label>Concepto de pago <span class="req">*</span></label>
+            <select>
+              <option value="">Seleccione</option>
+              <option>Arancel de Inscripción</option>
+              <option>Arancel de Grado</option>
+              <option>Constancias y Certificados</option>
+              <option>Material de Estudio</option>
+              <option>Otros Aranceles</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Banco donde realizó el pago <span class="req">*</span></label>
+            <select>
+              <option value="">Seleccione</option>
+              <option>Banco de Venezuela</option>
+              <option>Banesco</option>
+              <option>BANFANB</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Método de pago <span class="req">*</span></label>
+            <select>
+              <option value="">Seleccione</option>
+              <option>Transferencia bancaria</option>
+              <option>Pago móvil</option>
+              <option>Depósito bancario</option>
+            </select>
+          </div>
+          <div class="form-grid-2" style="gap:10px">
+            <div class="form-group">
+              <label>Monto (Bs.) <span class="req">*</span></label>
+              <input type="number" placeholder="0.00" step="0.01" min="0" />
+            </div>
+            <div class="form-group">
+              <label>Fecha del pago <span class="req">*</span></label>
+              <input type="date" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>N° de referencia <span class="req">*</span></label>
+            <input type="text" placeholder="Ej: 00123456" />
+          </div>
+          <div class="form-group">
+            <label>Adjuntar comprobante <span class="req">*</span></label>
+            <div class="file-upload-box">
+              <input type="file" accept=".jpg,.png,.pdf" id="file-comprobante" onchange="updateFileName(this,'lbl-comprobante')" />
+              <label for="file-comprobante" class="file-upload-label">
+                <span class="file-btn">Seleccionar archivo</span>
+                <span class="file-name" id="lbl-comprobante">Sin archivo seleccionado</span>
+              </label>
+              <small>JPG, PNG o PDF</small>
+            </div>
+          </div>
+          <button class="btn-inscribir" style="width:100%;margin-top:8px" onclick="alert('Comprobante enviado exitosamente. Será verificado en un plazo de 24-48 horas hábiles.')">Enviar Comprobante</button>
+        </div>
+      </div>
+
+    </div><!-- /pagos-right -->
+  </div><!-- /pagos-layout -->
+
+</div><!-- /tab-pagos -->
+
+</div><!-- /tab-pagos -->
+
+<!-- ══════════════════════════════════════════════════
+     TAB: DOCUMENTOS
+══════════════════════════════════════════════════ -->
+<div id="tab-documentos" class="tab-content" style="display:none">
+
+  <!-- Cabecera -->
+  <div class="docs-header-banner">
+    <div class="docs-header-left">
+      <div class="docs-header-icon">🗂</div>
+      <div>
+        <h2>Centro de Documentos</h2>
+        <p>Descarga tus documentos académicos o sube los recaudos solicitados por la coordinación.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="docs-layout">
+
+    <!-- Izquierda: documentos descargables -->
+    <div class="docs-main">
+
+      <!-- Descarga automática -->
+      <div class="exp-section-title">Documentos disponibles para descarga</div>
+      <div class="docs-grid-cards">
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(13,27,75,.08);color:var(--navy)">📄</div>
+          <div class="doc-card-info">
+            <strong>Constancia de Estudios</strong>
+            <span>Certifica que eres estudiante activo del programa de postgrado.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Constancia de Estudios')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(13,27,75,.08);color:var(--navy)">📊</div>
+          <div class="doc-card-info">
+            <strong>Constancia de Notas</strong>
+            <span>Historial de calificaciones de todos los términos cursados.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Constancia de Notas')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(22,163,74,.08);color:#16a34a">✅</div>
+          <div class="doc-card-info">
+            <strong>Constancia de Inscripción</strong>
+            <span>Comprobante oficial de inscripción del período vigente.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Constancia de Inscripción')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(22,163,74,.08);color:#16a34a">🎓</div>
+          <div class="doc-card-info">
+            <strong>Solvencia Académica</strong>
+            <span>Certificado de no tener deudas académicas pendientes.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Solvencia Académica')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(22,163,74,.08);color:#16a34a">💰</div>
+          <div class="doc-card-info">
+            <strong>Solvencia de Pago</strong>
+            <span>Constancia de haber cancelado todos los aranceles del período.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Solvencia de Pago')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(212,160,23,.08);color:var(--gold)">🏆</div>
+          <div class="doc-card-info">
+            <strong>Certificado de Culminación</strong>
+            <span>Disponible al completar el 100% del programa de postgrado.</span>
+          </div>
+          <button class="doc-dl-btn disabled" onclick="alert('Disponible al culminar el programa.')">No disponible</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(13,27,75,.08);color:var(--navy)">📋</div>
+          <div class="doc-card-info">
+            <strong>Carta de Buena Conducta</strong>
+            <span>Certificado de conducta académica y disciplinaria.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Carta de Buena Conducta')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(13,27,75,.08);color:var(--navy)">📚</div>
+          <div class="doc-card-info">
+            <strong>Pensum del Programa</strong>
+            <span>Plan de estudios oficial del programa de postgrado inscrito.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Pensum del Programa')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(13,27,75,.08);color:var(--navy)">📝</div>
+          <div class="doc-card-info">
+            <strong>Comprobante de Inscripción</strong>
+            <span>Recibo del proceso de inscripción del período actual.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Comprobante de Inscripción')">↓ PDF</button>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-card-icon" style="background:rgba(185,28,28,.08);color:var(--red)">🧾</div>
+          <div class="doc-card-info">
+            <strong>Recibo de Pago</strong>
+            <span>Último recibo de pago de aranceles registrado y verificado.</span>
+          </div>
+          <button class="doc-dl-btn" onclick="descargarDoc('Recibo de Pago')">↓ PDF</button>
+        </div>
+
+      </div><!-- /docs-grid-cards -->
+
+      <!-- Historial de documentos descargados -->
+      <div class="exp-section-title" style="margin-top:28px">Historial de descargas recientes</div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="historial-doc-row">
+            <span class="hd-icono">📄</span>
+            <div class="hd-info">
+              <strong>Constancia de Estudios</strong>
+              <span>Descargado el 18/04/2026 · 10:32 am</span>
+            </div>
+            <button class="hp-recibo" onclick="descargarDoc('Constancia de Estudios')">↓ Volver a descargar</button>
+          </div>
+          <div class="historial-doc-row">
+            <span class="hd-icono">💰</span>
+            <div class="hd-info">
+              <strong>Solvencia de Pago</strong>
+              <span>Descargado el 17/04/2026 · 2:15 pm</span>
+            </div>
+            <button class="hp-recibo" onclick="descargarDoc('Solvencia de Pago')">↓ Volver a descargar</button>
+          </div>
+          <div class="historial-doc-row">
+            <span class="hd-icono">📊</span>
+            <div class="hd-info">
+              <strong>Constancia de Notas</strong>
+              <span>Descargado el 10/04/2026 · 9:05 am</span>
+            </div>
+            <button class="hp-recibo" onclick="descargarDoc('Constancia de Notas')">↓ Volver a descargar</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /docs-main -->
+
+    <!-- Derecha: subir documentos -->
+    <div class="docs-right">
+
+      <div class="registrar-pago-card">
+        <div class="rp-header">Subir Documentos al Sistema</div>
+        <div class="rp-body">
+
+          <div class="docs-instrucciones">
+            <strong>Instrucciones</strong>
+            <ul>
+              <li>Solo se aceptan archivos JPG, PNG o PDF.</li>
+              <li>Peso máximo: 5 MB por archivo.</li>
+              <li>Los documentos serán revisados por la Coordinación.</li>
+            </ul>
+          </div>
+
+          <div class="form-group" style="margin-top:14px">
+            <label>Tipo de documento <span class="req">*</span></label>
+            <select>
+              <option value="">Seleccione</option>
+              <option>Cédula de Identidad</option>
+              <option>Título universitario</option>
+              <option>Notas certificadas</option>
+              <option>Constancia de trabajo</option>
+              <option>Foto tipo carnet</option>
+              <option>Partida de nacimiento</option>
+              <option>Comprobante de pago</option>
+              <option>Otro documento</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Descripción / Observación</label>
+            <textarea rows="2" placeholder="Opcional — describa el documento que sube..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Seleccionar archivo <span class="req">*</span></label>
+            <div class="file-upload-box">
+              <input type="file" accept=".jpg,.png,.pdf" id="file-doc-upload" onchange="updateFileName(this,'lbl-doc-upload')" />
+              <label for="file-doc-upload" class="file-upload-label">
+                <span class="file-btn">Seleccionar archivo</span>
+                <span class="file-name" id="lbl-doc-upload">Sin archivo seleccionado</span>
+              </label>
+              <small>JPG, PNG o PDF — máx. 5 MB</small>
+            </div>
+          </div>
+
+          <button class="btn-inscribir" style="width:100%;margin-top:10px" onclick="alert('Documento subido exitosamente.\nLa Coordinación lo revisará en un plazo de 24-48 horas hábiles.')">Subir Documento</button>
+
+          <!-- Documentos subidos -->
+          <div class="docs-subidos-titulo">Documentos subidos</div>
+          <div class="docs-subidos-lista">
+            <div class="doc-subido-item">
+              <span class="doc-subido-tipo">Cédula de Identidad</span>
+              <span class="doc-subido-estado aprobado">Verificado</span>
+            </div>
+            <div class="doc-subido-item">
+              <span class="doc-subido-tipo">Título universitario</span>
+              <span class="doc-subido-estado aprobado">Verificado</span>
+            </div>
+            <div class="doc-subido-item">
+              <span class="doc-subido-tipo">Notas certificadas</span>
+              <span class="doc-subido-estado pendiente-doc">En revisión</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /docs-right -->
+  </div><!-- /docs-layout -->
+
+</div><!-- /tab-documentos -->
+
+<!-- ══════════════════════════════════════════════════
+     TAB: PRE-INSCRIPCIÓN / BAREMO
+══════════════════════════════════════════════════ -->
+<div id="tab-preinscripcion" class="tab-content" style="display:none">
+
+  <!-- Intro -->
+  <div class="preinsc-intro">
+    <div class="preinsc-intro-icon">📋</div>
+    <div>
+      <h2>Preinscripción SIP-Postgrado</h2>
+      <p>Complete los campos a continuación. Este formulario está dirigido a aspirantes que <strong>no son estudiantes regulares</strong> de la UNEFA.</p>
+    </div>
+  </div>
+
+  <!-- Stepper -->
+  <div class="stepper">
+    <div class="step active" data-step="1"><div class="step-circle">1</div><span>Datos Personales</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="2"><div class="step-circle">2</div><span>Dirección</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="3"><div class="step-circle">3</div><span>Contacto</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="4"><div class="step-circle">4</div><span>Académico / Laboral</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="5"><div class="step-circle">5</div><span>Entrevista / Docs</span></div>
+  </div>
+
+  <!-- ── PASO 1: Datos Personales ── -->
+  <div class="form-card" id="paso-1">
+    <div class="form-card-header">
+      <span class="form-step-badge">Paso 1 de 5</span>
+      <h3>Datos Personales</h3>
+    </div>
+    <div class="form-body">
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Tipo de documento <span class="req">*</span></label>
+          <select>
+            <option value="V">V — Venezolano</option>
+            <option value="E">E — Extranjero</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cédula de Identidad <span class="req">*</span></label>
+          <input type="text" placeholder="Ej: 28310291" />
+        </div>
+        <div class="form-group">
+          <label>Primer nombre <span class="req">*</span></label>
+          <input type="text" placeholder="Escribe tu primer nombre" />
+        </div>
+        <div class="form-group">
+          <label>Segundo nombre</label>
+          <input type="text" placeholder="Escribe tu segundo nombre" />
+        </div>
+        <div class="form-group">
+          <label>Primer apellido <span class="req">*</span></label>
+          <input type="text" placeholder="Escribe tu primer apellido" />
+        </div>
+        <div class="form-group">
+          <label>Segundo apellido <span class="req">*</span></label>
+          <input type="text" placeholder="Escribe tu segundo apellido" />
+        </div>
+        <div class="form-group">
+          <label>Fecha de nacimiento <span class="req">*</span></label>
+          <input type="date" />
+        </div>
+        <div class="form-group">
+          <label>Sexo <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Femenino</option>
+            <option>Masculino</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Estado civil <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Soltero/a</option>
+            <option>Casado/a</option>
+            <option>Divorciado/a</option>
+            <option>Viudo/a</option>
+            <option>Unión estable de hecho</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <span></span>
+        <button class="btn-siguiente" onclick="irPaso(2)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PASO 2: Dirección ── -->
+  <div class="form-card" id="paso-2" style="display:none">
+    <div class="form-card-header">
+      <span class="form-step-badge">Paso 2 de 5</span>
+      <h3>Dirección de habitación</h3>
+    </div>
+    <div class="form-body">
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Estado <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Amazonas</option><option>Anzoátegui</option><option>Apure</option>
+            <option>Aragua</option><option>Barinas</option><option>Bolívar</option>
+            <option>Carabobo</option><option>Cojedes</option><option>Delta Amacuro</option>
+            <option>Distrito Capital</option><option>Falcón</option><option>Guárico</option>
+            <option>Lara</option><option>Mérida</option><option>Miranda</option>
+            <option>Monagas</option><option>Nueva Esparta</option><option>Portuguesa</option>
+            <option>Sucre</option><option>Táchira</option><option>Trujillo</option>
+            <option>Vargas</option><option>Yaracuy</option><option>Zulia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Municipio <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Libertador</option><option>Sucre</option><option>Baruta</option>
+            <option>Chacao</option><option>El Hatillo</option><option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Ciudad / Pueblo <span class="req">*</span></label>
+          <input type="text" placeholder="Escribe tu ciudad o pueblo" />
+        </div>
+        <div class="form-group">
+          <label>Avenida / Calle / Vereda <span class="req">*</span></label>
+          <input type="text" placeholder="Escribe tu avenida o calle" />
+        </div>
+        <div class="form-group">
+          <label>Urbanización / Barrio / Sector</label>
+          <input type="text" placeholder="Escribe tu urbanización o barrio" />
+        </div>
+        <div class="form-group">
+          <label>Tipo de residencia <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Casa</option>
+            <option>Apartamento</option>
+            <option>Quinta</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Residencia (nombre o N° casa / edificio)</label>
+          <input type="text" placeholder="Casa o edificio" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-anterior" onclick="irPaso(1)">← Atrás</button>
+        <button class="btn-siguiente" onclick="irPaso(3)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PASO 3: Redes + Contacto ── -->
+  <div class="form-card" id="paso-3" style="display:none">
+    <div class="form-card-header">
+      <span class="form-step-badge">Paso 3 de 5</span>
+      <h3>Redes sociales y Contacto</h3>
+    </div>
+    <div class="form-body">
+      <h4 class="sub-section">Redes Sociales</h4>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Twitter (X)</label>
+          <div class="input-icon-row"><span class="input-icon">𝕏</span><input type="text" placeholder="Tu usuario" /></div>
+        </div>
+        <div class="form-group">
+          <label>Facebook</label>
+          <div class="input-icon-row"><span class="input-icon">f</span><input type="text" placeholder="Tu usuario" /></div>
+        </div>
+        <div class="form-group">
+          <label>Instagram</label>
+          <div class="input-icon-row"><span class="input-icon">◎</span><input type="text" placeholder="Tu usuario" /></div>
+        </div>
+        <div class="form-group">
+          <label>LinkedIn</label>
+          <div class="input-icon-row"><span class="input-icon">in</span><input type="text" placeholder="Tu usuario" /></div>
+        </div>
+      </div>
+
+      <h4 class="sub-section">Contacto y condición</h4>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Teléfono fijo <span class="req">*</span></label>
+          <div class="input-icon-row"><span class="input-icon">☎</span><input type="tel" placeholder="11 dígitos, inicia con 0" /></div>
+        </div>
+        <div class="form-group">
+          <label>Celular <span class="req">*</span></label>
+          <div class="input-icon-row"><span class="input-icon">📱</span><input type="tel" placeholder="11 dígitos, inicia con 0" /></div>
+        </div>
+        <div class="form-group">
+          <label>Condición de ingreso <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Nuevo ingreso</option>
+            <option>Reingreso</option>
+            <option>Equivalencia</option>
+            <option>Traslado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Condición del usuario <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Civil</option>
+            <option>Militar activo</option>
+            <option>Militar retirado</option>
+            <option>Funcionario público</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-anterior" onclick="irPaso(2)">← Atrás</button>
+        <button class="btn-siguiente" onclick="irPaso(4)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PASO 4: Académico + Laboral ── -->
+  <div class="form-card" id="paso-4" style="display:none">
+    <div class="form-card-header">
+      <span class="form-step-badge">Paso 4 de 5</span>
+      <h3>Datos Académicos y Laborales</h3>
+    </div>
+    <div class="form-body">
+      <h4 class="sub-section">Datos Académicos</h4>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Área de conocimiento <span class="req">*</span></label>
+          <input type="text" placeholder="Área" />
+        </div>
+        <div class="form-group">
+          <label>Nivel académico <span class="req">*</span></label>
+          <input type="text" placeholder="Ej: Pregrado, Especialización" />
+        </div>
+        <div class="form-group">
+          <label>Universidad <span class="req">*</span></label>
+          <input type="text" placeholder="Universidad" />
+        </div>
+        <div class="form-group">
+          <label>Título obtenido <span class="req">*</span></label>
+          <input type="text" placeholder="Título" />
+        </div>
+        <div class="form-group">
+          <label>Año de graduación <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>2026</option><option>2025</option><option>2024</option><option>2023</option>
+            <option>2022</option><option>2021</option><option>2020</option><option>2019</option>
+            <option>2018</option><option>2017</option><option>2016</option><option>2015</option>
+            <option>2014</option><option>2013</option><option>2012</option><option>2010</option>
+            <option>Antes de 2010</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Promedio de calificaciones <span class="req">*</span></label>
+          <input type="number" placeholder="Ej: 16 o 16.5" min="0" max="20" step="0.1" />
+        </div>
+      </div>
+
+      <h4 class="sub-section">Datos Laborales</h4>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Tipo de institución <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>Pública</option>
+            <option>Privada</option>
+            <option>Mixta</option>
+            <option>ONG</option>
+            <option>Fuerzas Armadas</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nombre de la institución u organismo <span class="req">*</span></label>
+          <input type="text" placeholder="Nombre" />
+        </div>
+        <div class="form-group">
+          <label>Antigüedad <span class="req">*</span></label>
+          <input type="text" placeholder="Años / meses" />
+        </div>
+        <div class="form-group">
+          <label>Teléfono (trabajo)</label>
+          <input type="tel" placeholder="Opcional, 11 dígitos si indica" />
+        </div>
+        <div class="form-group">
+          <label>Cargo <span class="req">*</span></label>
+          <input type="text" placeholder="Cargo" />
+        </div>
+        <div class="form-group">
+          <label>¿Trabaja en la UNEFA? <span class="req">*</span></label>
+          <select>
+            <option value="">Seleccione</option>
+            <option value="si">Sí</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-anterior" onclick="irPaso(3)">← Atrás</button>
+        <button class="btn-siguiente" onclick="irPaso(5)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PASO 5: Entrevista / Baremo / Documentos ── -->
+  <div class="form-card" id="paso-5" style="display:none">
+    <div class="form-card-header">
+      <span class="form-step-badge">Paso 5 de 5</span>
+      <h3>Aspectos para la Entrevista</h3>
+      <p>Responda Sí o No según corresponda a su perfil</p>
+    </div>
+    <div class="form-body">
+
+      <!-- Tabla baremo -->
+      <div class="baremo-table-wrap">
+        <table class="baremo-table">
+          <thead>
+            <tr>
+              <th>Aspectos a Evaluar</th>
+              <th>Sí</th>
+              <th>No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="baremo-category"><td colspan="3">Académico</td></tr>
+            <tr>
+              <td>Participación en eventos científicos nacionales e internacionales.</td>
+              <td><input type="radio" name="b1" value="si" /></td>
+              <td><input type="radio" name="b1" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Participación como jurado o tutor en trabajos de investigación.</td>
+              <td><input type="radio" name="b2" value="si" /></td>
+              <td><input type="radio" name="b2" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Disposición a participar en actividades académicas, investigación e institucionales.</td>
+              <td><input type="radio" name="b3" value="si" /></td>
+              <td><input type="radio" name="b3" value="no" checked /></td>
+            </tr>
+
+            <tr class="baremo-category"><td colspan="3">Investigación</td></tr>
+            <tr>
+              <td>Tema de interés específico para su investigación vinculada a la nación.</td>
+              <td><input type="radio" name="b4" value="si" /></td>
+              <td><input type="radio" name="b4" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Vinculación entre el área profesional con los estudios de postgrado.</td>
+              <td><input type="radio" name="b5" value="si" /></td>
+              <td><input type="radio" name="b5" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Afiliación a grupo o red de investigadores.</td>
+              <td><input type="radio" name="b6" value="si" /></td>
+              <td><input type="radio" name="b6" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Participación como evaluador en artículos científicos.</td>
+              <td><input type="radio" name="b7" value="si" /></td>
+              <td><input type="radio" name="b7" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Ha escrito o publicado artículos científicos (Opción A).</td>
+              <td><input type="radio" name="b8" value="si" /></td>
+              <td><input type="radio" name="b8" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Ha escrito o publicado artículos científicos (Opción B).</td>
+              <td><input type="radio" name="b9" value="si" /></td>
+              <td><input type="radio" name="b9" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Familiarización con las líneas de investigación de la Universidad.</td>
+              <td><input type="radio" name="b10" value="si" /></td>
+              <td><input type="radio" name="b10" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>La investigación satisface fines personales o institucionales.</td>
+              <td><input type="radio" name="b11" value="si" /></td>
+              <td><input type="radio" name="b11" value="no" checked /></td>
+            </tr>
+
+            <tr class="baremo-category"><td colspan="3">Otros</td></tr>
+            <tr>
+              <td>Acceso y disponibilidad al manejo de equipos tecnológicos.</td>
+              <td><input type="radio" name="b12" value="si" /></td>
+              <td><input type="radio" name="b12" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Disponibilidad personal para financiar los estudios (Opción A).</td>
+              <td><input type="radio" name="b13" value="si" /></td>
+              <td><input type="radio" name="b13" value="no" checked /></td>
+            </tr>
+            <tr>
+              <td>Disponibilidad personal para financiar los estudios (Opción B).</td>
+              <td><input type="radio" name="b14" value="si" /></td>
+              <td><input type="radio" name="b14" value="no" checked /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Texto libre -->
+      <div class="form-group" style="margin-top:20px">
+        <label>Debe explicar: Tema de interés específico para su investigación vinculados a las áreas prioritarias de desarrollo de la nación: <span class="req">*</span></label>
+        <textarea rows="4" placeholder="Describa su tema de interés investigativo..."></textarea>
+      </div>
+
+      <!-- Otros datos -->
+      <h4 class="sub-section">Otros datos</h4>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>¿Cuenta con beca?</label>
+          <select>
+            <option value="">Seleccione</option>
+            <option>No</option>
+            <option>Beca MPPEU</option>
+            <option>Beca UNEFA</option>
+            <option>Beca Fundayacucho</option>
+            <option>Otra beca</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha de ingreso a la UNEFA</label>
+          <input type="date" />
+        </div>
+      </div>
+
+      <!-- Adjuntar documentos -->
+      <h4 class="sub-section">Adjuntar Documentos</h4>
+      <div class="docs-instructions">
+        <strong>Instrucciones:</strong>
+        <ul>
+          <li>Solo se aceptan archivos de imagen en formato JPG o PNG.</li>
+          <li>Las imágenes deben ser en Color, Claras y Legibles.</li>
+          <li>La resolución recomendada es de 1400 x 1400.</li>
+        </ul>
+      </div>
+      <div class="form-grid-2" style="margin-top:14px">
+        <div class="form-group">
+          <label>Documento de Identidad <span class="req">*</span></label>
+          <div class="file-upload-box">
+            <input type="file" accept=".jpg,.png" id="file-ci" onchange="updateFileName(this,'lbl-ci')" />
+            <label for="file-ci" class="file-upload-label">
+              <span class="file-btn">Seleccionar archivo</span>
+              <span class="file-name" id="lbl-ci">Sin archivos seleccionados</span>
+            </label>
+            <small>Solo se aceptan formatos JPG y PNG</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Título <span class="req">*</span></label>
+          <div class="file-upload-box">
+            <input type="file" accept=".jpg,.png" id="file-titulo" onchange="updateFileName(this,'lbl-titulo')" />
+            <label for="file-titulo" class="file-upload-label">
+              <span class="file-btn">Seleccionar archivo</span>
+              <span class="file-name" id="lbl-titulo">Sin archivos seleccionados</span>
+            </label>
+            <small>Solo se aceptan formatos JPG y PNG</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-anterior" onclick="irPaso(4)">← Atrás</button>
+        <button class="btn-enviar" onclick="enviarPreinscripcion()">Finalizar Registro</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-preinscripcion -->
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <strong>UNEFA</strong> | Excelencia Educativa Abierta al Pueblo<br/>
+  Vicerrectorado de Investigación, Postgrado y Recreación
+</footer>
+
+<!-- TWEAKS -->
+<div id="tweaks-panel">
+  <h5>Tweaks</h5>
+
+  <label>Nombre del usuario</label>
+  <select id="tw-name" onchange="applyTweaks()">
+    <option value="Ana Gabriela Cardozo Peña">Ana Gabriela Cardozo Peña</option>
+    <option value="Carlos Rodríguez López">Carlos Rodríguez López</option>
+    <option value="María Fernández">María Fernández</option>
+  </select>
+
+  <label>Acento de módulos</label>
+  <select id="tw-accent" onchange="applyTweaks()">
+    <option value="multi">Multicolor (original)</option>
+    <option value="navy">Todo azul marino</option>
+    <option value="red">Todo rojo</option>
+  </select>
+
+  <label>Compacidad</label>
+  <input type="range" id="tw-density" min="0.8" max="1.2" step="0.05" value="1" oninput="applyTweaks()" />
+</div>
+
+<script>
+  // Tweaks protocol
+  window.addEventListener('message', e => {
+    if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').style.display = 'block';
+    if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  function applyTweaks() {
+    const name    = document.getElementById('tw-name').value;
+    const accent  = document.getElementById('tw-accent').value;
+    const density = parseFloat(document.getElementById('tw-density').value);
+
+    // Name
+    document.querySelector('.welcome-bar-left h2').textContent = 'Bienvenido, ' + name;
+
+    // Density
+    document.documentElement.style.fontSize = (density * 16) + 'px';
+
+    // Accent
+    const cards = document.querySelectorAll('.module-card');
+    if (accent === 'navy') {
+      cards.forEach(c => { c.style.setProperty('--accent','#0d1b4b'); c.style.setProperty('--icon-bg','rgba(13,27,75,.08)'); });
+    } else if (accent === 'red') {
+      cards.forEach(c => { c.style.setProperty('--accent','#b91c1c'); c.style.setProperty('--icon-bg','rgba(185,28,28,.08)'); });
+    } else {
+      // restore original
+      const accents = ['#0d1b4b','#b91c1c','#d4a017','#0d1b4b','#16a34a','#b91c1c'];
+      const bgs     = ['rgba(13,27,75,.08)','rgba(185,28,28,.08)','rgba(212,160,23,.1)','rgba(13,27,75,.08)','rgba(34,197,94,.08)','rgba(185,28,28,.08)'];
+      cards.forEach((c,i) => { c.style.setProperty('--accent',accents[i]); c.style.setProperty('--icon-bg',bgs[i]); });
+    }
+  }
+
+  function descargarDoc(nombre) {
+    alert('Generando ' + nombre + ' en PDF...\nEl archivo se descargará en unos segundos.');
+  }
+
+  function selBanco(btn, id) {
+    document.querySelectorAll('.banco-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.banco-datos').forEach(d => d.style.display = 'none');
+    btn.classList.add('active');
+    document.getElementById('datos-' + id).style.display = 'block';
+  }
+
+  // ── INSCRIPCIONES ──
+  const colores = ['#0d1b4b','#b91c1c','#d4a017','#16a34a','#7c3aed','#0891b2'];
+  let materiasSeleccionadas = {};
+
+  function toggleMateria(chk, codigo, nombre, uc, horario, profesor, seccion) {
+    const card = chk.closest('.materia-card');
+    if (chk.checked) {
+      materiasSeleccionadas[codigo] = { nombre, uc, horario, profesor, seccion };
+      card.classList.add('selected');
+    } else {
+      delete materiasSeleccionadas[codigo];
+      card.classList.remove('selected');
+    }
+    renderResumen();
+    renderHorario();
+    updateUC();
+  }
+
+  function updateUC() {
+    const total = Object.values(materiasSeleccionadas).reduce((s,m) => s + m.uc, 0);
+    document.getElementById('uc-sel').textContent = total;
+    document.getElementById('total-uc').textContent = total;
+    const btn = document.getElementById('btn-inscribir');
+    btn.disabled = total === 0;
+  }
+
+  function renderResumen() {
+    const cont = document.getElementById('insc-seleccionadas');
+    const keys = Object.keys(materiasSeleccionadas);
+    if (keys.length === 0) {
+      cont.innerHTML = '<div class="insc-empty">Ninguna materia seleccionada</div>';
+      return;
+    }
+    cont.innerHTML = keys.map(k => {
+      const m = materiasSeleccionadas[k];
+      return `<div class="insc-sel-item">
+        <span class="insc-sel-nombre">${m.nombre}</span>
+        <span class="insc-sel-uc">${m.uc} UC</span>
+      </div>`;
+    }).join('');
+  }
+
+  function renderHorario() {
+    const cont = document.getElementById('horario-preview');
+    const keys = Object.keys(materiasSeleccionadas);
+    if (keys.length === 0) {
+      cont.innerHTML = '<div class="horario-vacio">Selecciona materias para ver tu horario</div>';
+      return;
+    }
+    cont.innerHTML = keys.map((k, i) => {
+      const m = materiasSeleccionadas[k];
+      const color = colores[i % colores.length];
+      return `<div class="horario-pill" style="background:${color}18; border-color:${color}; color:${color}">
+        <span style="font-weight:800">${k}</span>
+        <span>${m.horario}</span>
+      </div>`;
+    }).join('');
+  }
+
+  function filtrarMaterias(seccion) {
+    document.querySelectorAll('.materia-card').forEach(card => {
+      const s = card.dataset.seccion;
+      card.style.display = (seccion === 'todas' || s === seccion) ? '' : 'none';
+    });
+  }
+
+  function buscarMateria(query) {
+    const q = query.toLowerCase();
+    document.querySelectorAll('.materia-card').forEach(card => {
+      const nombre = card.querySelector('.materia-nombre').textContent.toLowerCase();
+      const codigo = card.dataset.codigo.toLowerCase();
+      card.style.display = (nombre.includes(q) || codigo.includes(q)) ? '' : 'none';
+    });
+  }
+
+  function confirmarInscripcion() {
+    const keys = Object.keys(materiasSeleccionadas);
+    if (keys.length === 0) return;
+    const lista = keys.map(k => `• ${materiasSeleccionadas[k].nombre}`).join('\n');
+    const total = Object.values(materiasSeleccionadas).reduce((s,m) => s + m.uc, 0);
+    alert(`Inscripción enviada a revisión del coordinador.\n\nMaterias:\n${lista}\n\nTotal: ${total} UC\n\nRecibirá confirmación en su correo electrónico.`);
+  }
+
+  // Countdown
+  (function updateCountdown() {
+    const fin = new Date('2026-04-30T23:59:59');
+    function tick() {
+      const diff = fin - new Date();
+      if (diff <= 0) return;
+      const dias  = Math.floor(diff / 86400000);
+      const horas = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000) / 60000);
+      const dEl = document.getElementById('cd-dias');
+      const hEl = document.getElementById('cd-horas');
+      const mEl = document.getElementById('cd-mins');
+      if (dEl) dEl.textContent = String(dias).padStart(2,'0');
+      if (hEl) hEl.textContent = String(horas).padStart(2,'0');
+      if (mEl) mEl.textContent = String(mins).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 60000);
+  })();
+
+  function showTerm(btn, termId) {
+    document.querySelectorAll('.exp-term-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.exp-term-panel').forEach(p => p.style.display = 'none');
+    btn.classList.add('active');
+    document.getElementById(termId).style.display = 'block';
+  }
+
+  // ── ANIMACIONES: contador animado ──
+  function animateCounters() {
+    document.querySelectorAll('.exp-stat-val, .baremo-score-total span').forEach(el => {
+      const text = el.textContent.trim();
+      const num = parseFloat(text.replace(/[^0-9.]/g, ''));
+      if (isNaN(num) || num === 0) return;
+      const suffix = text.replace(/[0-9.]/g, '');
+      const duration = 900;
+      const start = performance.now();
+      const isFloat = text.includes('.');
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const val = isFloat ? (num * ease).toFixed(1) : Math.round(num * ease);
+        el.textContent = val + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // Re-trigger animations on tab switch
+  function retriggerAnims(section) {
+    section.querySelectorAll('.stat-card,.module-card,.exp-stat,.pago-stat,.materia-card,.doc-card,.arancel-row:not(.header-row),.historial-pago-row,.notas-table tbody tr').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+    setTimeout(animateCounters, 200);
+  }
+
+  // Tab navigation with content switching
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const target = tab.dataset.tab;
+      document.querySelectorAll('.tab-content').forEach(c => {
+        c.style.display = 'none';
+        c.classList.remove('active');
+      });
+      const section = document.getElementById('tab-' + target);
+      if (section) {
+        section.style.display = 'block';
+        section.classList.add('active');
+        retriggerAnims(section);
+      } else {
+        const inicio = document.getElementById('tab-inicio');
+        inicio.style.display = 'block';
+        inicio.classList.add('active');
+        retriggerAnims(inicio);
+      }
+    });
+  });
+
+  // Animar contadores al cargar
+  animateCounters();
+
+  // Multi-step form
+  let pasoActual = 1;
+
+  function irPaso(n) {
+    document.getElementById('paso-' + pasoActual).style.display = 'none';
+    // Mark done
+    document.querySelectorAll('.step').forEach(s => {
+      const sn = parseInt(s.dataset.step);
+      s.classList.remove('active','done');
+      if (sn < n) s.classList.add('done');
+      if (sn === n) s.classList.add('active');
+      // update circle for done
+      if (sn < n) s.querySelector('.step-circle').textContent = '✓';
+      else s.querySelector('.step-circle').textContent = sn;
+    });
+    pasoActual = n;
+    document.getElementById('paso-' + n).style.display = 'block';
+    if (n === 5) calcBaremo();
+  }
+
+  function updateFileName(input, labelId) {
+    const label = document.getElementById(labelId);
+    if (input.files && input.files[0]) {
+      label.textContent = input.files[0].name;
+      label.style.color = 'var(--navy)';
+    } else {
+      label.textContent = 'Sin archivos seleccionados';
+      label.style.color = '';
+    }
+  }
+
+  function enviarPreinscripcion() {
+    alert('Pre-Inscripción enviada exitosamente.\nSu solicitud será revisada por la Coordinación de Postgrado.\nRecibirá confirmación en su correo electrónico registrado.');
+  }
+</script>
+
+</body>
+</html>
