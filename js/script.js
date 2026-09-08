@@ -36,7 +36,7 @@
 
   /* Scroll reveal */
   var revealTargets = document.querySelectorAll(
-    '.shield-card, .project-card, .web-project-card, .audience-card, .detail-card, .about__media, .about__text, .contact__intro, .contact__form, .hero__text, .hero__media'
+    '.shield-card, .project-card, .web-project-card, .about__media, .about__text, .contact__intro, .contact__form, .hero__text, .hero__media'
   );
   revealTargets.forEach(function (el) { el.classList.add('reveal'); });
 
@@ -147,29 +147,6 @@
 
     window.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeProjectModal();
-    });
-  }
-
-  /* Process step pills */
-  var stepFilters = document.getElementById('stepFilters');
-  var stepDesc = document.getElementById('stepDesc');
-  var stepText = {
-    '1': 'Me cuentas tu idea, tu negocio y qué necesitas. Con eso te armo una propuesta clara, sin letra chica.',
-    '2': 'Armo la identidad visual y el diseño de cada pantalla antes de tocar una línea de código, para que apruebes el look primero.',
-    '3': 'Desarrollo tu web o pieza final con código limpio, rápido y optimizado para celular.',
-    '4': 'Revisamos todo juntos, hacemos los últimos ajustes y entrego el proyecto listo para publicar.'
-  };
-
-  if (stepFilters && stepDesc) {
-    stepFilters.addEventListener('click', function (e) {
-      var btn = e.target.closest('.filter');
-      if (!btn) return;
-
-      stepFilters.querySelectorAll('.filter').forEach(function (f) { f.classList.remove('is-active'); });
-      btn.classList.add('is-active');
-
-      var step = btn.getAttribute('data-step');
-      if (stepText[step]) stepDesc.textContent = stepText[step];
     });
   }
 
