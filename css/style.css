@@ -92,7 +92,7 @@ button { font: inherit; cursor: pointer; }
 }
 .header__inner {
   display: flex; align-items: center; justify-content: space-between;
-  height: 76px;
+  height: 84px;
 }
 .logo {
   font-family: var(--ff-head);
@@ -103,7 +103,7 @@ button { font: inherit; cursor: pointer; }
 .logo span { color: var(--pink); }
 .logo--sm { font-size: 1.1rem; }
 .logo--mark { display: flex; align-items: center; }
-.logo__img { height: 66px; width: auto; display: block; }
+.logo__img { height: 72px; width: auto; display: block; }
 
 .nav { display: flex; align-items: center; gap: 8px; }
 .nav a {
@@ -570,6 +570,8 @@ body.is-locked .nav-scrim { opacity: 1; pointer-events: auto; }
 .project-modal__body p { color: var(--text-dim); font-size: .96rem; line-height: 1.6; margin-bottom: 24px; }
 
 @media (max-width: 760px) {
+  .logo__img { height: 48px; }
+
   .project-modal { padding: 0; align-items: flex-end; }
   .project-modal__panel {
     flex-direction: column;
