@@ -294,192 +294,194 @@
   <section class="section section--dark" id="proyectos">
     <div class="wrap">
       <p class="eyebrow eyebrow--center">Portafolio</p>
-      <h2 class="section__title">Algunos <span class="hl">proyectos</span></h2>
-      <p class="section__sub">Una muestra de trabajos reales para distintos clientes. Sigo subiendo más por categoría.</p>
+      <h2 class="section__title">Trabajo <span class="hl">por cliente</span></h2>
+      <p class="section__sub">Una muestra real de lo que he hecho para cada cliente.</p>
 
       <div class="filters" id="filters">
         <button class="filter is-active" data-filter="all">Todos</button>
-        <button class="filter" data-filter="post">Post</button>
-        <button class="filter" data-filter="flyer">Flyer</button>
-        <button class="filter" data-filter="historias">Historias</button>
-        <button class="filter" data-filter="banner">Banner</button>
-        <button class="filter" data-filter="logo">Logo</button>
-        <button class="filter" data-filter="animaciones">Animaciones</button>
-        <button class="filter" data-filter="web">Diseño de páginas web</button>
+        <button class="filter" data-filter="nextcore">NextCore</button>
+        <button class="filter" data-filter="narestco">NARESTCO</button>
+        <button class="filter" data-filter="michoacana">La Michoacana</button>
+        <button class="filter" data-filter="toprak">Toprak Moto</button>
       </div>
 
-      <!-- Para agregar un proyecto nuevo: copia un <article class="project-card">, cambia data-cat (para el filtro),
-           data-title, data-tag, data-desc (lo que se ve en la ventana emergente), la imagen dentro de
-           .project-card__media, y el título/descripción cortos del cuerpo de la tarjeta. -->
-      <div class="projects" id="projects">
-        <article class="project-card" data-cat="post" data-title="La Michoacana — Malteada Halloween" data-tag="Post"
-                  data-desc="Pieza de temporada para redes sociales: una malteada de temática Halloween compuesta con elementos 3D y branding de La Michoacana, pensada para destacar en el feed durante octubre."
-                  data-img="assets/projects/post-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/post-michoacana.png" alt="Post de Halloween para La Michoacana" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Post</span>
-            <h3>La Michoacana</h3>
-            <p>Post de temporada — Halloween</p>
-          </div>
-        </article>
+      <!-- Para agregar un cliente nuevo: copia un <article class="client-block">, cambia data-client (para el filtro),
+           el nombre y los servicios en .client-block__head, y las .project-card de adentro (data-title, data-tag,
+           data-desc para la ventana emergente, y la imagen). -->
+      <div class="clients" id="clients">
 
-        <article class="project-card" data-cat="post" data-title="NARESTCO — Post de servicio" data-tag="Post"
-                  data-desc="Post promocional para National Restoration Construction: composición con foto de equipo, camioneta de marca y logo, comunicando su servicio de restauración disponible 24/7."
-                  data-img="assets/projects/post-narestco.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/post-narestco.png" alt="Post promocional de NARESTCO" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Post</span>
-            <h3>NARESTCO</h3>
-            <p>Post de servicio 24/7</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="flyer" data-title="Ibiza Casino — Concurso de disfraces" data-tag="Flyer"
-                  data-desc="Flyer de Halloween para Ibiza Casino: concurso de disfraces con premios en efectivo, diseñado con una estética de terror que capta la atención y comunica toda la info clave del evento."
-                  data-img="assets/projects/flyer-ibiza-halloween.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/flyer-ibiza-halloween.png" alt="Flyer de concurso de disfraces de Ibiza Casino" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Flyer</span>
-            <h3>Ibiza Casino</h3>
-            <p>Concurso de disfraces — Halloween</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="flyer" data-title="La Michoacana — Flyer de venta al mayor" data-tag="Flyer"
-                  data-desc="Flyer para atraer nuevos negocios distribuidores de La Michoacana: destaca el producto, la marca y los beneficios de vender la marca (producto natural, alta rotación, soporte)."
-                  data-img="assets/projects/flyer-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/flyer-michoacana.png" alt="Flyer de La Michoacana" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Flyer</span>
-            <h3>La Michoacana</h3>
-            <p>Flyer para nuevos distribuidores</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="historias" data-title="Ibiza Casino — Historia de evento" data-tag="Historias"
-                  data-desc="Historia de Instagram anunciando una transmisión de fútbol en vivo (Panamá vs Paraguay) en las sucursales de Ibiza Casino, con fecha, hora y llamado a la acción."
-                  data-img="assets/projects/historia-ibiza.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/historia-ibiza.png" alt="Historia de Instagram de Ibiza Casino" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Historias</span>
-            <h3>Ibiza Casino</h3>
-            <p>Historia de transmisión en vivo</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="historias" data-title="La Michoacana — Historia temática" data-tag="Historias"
-                  data-desc="Historia de Instagram con temática de anime para promocionar un descuento especial de La Michoacana durante dos días, combinando referencias pop con la identidad de la marca."
-                  data-img="assets/projects/historia-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/historia-michoacana.png" alt="Historia de Instagram de La Michoacana" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Historias</span>
-            <h3>La Michoacana</h3>
-            <p>Historia con descuento especial</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="banner" data-title="Toprak Moto — Banner" data-tag="Banner"
-                  data-desc="Banner de anticipación para Toprak Moto, tienda de equipamiento para motociclistas: fotografía de ambiente, logo y mensaje de 'próximamente' para generar expectativa antes del lanzamiento."
-                  data-img="assets/projects/banner-toprak-moto.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/banner-toprak-moto.png" alt="Banner de Toprak Moto" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Banner</span>
-            <h3>Toprak Moto</h3>
-            <p>Banner de lanzamiento</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="banner" data-title="Fibra Go — Banner" data-tag="Banner"
-                  data-desc="Banner promocional para la app Fibra Go (cliente NextCore): fotografía real, tipografía clara y un mensaje directo ('Tu plan perfecto te espera') sobre un fondo de marca."
-                  data-img="assets/projects/banner-fibrago.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media has-image">
-            <img src="assets/projects/banner-fibrago.png" alt="Banner de Fibra Go" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Banner</span>
-            <h3>Fibra Go</h3>
-            <p>Banner promocional de app</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="logo" data-title="NextCore — Logo" data-tag="Logo"
-                  data-desc="Diseño de logotipo para NextCore: símbolo de lazo infinito en verde menta junto a una tipografía bold, transmitiendo tecnología, conexión y modernidad."
-                  data-img="assets/projects/logo-nextcore.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--logo has-image">
-            <img src="assets/projects/logo-nextcore.png" alt="Logo de NextCore" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Logo</span>
+        <article class="client-block" data-client="nextcore">
+          <div class="client-block__head">
             <h3>NextCore</h3>
-            <p>Logotipo para empresa tech</p>
+            <p class="client-block__services">Logo · Manejo de redes</p>
+          </div>
+          <div class="client-block__grid">
+            <article class="project-card" data-title="NextCore — Logo" data-tag="Logo"
+                      data-desc="Diseño de logotipo para NextCore: símbolo de lazo infinito en verde menta junto a una tipografía bold, transmitiendo tecnología, conexión y modernidad."
+                      data-img="assets/projects/logo-nextcore.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media project-card__media--logo has-image">
+                <img src="assets/projects/logo-nextcore.png" alt="Logo de NextCore" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Logo</span>
+                <h3>Logo</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="NextCore — Banner Fibra Go" data-tag="Banner"
+                      data-desc="Banner promocional para la app Fibra Go (producto de NextCore): fotografía real, tipografía clara y un mensaje directo ('Tu plan perfecto te espera') sobre un fondo de marca."
+                      data-img="assets/projects/banner-fibrago.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/banner-fibrago.png" alt="Banner de Fibra Go" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Banner</span>
+                <h3>Banner — Fibra Go</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="NextCore — Post de redes" data-tag="Post"
+                      data-desc="Post para el manejo de redes de NextCore: pieza con motion graphics 3D preguntando '¿Sientes que la comunicación en tu equipo es un caos?', parte del contenido mensual para su Instagram."
+                      data-img="assets/projects/post-nextcore-carrusel.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/post-nextcore-carrusel.png" alt="Post de redes de NextCore" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Post</span>
+                <h3>Post de redes</h3>
+              </div>
+            </article>
           </div>
         </article>
 
-        <article class="project-card" data-cat="logo" data-title="National Restoration Construction — Logo" data-tag="Logo"
-                  data-desc="Logotipo para National Restoration Construction (NARESTCO): un ícono de casa con martillo y llama que comunica de forma directa su rubro (agua, fuego, moho, trauma) sobre una paleta roja y negra."
-                  data-img="assets/projects/logo-narestco.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--logo has-image">
-            <img src="assets/projects/logo-narestco.png" alt="Logo de National Restoration Construction" loading="lazy">
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Logo</span>
+        <article class="client-block" data-client="narestco">
+          <div class="client-block__head">
             <h3>NARESTCO</h3>
-            <p>Logotipo para empresa de restauración</p>
+            <p class="client-block__services">Logo · Manejo de redes (varios meses)</p>
+          </div>
+          <div class="client-block__grid">
+            <article class="project-card" data-title="NARESTCO — Logo" data-tag="Logo"
+                      data-desc="Logotipo para National Restoration Construction (NARESTCO): un ícono de casa con martillo y llama que comunica de forma directa su rubro (agua, fuego, moho, trauma) sobre una paleta roja y negra."
+                      data-img="assets/projects/logo-narestco.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media project-card__media--logo has-image">
+                <img src="assets/projects/logo-narestco.png" alt="Logo de National Restoration Construction" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Logo</span>
+                <h3>Logo</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="NARESTCO — Post de servicio" data-tag="Post"
+                      data-desc="Post promocional para NARESTCO: composición con foto de equipo, camioneta de marca y logo, comunicando su servicio de restauración disponible 24/7."
+                      data-img="assets/projects/post-narestco.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/post-narestco.png" alt="Post promocional de NARESTCO" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Post</span>
+                <h3>Post de servicio</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="NARESTCO — Post mensual" data-tag="Post"
+                      data-desc="Otra pieza del contenido mensual de NARESTCO: camioneta de marca frente a una vivienda, presentando al equipo con el mensaje 'Meet the Expertise, Compassionate Service'."
+                      data-img="assets/projects/post-narestco-2.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/post-narestco-2.png" alt="Post mensual de NARESTCO" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Post</span>
+                <h3>Post mensual</h3>
+              </div>
+            </article>
           </div>
         </article>
 
-        <article class="project-card" data-cat="logo" data-title="Toprak Moto — Logo" data-tag="Logo"
-                  data-desc="Logotipo para Toprak Moto, tienda de equipamiento para motociclistas: símbolo agresivo en blanco y negro combinado con tipografía itálica en verde, con energía y carácter deportivo."
-                  data-img="assets/projects/logo-toprak-moto.png" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--logo has-image">
-            <img src="assets/projects/logo-toprak-moto.png" alt="Logo de Toprak Moto" loading="lazy">
+        <article class="client-block" data-client="michoacana">
+          <div class="client-block__head">
+            <h3>La Michoacana</h3>
+            <p class="client-block__services">Piezas puntuales — Flyer · Historias · Post</p>
           </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Logo</span>
+          <div class="client-block__grid">
+            <article class="project-card" data-title="La Michoacana — Flyer de venta al mayor" data-tag="Flyer"
+                      data-desc="Flyer para atraer nuevos negocios distribuidores de La Michoacana: destaca el producto, la marca y los beneficios de vender la marca (producto natural, alta rotación, soporte)."
+                      data-img="assets/projects/flyer-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/flyer-michoacana.png" alt="Flyer de La Michoacana" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Flyer</span>
+                <h3>Flyer de distribución</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="La Michoacana — Historia temática" data-tag="Historias"
+                      data-desc="Historia de Instagram con temática de anime para promocionar un descuento especial de La Michoacana durante dos días, combinando referencias pop con la identidad de la marca."
+                      data-img="assets/projects/historia-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/historia-michoacana.png" alt="Historia de Instagram de La Michoacana" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Historias</span>
+                <h3>Historia con descuento</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="La Michoacana — Malteada Halloween" data-tag="Post"
+                      data-desc="Pieza de temporada para redes sociales: una malteada de temática Halloween compuesta con elementos 3D y branding de La Michoacana, pensada para destacar en el feed durante octubre."
+                      data-img="assets/projects/post-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/post-michoacana.png" alt="Post de Halloween para La Michoacana" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Post</span>
+                <h3>Post de temporada</h3>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="client-block" data-client="toprak">
+          <div class="client-block__head">
             <h3>Toprak Moto</h3>
-            <p>Logotipo para tienda de motos</p>
+            <p class="client-block__services">Identidad de marca — Logo · Banner</p>
+          </div>
+          <div class="client-block__grid">
+            <article class="project-card" data-title="Toprak Moto — Logo" data-tag="Logo"
+                      data-desc="Logotipo para Toprak Moto, tienda de equipamiento para motociclistas: símbolo agresivo en blanco y negro combinado con tipografía itálica en verde, con energía y carácter deportivo."
+                      data-img="assets/projects/logo-toprak-moto.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media project-card__media--logo has-image">
+                <img src="assets/projects/logo-toprak-moto.png" alt="Logo de Toprak Moto" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Logo</span>
+                <h3>Logo</h3>
+              </div>
+            </article>
+
+            <article class="project-card" data-title="Toprak Moto — Banner" data-tag="Banner"
+                      data-desc="Banner de anticipación para Toprak Moto: fotografía de ambiente, logo y mensaje de 'próximamente' para generar expectativa antes del lanzamiento de la tienda."
+                      data-img="assets/projects/banner-toprak-moto.png" tabindex="0" role="button" aria-haspopup="dialog">
+              <div class="project-card__media has-image">
+                <img src="assets/projects/banner-toprak-moto.png" alt="Banner de Toprak Moto" loading="lazy">
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__tag">Banner</span>
+                <h3>Banner de lanzamiento</h3>
+              </div>
+            </article>
           </div>
         </article>
 
-        <article class="project-card" data-cat="animaciones" data-title="NextCore — Reel animado" data-tag="Animaciones"
-                  data-desc="Reel de Instagram para NextCore, editado con motion graphics y ritmo pensado para redes sociales." tabindex="0" role="button" aria-haspopup="dialog"
-                  data-video="assets/projects/animacion-nextcore-reel.mp4">
-          <div class="project-card__media has-video">
-            <video src="assets/projects/animacion-nextcore-reel.mp4" preload="metadata" muted playsinline></video>
-            <span class="project-card__play" aria-hidden="true">▶</span>
-          </div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Animaciones</span>
-            <h3>NextCore</h3>
-            <p>Reel animado para Instagram</p>
-          </div>
-        </article>
-
-        <article class="project-card" data-cat="web" data-title="Próximamente" data-tag="Diseño de páginas web"
-                  data-desc="Estoy preparando este proyecto para mostrártelo aquí: un diseño de página web a medida. Mientras tanto, esta misma página (anainnova.com) es un ejemplo de mi trabajo de diseño y desarrollo web." tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="project-card__media project-card__media--1"></div>
-          <div class="project-card__body">
-            <span class="project-card__tag">Diseño de páginas web</span>
-            <h3>Próximamente</h3>
-            <p>Diseño de página web</p>
-          </div>
-        </article>
       </div>
-      <p class="projects__empty" id="projectsEmpty" hidden>Todavía no hay proyectos en esta categoría.</p>
+      <p class="projects__empty" id="projectsEmpty" hidden>Todavía no hay clientes en este filtro.</p>
+
+      <div class="web-note">
+        <span class="project-card__tag">Diseño de páginas web</span>
+        <h3>Próximamente</h3>
+        <p>Estoy preparando ejemplos de diseño de páginas web para mostrarte aquí. Mientras tanto, esta misma página (anainnova.com) es un ejemplo real de mi trabajo de diseño y desarrollo web.</p>
+      </div>
     </div>
   </section>
 

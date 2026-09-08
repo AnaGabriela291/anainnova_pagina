@@ -57,8 +57,9 @@
     revealTargets.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* Project filters */
+  /* Client filters */
   var filters = document.getElementById('filters');
+  var clientBlocks = document.querySelectorAll('.client-block');
   var projects = document.querySelectorAll('.project-card');
   var emptyMsg = document.getElementById('projectsEmpty');
 
@@ -70,12 +71,12 @@
       filters.querySelectorAll('.filter').forEach(function (f) { f.classList.remove('is-active'); });
       btn.classList.add('is-active');
 
-      var cat = btn.getAttribute('data-filter');
+      var client = btn.getAttribute('data-filter');
       var visibleCount = 0;
 
-      projects.forEach(function (card) {
-        var match = cat === 'all' || card.getAttribute('data-cat') === cat;
-        card.classList.toggle('is-hidden', !match);
+      clientBlocks.forEach(function (block) {
+        var match = client === 'all' || block.getAttribute('data-client') === client;
+        block.classList.toggle('is-hidden', !match);
         if (match) visibleCount++;
       });
 
