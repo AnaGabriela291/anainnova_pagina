@@ -103,7 +103,7 @@ button { font: inherit; cursor: pointer; }
 .logo span { color: var(--pink); }
 .logo--sm { font-size: 1.1rem; }
 .logo--mark { display: flex; align-items: center; }
-.logo__img { height: 38px; width: auto; display: block; }
+.logo__img { height: 58px; width: auto; display: block; }
 
 .nav { display: flex; align-items: center; gap: 8px; }
 .nav a {
