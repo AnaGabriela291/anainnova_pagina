@@ -342,11 +342,12 @@ body.is-locked .nav-scrim { opacity: 1; pointer-events: auto; }
 }
 .project-card:hover .project-card__media.has-image img { transform: scale(1.04); }
 
+.project-card__media--logo { aspect-ratio: 2/1; }
 .project-card__media--logo.has-image { background: #f4f2ef; }
 .project-card__media--logo.has-image img {
   object-fit: contain;
   object-position: center;
-  padding: 28px;
+  padding: 12px;
 }
 .project-card:hover .project-card__media--logo.has-image img { transform: none; }
 
