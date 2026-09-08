@@ -93,9 +93,14 @@
 
   function openProjectModal(card) {
     var imgSrc = card.getAttribute('data-img');
+    var videoSrc = card.getAttribute('data-video');
+    var isLogo = card.querySelector('.project-card__media--logo') !== null;
 
-    if (imgSrc) {
-      modalMedia.className = 'project-modal__media has-image';
+    if (videoSrc) {
+      modalMedia.className = 'project-modal__media has-video';
+      modalMedia.innerHTML = '<video src="' + videoSrc + '" controls preload="metadata"></video>';
+    } else if (imgSrc) {
+      modalMedia.className = 'project-modal__media has-image' + (isLogo ? ' project-modal__media--logo' : '');
       modalMedia.innerHTML = '<img src="' + imgSrc + '" alt="">';
     } else {
       var mediaEl = card.querySelector('.project-card__media');
@@ -116,6 +121,8 @@
   }
 
   function closeProjectModal() {
+    var video = modalMedia.querySelector('video');
+    if (video) video.pause();
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('is-locked');
