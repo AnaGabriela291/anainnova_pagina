@@ -92,6 +92,26 @@
   var modalDesc = document.getElementById('projectModalDesc');
   var lastTrigger = null;
 
+  /* Sizes the modal media box to the exact aspect ratio of its image/video (desktop only —
+     on mobile CSS handles it with width:100%/height:auto), so there's never empty letterbox
+     space around it. */
+  function sizeModalMedia(naturalW, naturalH) {
+    if (!naturalW || !naturalH) {
+      modalMedia.style.width = '';
+      modalMedia.style.height = '';
+      return;
+    }
+    var isMobile = window.innerWidth <= 760;
+    var maxH = isMobile ? window.innerHeight * 0.5 : Math.min(620, window.innerHeight * 0.82);
+    var maxW = isMobile ? (window.innerWidth - 2) : Math.min(window.innerWidth * 0.56, 760);
+    var ratio = naturalW / naturalH;
+    var w = maxH * ratio;
+    var h = maxH;
+    if (w > maxW) { w = maxW; h = maxW / ratio; }
+    modalMedia.style.width = Math.round(w) + 'px';
+    modalMedia.style.height = Math.round(h) + 'px';
+  }
+
   function openProjectModal(card) {
     var imgSrc = card.getAttribute('data-img');
     var videoSrc = card.getAttribute('data-video');
@@ -100,14 +120,27 @@
     if (videoSrc) {
       modalMedia.className = 'project-modal__media has-video';
       modalMedia.innerHTML = '<video src="' + videoSrc + '" controls preload="metadata"></video>';
+      modalMedia.querySelector('video').addEventListener('loadedmetadata', function () {
+        sizeModalMedia(this.videoWidth, this.videoHeight);
+      });
     } else if (imgSrc) {
       modalMedia.className = 'project-modal__media has-image' + (isLogo ? ' project-modal__media--logo' : '');
       modalMedia.innerHTML = '<img src="' + imgSrc + '" alt="">';
+      var modalImg = modalMedia.querySelector('img');
+      if (modalImg.complete && modalImg.naturalWidth) {
+        sizeModalMedia(modalImg.naturalWidth, modalImg.naturalHeight);
+      } else {
+        modalImg.addEventListener('load', function () {
+          sizeModalMedia(this.naturalWidth, this.naturalHeight);
+        });
+      }
     } else {
       var mediaEl = card.querySelector('.project-card__media');
       var mediaMatch = mediaEl && mediaEl.className.match(/project-card__media--(\d)/);
       modalMedia.className = 'project-modal__media' + (mediaMatch ? ' project-modal__media--' + mediaMatch[1] : '');
       modalMedia.innerHTML = '';
+      modalMedia.style.width = '';
+      modalMedia.style.height = '';
     }
 
     modalTag.textContent = card.getAttribute('data-tag') || '';
@@ -139,6 +172,14 @@
           openProjectModal(card);
         }
       });
+    });
+
+    window.addEventListener('resize', function () {
+      if (!modal.classList.contains('is-open')) return;
+      var content = modalMedia.querySelector('img, video');
+      if (!content) return;
+      if (content.tagName === 'IMG') sizeModalMedia(content.naturalWidth, content.naturalHeight);
+      else sizeModalMedia(content.videoWidth, content.videoHeight);
     });
 
     modal.querySelectorAll('[data-modal-close]').forEach(function (el) {
