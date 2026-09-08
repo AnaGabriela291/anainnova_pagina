@@ -314,12 +314,15 @@ body.is-locked .nav-scrim { opacity: 1; pointer-events: auto; }
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   transition: transform .25s ease, opacity .25s ease, border-color .25s ease;
 }
 .project-card:hover { transform: translateY(-6px); border-color: rgba(255,94,196,.35); }
 .project-card:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
 .project-card__media {
   aspect-ratio: 4/3;
+  flex: none;
   background: linear-gradient(135deg, var(--surface-2), var(--bg-alt));
   position: relative;
   overflow: hidden;
@@ -376,7 +379,13 @@ body.is-locked .nav-scrim { opacity: 1; pointer-events: auto; }
 .project-card__media--4 { background: linear-gradient(135deg, #2c2414, #14141a); }
 .project-card__media--5 { background: linear-gradient(135deg, #24142c, #14141a); }
 .project-card__media--6 { background: linear-gradient(135deg, #14242a, #14141a); }
-.project-card__body { padding: 18px 20px 22px; }
+.project-card__body {
+  padding: 18px 20px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .project-card__tag {
   display: inline-block;
   font-size: .72rem; font-weight: 700;
