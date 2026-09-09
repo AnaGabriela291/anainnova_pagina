@@ -149,6 +149,77 @@
     });
   }
 
+  /* Project modal (image lightbox for social-card items) */
+  var projectModal = document.getElementById('projectModal');
+  var projectModalMedia = document.getElementById('projectModalMedia');
+  var projectModalTitle = document.getElementById('projectModalTitle');
+  var projectModalDesc = document.getElementById('projectModalDesc');
+  var projectCards = document.querySelectorAll('.social-card');
+
+  function sizeProjectModalMedia(naturalW, naturalH) {
+    if (!naturalW || !naturalH) {
+      projectModalMedia.style.width = '';
+      projectModalMedia.style.height = '';
+      return;
+    }
+    var isMobile = window.innerWidth <= 760;
+    var maxH = isMobile ? window.innerHeight * 0.5 : Math.min(620, window.innerHeight * 0.82);
+    var maxW = isMobile ? (window.innerWidth - 2) : Math.min(window.innerWidth * 0.56, 760);
+    var ratio = naturalW / naturalH;
+    var w = maxH * ratio;
+    var h = maxH;
+    if (w > maxW) { w = maxW; h = maxW / ratio; }
+    projectModalMedia.style.width = Math.round(w) + 'px';
+    projectModalMedia.style.height = Math.round(h) + 'px';
+  }
+
+  function openProjectModal(card) {
+    var imgSrc = card.getAttribute('data-img');
+    projectModalMedia.innerHTML = '<img src="' + imgSrc + '" alt="">';
+    var modalImg = projectModalMedia.querySelector('img');
+    if (modalImg.complete && modalImg.naturalWidth) {
+      sizeProjectModalMedia(modalImg.naturalWidth, modalImg.naturalHeight);
+    } else {
+      modalImg.addEventListener('load', function () {
+        sizeProjectModalMedia(this.naturalWidth, this.naturalHeight);
+      });
+    }
+
+    projectModalTitle.textContent = card.getAttribute('data-title') || '';
+    projectModalDesc.textContent = card.getAttribute('data-desc') || '';
+
+    projectModal.classList.add('is-open');
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('is-locked');
+    projectModal.querySelector('.project-modal__close').focus();
+  }
+
+  function closeProjectModal() {
+    projectModal.classList.remove('is-open');
+    projectModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-locked');
+  }
+
+  if (projectModal && projectCards.length) {
+    projectCards.forEach(function (card) {
+      card.addEventListener('click', function () { openProjectModal(card); });
+    });
+
+    projectModal.querySelectorAll('[data-modal-close]').forEach(function (el) {
+      el.addEventListener('click', closeProjectModal);
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && projectModal.classList.contains('is-open')) closeProjectModal();
+    });
+
+    window.addEventListener('resize', function () {
+      if (!projectModal.classList.contains('is-open')) return;
+      var img = projectModalMedia.querySelector('img');
+      if (img) sizeProjectModalMedia(img.naturalWidth, img.naturalHeight);
+    });
+  }
+
   /* Contact form -> WhatsApp */
   var form = document.getElementById('contactForm');
   if (form) {

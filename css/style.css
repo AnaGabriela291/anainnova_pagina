@@ -370,8 +370,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .proyectos__category-info p { color: var(--text-dim); font-size: .92rem; margin-bottom: 18px; max-width: 240px; }
 .proyectos__category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .social-card, .web-card, .video-card {
-  display: block; background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
+  display: block; width: 100%; padding: 0; margin: 0; text-align: left;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
   transition: transform .25s ease, border-color .25s ease;
 }
 .social-card:hover, .web-card:hover, .video-card:hover { transform: translateY(-6px); border-color: rgba(255,45,134,.35); }
@@ -383,6 +384,13 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .card-tag { display: inline-block; font-size: .72rem; font-weight: 700; color: var(--pink-2); margin-bottom: 6px; }
 .social-card__body, .web-card__body, .video-card__body { padding: 16px 18px 20px; }
 .social-card__body h4, .web-card__body h4, .video-card__body h4 { font-size: .92rem; font-weight: 700; line-height: 1.35; }
+.web-card__body p { color: var(--text-dim); font-size: .82rem; margin: 6px 0 14px; }
+.web-card__link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--pink); font-weight: 700; font-size: .85rem;
+}
+.web-card__link:hover .btn__arrow { transform: translateX(3px); }
+.web-card__link .btn__arrow { transition: transform .18s ease; }
 
 .category-placeholder {
   aspect-ratio: 4/3; border: 1px dashed var(--border); border-radius: var(--radius);
@@ -445,6 +453,58 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .footer__inner p { color: var(--text-dim); font-size: .85rem; }
 .footer__top { color: var(--text-dim); font-size: .85rem; }
 .footer__top:hover { color: var(--pink); }
+
+/* ============ Project modal (image lightbox) ============ */
+.project-modal {
+  position: fixed; inset: 0; z-index: 320;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+.project-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.project-modal__scrim { position: absolute; inset: 0; background: rgba(0,0,0,.7); }
+.project-modal__panel {
+  position: relative; display: flex;
+  width: auto; height: auto;
+  max-width: min(1100px, 94vw); max-height: 88vh;
+  background: var(--bg-alt); border: 1px solid var(--border); border-radius: 26px;
+  overflow: hidden; box-shadow: 0 40px 90px -30px rgba(0,0,0,.7);
+  transform: translateY(16px) scale(.97); opacity: 0;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+}
+.project-modal.is-open .project-modal__panel { transform: translateY(0) scale(1); opacity: 1; }
+.project-modal__media {
+  flex: 0 0 auto; width: 420px; height: 320px;
+  background: #050505; position: relative;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.project-modal__media img {
+  width: 100%; height: 100%; object-fit: contain; display: block;
+}
+.project-modal__body {
+  flex: 0 0 360px; min-width: 0; overflow-y: auto; padding: 40px 36px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.project-modal__body h3 { font-size: 1.3rem; margin: 10px 0 14px; }
+.project-modal__body p { color: var(--text-dim); font-size: .92rem; line-height: 1.6; margin-bottom: 26px; }
+.project-modal__close {
+  position: absolute; top: 20px; right: 20px; z-index: 2;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.4); color: #fff;
+}
+.project-modal__close:hover { background: var(--pink); color: #1a0010; }
+
+@media (max-width: 760px) {
+  .project-modal { padding: 0; align-items: flex-end; }
+  .project-modal__panel {
+    flex-direction: column; align-items: center;
+    width: 100%; max-width: 100%; height: auto; max-height: 92vh;
+    overflow-y: auto; border-radius: 26px 26px 0 0;
+  }
+  .project-modal__media { flex: none; }
+  .project-modal__body { flex: none; width: 100%; overflow-y: visible; }
+}
 
 /* ============ Lead modal (popup) ============ */
 .lead-modal {
