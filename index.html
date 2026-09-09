@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AnaInnova — Diseño, desarrollo web &amp; contenido</title>
-<meta name="description" content="Diseño y desarrollo de páginas web a medida, identidad visual, contenido para redes y ciberseguridad. Escríbeme y hagamos crecer tu negocio.">
+<meta name="description" content="Diseño digital, desarrollo web y tecnología para marcas que quieren destacar. Identidad visual, contenido para redes y ciberseguridad. Escríbeme y hagamos crecer tu negocio.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=9">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body>
 
@@ -30,7 +30,7 @@
     </nav>
 
     <div class="header__actions">
-      <a href="#contacto" class="btn btn--pink btn--sm">Hablemos</a>
+      <a href="#contacto" class="btn btn--pink btn--sm">Hablemos <span class="btn__arrow">→</span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
         <span></span><span></span><span></span>
       </button>
@@ -43,527 +43,221 @@
 <main id="main">
 
   <!-- HERO -->
-  <section class="hero-outer" id="top">
-    <div class="wrap">
-      <div class="hero-frame">
-        <div class="hero-frame__glow" aria-hidden="true"></div>
+  <section class="hero" id="top">
+    <div class="wrap hero__inner">
+      <span class="hero__rail" aria-hidden="true">01</span>
+      <span class="hero__rail-label" aria-hidden="true">Portafolio</span>
 
-        <div class="hero-frame__inner">
-          <div class="hero__text">
-            <p class="eyebrow">👋 Hola, soy Ana</p>
-
-            <h1 class="stack-title">
-              <span class="stack-title__line">ana</span>
-              <span class="stack-title__line stack-title__line--pink">innova</span>
-              <span class="stack-title__line">studio</span>
-            </h1>
-
-            <p class="hero__sub">
-              Diseño web, identidad visual y contenido digital para negocios
-              que quieren verse profesionales desde el primer clic.
-            </p>
-
-            <div class="hero__cta">
-              <a href="#contacto" class="btn btn--pink">Empecemos <span class="btn__arrow">→</span></a>
-              <a href="#servicios" class="btn btn--ghost">Ver servicios</a>
-            </div>
-
-          </div>
-
-          <div class="hero__media">
-            <img src="assets/ana-hero-services.webp" alt="Ana Gabriela, fundadora de AnaInnova, con íconos de sus servicios: páginas web, diseño gráfico, edición de video y community manager" class="hero__img">
-          </div>
+      <div class="hero__text reveal">
+        <p class="pill pill--outline">Diseño + Tecnología</p>
+        <h1 class="hero__title">
+          <span>ANA</span>
+          <span class="hl">INNOVA</span>
+          <span>STUDIO</span>
+        </h1>
+        <p class="hero__sub">Diseño digital, desarrollo y tecnología para marcas que quieren destacar.</p>
+        <div class="hero__cta">
+          <a href="#proyectos" class="btn btn--pink">Ver proyectos <span class="btn__arrow">→</span></a>
+          <a href="#servicios" class="btn btn--ghost">Conoce más</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- LOGOS / TRUST -->
-  <section class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Diseño Web</span><span>•</span>
-      <span>Desarrollo</span><span>•</span>
-      <span>Identidad Visual</span><span>•</span>
-      <span>Community Management</span><span>•</span>
-      <span>Video</span><span>•</span>
-      <span>Ciberseguridad</span><span>•</span>
-      <span>Diseño Web</span><span>•</span>
-      <span>Desarrollo</span><span>•</span>
-      <span>Identidad Visual</span><span>•</span>
-      <span>Community Management</span><span>•</span>
-      <span>Video</span><span>•</span>
-      <span>Ciberseguridad</span><span>•</span>
-    </div>
-  </section>
-
-  <!-- SOBRE MI -->
-  <section class="section about" id="sobre-mi">
-    <div class="wrap about__inner">
-      <div class="about__media">
-        <img src="assets/ana-hero.jpg" alt="Ana Gabriela">
-      </div>
-      <div class="about__text">
-        <p class="eyebrow">Sobre mí</p>
-        <h2 class="section__title">Hola, soy Ana <span class="hl">👋</span></h2>
-        <p>
-          Soy ingeniera en sistemas y me apasiona todo lo que tenga que ver con crear:
-          páginas web, identidad visual, contenido para redes y también la seguridad
-          detrás de todo eso.
-        </p>
-        <p>
-          Con <strong>AnaInnova</strong> ayudo a negocios y emprendedores a tener una
-          presencia digital que se vea profesional, ordenada y que realmente conecte
-          con sus clientes — sin plantillas genéricas, todo a la medida.
-        </p>
-        <div class="about__badges">
-          <span>Ingeniería de Sistemas</span>
-          <span>Diseño &amp; Desarrollo Web</span>
-          <span>Community Management</span>
+      <div class="hero__media reveal">
+        <p class="script-note hero__note" aria-hidden="true">Ideas<br>Código<br>Diseño<br>Resultados</p>
+        <img src="assets/hero-laptop.webp" alt="Ana Gabriela, fundadora de AnaInnova, trabajando en su laptop" class="hero__img">
+        <div class="hero__tags" aria-hidden="true">
+          <span>Web</span>
+          <span>Branding</span>
+          <span>Content</span>
           <span>Ciberseguridad</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SOBRE MI -->
+  <section class="section" id="sobre-mi">
+    <div class="wrap about__inner">
+      <div class="about__media reveal">
+        <p class="script-note about__note" aria-hidden="true">La tecnología también es creatividad 💗</p>
+        <img src="assets/ana-about-2.jpg" alt="Ana Gabriela">
+      </div>
+      <div class="about__text reveal">
+        <p class="pill">Sobre mí</p>
+        <h2 class="section__title">No soy solo diseñadora.<br><span class="hl">Entiendo lo que hay detrás de una marca digital.</span></h2>
+        <p>
+          Soy ingeniera en sistemas y creadora digital. Combino diseño, desarrollo
+          y tecnología para construir experiencias digitales que no solo se ven
+          bien, sino que funcionan.
+        </p>
+        <a href="#contacto" class="btn btn--ghost">Conoce más sobre mí</a>
+      </div>
+      <ol class="about__list reveal">
+        <li><span>01</span>Ingeniería de Sistemas</li>
+        <li><span>02</span>Diseño &amp; Dirección Visual</li>
+        <li><span>03</span>Desarrollo Web</li>
+        <li><span>04</span>Contenido Digital</li>
+        <li><span>05</span>Ciberseguridad</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap stats__inner">
+      <div class="stat"><strong>+05</strong><span>Clientes satisfechos</span></div>
+      <div class="stat"><strong>+20</strong><span>Proyectos completados</span></div>
+      <div class="stat"><strong>04</strong><span>Áreas de especialización</span></div>
+      <div class="stat"><strong>100%</strong><span>Compromiso</span></div>
+      <p class="script-note stats__note" aria-hidden="true">Grandes ideas<br>se construyen<br>juntas</p>
+    </div>
+  </section>
+
   <!-- SERVICIOS -->
   <section class="section" id="servicios">
     <div class="wrap">
-      <p class="eyebrow eyebrow--center">ANAINNOVA</p>
-      <h2 class="section__title">Todo lo que tu marca necesita<span class="hl">, en un solo lugar</span></h2>
-      <p class="section__sub">No plantillas. Cada proyecto se diseña y desarrolla pensando en tu negocio y tus clientes.</p>
+      <div class="section__head">
+        <div>
+          <p class="pill">Servicios</p>
+          <h2 class="section__title">Soluciones digitales<br>para cada necesidad.</h2>
+        </div>
+        <div>
+          <p class="section__sub">Desde la idea hasta el resultado, te acompaño en todo el proceso para que tu marca tenga una presencia sólida, funcional y creativa.</p>
+          <a href="#contacto" class="btn btn--ghost">Ver todos los servicios</a>
+        </div>
+      </div>
 
-      <div class="shield-grid">
-        <article class="shield-card">
-          <div class="shield-card__icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 19h20M9 19l1-3h4l1 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 9l2 2-2 2M12 13h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Diseño &amp; desarrollo web</h3>
-          <p>Páginas y landing pages a medida, rápidas, responsivas y pensadas para convertir visitas en clientes.</p>
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <span class="service-card__num">01</span>
+          <span class="service-card__icon">🖥️</span>
+          <h3>Diseño &amp; Desarrollo Web</h3>
+          <p>Sitios web modernos, rápidos y estratégicos para convertir visitas en clientes.</p>
+          <a href="#contacto" class="service-card__arrow" aria-label="Consultar sobre diseño web">→</a>
         </article>
 
-        <article class="shield-card shield-card--pink">
-          <div class="shield-card__icon">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.3" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.3" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.3" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.3" stroke="currentColor" stroke-width="1.6"/></svg>
-          </div>
+        <article class="service-card service-card--active reveal">
+          <span class="service-card__num">02</span>
+          <span class="service-card__icon">🎨</span>
           <h3>Diseño gráfico &amp; CM</h3>
-          <p>Identidad visual, posts, carruseles y estrategia de contenido para que tus redes se vean consistentes.</p>
+          <p>Identidad visual, posts, carruseles y contenido que comunica y conecta.</p>
+          <a href="#contacto" class="service-card__arrow" aria-label="Consultar sobre diseño gráfico">→</a>
         </article>
 
-        <article class="shield-card">
-          <div class="shield-card__icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h11v9H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 10l5-2.5v8L15 13" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          </div>
+        <article class="service-card reveal">
+          <span class="service-card__num">03</span>
+          <span class="service-card__icon">▶️</span>
           <h3>Edición de video</h3>
-          <p>Reels y contenido audiovisual con ritmo y estética cuidada para captar atención desde el primer segundo.</p>
+          <p>Reels y contenido audiovisual con ritmo y estética cuidada para tu marca.</p>
+          <a href="#contacto" class="service-card__arrow" aria-label="Consultar sobre edición de video">→</a>
         </article>
 
-        <article class="shield-card">
-          <div class="shield-card__icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
+        <article class="service-card reveal">
+          <span class="service-card__num">04</span>
+          <span class="service-card__icon">🛡️</span>
           <h3>Ciberseguridad</h3>
-          <p>Asesoría y buenas prácticas para proteger tu negocio, tus datos y los de tus clientes.</p>
+          <p>Protege tu negocio, tus datos y los de tus clientes.</p>
+          <a href="#contacto" class="service-card__arrow" aria-label="Consultar sobre ciberseguridad">→</a>
         </article>
       </div>
     </div>
   </section>
 
   <!-- PROYECTOS -->
-  <section class="section section--dark" id="proyectos">
+  <section class="section" id="proyectos">
     <div class="wrap">
-      <p class="eyebrow eyebrow--center">Portafolio</p>
-      <h2 class="section__title">Trabajo <span class="hl">por cliente</span></h2>
-      <p class="section__sub">Una muestra real de lo que he hecho para cada cliente.</p>
+      <p class="pill">Proyectos</p>
+      <h2 class="section__title">Lo que he construido<br>para marcas reales.</h2>
+      <p class="section__sub">Cada proyecto es una historia de estrategia, diseño y tecnología. Aquí algunos de mis trabajos más recientes.</p>
 
       <div class="filters" id="filters">
         <button class="filter is-active" data-filter="all">Todos</button>
-        <button class="filter" data-filter="nextcore">NextCore</button>
-        <button class="filter" data-filter="michoacana">La Michoacana</button>
-        <button class="filter" data-filter="toprak">Toprak Moto</button>
-        <button class="filter" data-filter="norte">Norte Obras Civiles</button>
-        <button class="filter" data-filter="xilapost">Xila Post</button>
+        <button class="filter" data-filter="branding">Branding</button>
+        <button class="filter" data-filter="redes">Redes Sociales</button>
+        <button class="filter" data-filter="video">Video</button>
       </div>
 
-      <!-- Para agregar un cliente nuevo: copia un <article class="client-block">, cambia data-client (para el filtro),
-           el nombre y los servicios en .client-block__head, y las .project-card de adentro (data-title, data-tag,
-           data-desc para la ventana emergente, y la imagen). -->
-      <div class="clients" id="clients">
-
-        <article class="client-block" data-client="nextcore">
-          <div class="client-block__head">
+      <div class="portfolio-grid" id="portfolioGrid">
+        <a href="#contacto" class="portfolio-card reveal" data-cat="branding">
+          <div class="portfolio-card__media"><img src="assets/projects/nextcore-post-producto.jpg" alt="Presentación de producto de NextCore" loading="lazy"></div>
+          <div class="portfolio-card__body">
+            <span class="portfolio-card__tag">Branding</span>
             <h3>NextCore</h3>
-            <p class="client-block__services">Logo · Manejo de redes</p>
           </div>
-          <div class="client-block__grid">
-            <article class="project-card" data-title="NextCore — Logo" data-tag="Logo"
-                      data-desc="Diseño de logotipo para NextCore: símbolo de lazo infinito en verde menta junto a una tipografía bold, transmitiendo tecnología, conexión y modernidad."
-                      data-img="assets/projects/logo-nextcore-v2.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media project-card__media--logo has-image">
-                <img src="assets/projects/logo-nextcore-v2.png" alt="Logo de NextCore" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Logo</span>
-                <h3>Logo</h3>
-              </div>
-            </article>
+        </a>
 
-            <article class="project-card" data-title="NextCore — Banner Fibra Go" data-tag="Banner"
-                      data-desc="Banner promocional para la app Fibra Go (producto de NextCore): fotografía real, tipografía clara y un mensaje directo ('Tu plan perfecto te espera') sobre un fondo de marca."
-                      data-img="assets/projects/banner-fibrago.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/banner-fibrago.png" alt="Banner de Fibra Go" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Banner</span>
-                <h3>Banner — Fibra Go</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="NextCore — Presentación de producto" data-tag="Post"
-                      data-desc="Pieza de presentación para redes de NextCore: mockup del panel 'Opera tu ISP completo desde una sola pantalla', mostrando módulos de CRM, facturación, red y soporte en tiempo real."
-                      data-img="assets/projects/nextcore-post-producto.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/nextcore-post-producto.jpg" alt="Presentación de producto de NextCore" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Presentación de producto</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="NextCore — Video de redes" data-tag="Video"
-                      data-desc="Edición de video para el manejo de redes de NextCore: pieza sobre cómo el crecimiento sin las herramientas correctas termina afectando la operación del negocio."
-                      data-video="assets/projects/nextcore-video.mp4" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-video">
-                <video src="assets/projects/nextcore-video.mp4" preload="metadata" muted playsinline></video>
-                <span class="project-card__play" aria-hidden="true">▶</span>
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Video</span>
-                <h3>Video de redes</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="NextCore — Carrusel: el problema" data-tag="Post"
-                      data-desc="Slide 1 de un carrusel de Instagram para NextCore: '¿Cuántas horas pierde tu equipo cobrando manualmente cada mes?', abriendo el gancho del post."
-                      data-img="assets/projects/nextcore-carrusel-1.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/nextcore-carrusel-1.jpg" alt="Carrusel de NextCore, slide 1" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Carrusel: el problema</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="NextCore — Carrusel: cobro manual" data-tag="Post"
-                      data-desc="Slide 2 del carrusel de NextCore: 'Tu equipo cobra a mano lo que debería ser automático', mostrando el panel con datos sin conciliar."
-                      data-img="assets/projects/nextcore-carrusel-2.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/nextcore-carrusel-2.jpg" alt="Carrusel de NextCore, slide 2" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Carrusel: cobro manual</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="NextCore — Carrusel: la solución" data-tag="Post"
-                      data-desc="Slide 3 del carrusel de NextCore: 'NextCore corre el ciclo de cobro completo, solo', mostrando el mismo panel ya resuelto."
-                      data-img="assets/projects/nextcore-carrusel-3.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/nextcore-carrusel-3.jpg" alt="Carrusel de NextCore, slide 3" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Carrusel: la solución</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="NextCore — Carrusel: cierre" data-tag="Post"
-                      data-desc="Slide 4 (cierre) del carrusel de NextCore: 'El ciclo de cobro que se arregla solo', con llamado a la acción hacia nextcore.com."
-                      data-img="assets/projects/nextcore-carrusel-4.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/nextcore-carrusel-4.jpg" alt="Carrusel de NextCore, slide 4" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Carrusel: cierre</h3>
-              </div>
-            </article>
-          </div>
-        </article>
-
-        <article class="client-block" data-client="michoacana">
-          <div class="client-block__head">
+        <a href="#contacto" class="portfolio-card reveal" data-cat="branding">
+          <div class="portfolio-card__media"><img src="assets/projects/flyer-michoacana.png" alt="Flyer de La Michoacana" loading="lazy"></div>
+          <div class="portfolio-card__body">
+            <span class="portfolio-card__tag">Branding</span>
             <h3>La Michoacana</h3>
-            <p class="client-block__services">Piezas puntuales — Flyer · Historias · Post</p>
           </div>
-          <div class="client-block__grid">
-            <article class="project-card" data-title="La Michoacana — Flyer de venta al mayor" data-tag="Flyer"
-                      data-desc="Flyer para atraer nuevos negocios distribuidores de La Michoacana: destaca el producto, la marca y los beneficios de vender la marca (producto natural, alta rotación, soporte)."
-                      data-img="assets/projects/flyer-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/flyer-michoacana.png" alt="Flyer de La Michoacana" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Flyer</span>
-                <h3>Flyer de distribución</h3>
-              </div>
-            </article>
+        </a>
 
-            <article class="project-card" data-title="La Michoacana — Historia temática" data-tag="Historias"
-                      data-desc="Historia de Instagram con temática de anime para promocionar un descuento especial de La Michoacana durante dos días, combinando referencias pop con la identidad de la marca."
-                      data-img="assets/projects/historia-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/historia-michoacana.png" alt="Historia de Instagram de La Michoacana" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Historias</span>
-                <h3>Historia con descuento</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="La Michoacana — Malteada Halloween" data-tag="Post"
-                      data-desc="Pieza de temporada para redes sociales: una malteada de temática Halloween compuesta con elementos 3D y branding de La Michoacana, pensada para destacar en el feed durante octubre."
-                      data-img="assets/projects/post-michoacana.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/post-michoacana.png" alt="Post de Halloween para La Michoacana" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Post de temporada</h3>
-              </div>
-            </article>
-          </div>
-        </article>
-
-        <article class="client-block" data-client="toprak">
-          <div class="client-block__head">
+        <a href="#contacto" class="portfolio-card reveal" data-cat="branding">
+          <div class="portfolio-card__media"><img src="assets/projects/banner-toprak-moto.png" alt="Banner de Toprak Moto" loading="lazy"></div>
+          <div class="portfolio-card__body">
+            <span class="portfolio-card__tag">Branding</span>
             <h3>Toprak Moto</h3>
-            <p class="client-block__services">Identidad de marca — Logo · Banner</p>
           </div>
-          <div class="client-block__grid">
-            <article class="project-card" data-title="Toprak Moto — Logo" data-tag="Logo"
-                      data-desc="Logotipo para Toprak Moto, tienda de equipamiento para motociclistas: símbolo agresivo en blanco y negro combinado con tipografía itálica en verde, con energía y carácter deportivo."
-                      data-img="assets/projects/logo-toprak-moto.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media project-card__media--logo has-image">
-                <img src="assets/projects/logo-toprak-moto.png" alt="Logo de Toprak Moto" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Logo</span>
-                <h3>Logo</h3>
-              </div>
-            </article>
+        </a>
 
-            <article class="project-card" data-title="Toprak Moto — Banner" data-tag="Banner"
-                      data-desc="Banner de anticipación para Toprak Moto: fotografía de ambiente, logo y mensaje de 'próximamente' para generar expectativa antes del lanzamiento de la tienda."
-                      data-img="assets/projects/banner-toprak-moto.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/banner-toprak-moto.png" alt="Banner de Toprak Moto" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Banner</span>
-                <h3>Banner de lanzamiento</h3>
-              </div>
-            </article>
-          </div>
-        </article>
-
-        <article class="client-block" data-client="norte">
-          <div class="client-block__head">
+        <a href="#contacto" class="portfolio-card reveal" data-cat="redes">
+          <div class="portfolio-card__media"><img src="assets/projects/norte-flyer-acero.png" alt="Flyer de Norte Obras Civiles" loading="lazy"></div>
+          <div class="portfolio-card__body">
+            <span class="portfolio-card__tag">Redes Sociales</span>
             <h3>Norte Obras Civiles</h3>
-            <p class="client-block__services">Piezas puntuales — Flyer · Historias</p>
           </div>
-          <div class="client-block__grid">
-            <article class="project-card" data-title="Norte Obras Civiles — Diplomado Estructuras de Acero" data-tag="Flyer"
-                      data-desc="Flyer para la 2da edición del Diplomado Internacional en Estructuras de Acero, avalado por la Universidad Central de Venezuela: fechas, modalidad y facilidades de pago."
-                      data-img="assets/projects/norte-flyer-acero.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/norte-flyer-acero.png" alt="Flyer del Diplomado en Estructuras de Acero de Norte Obras Civiles" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Flyer</span>
-                <h3>Diplomado Estructuras de Acero</h3>
-              </div>
-            </article>
+        </a>
 
-            <article class="project-card" data-title="Norte Obras Civiles — Seminario abierto" data-tag="Flyer"
-                      data-desc="Flyer para un seminario de entrada libre sobre cambio de uso en rascacielos, con el ponente invitado y los datos del evento."
-                      data-img="assets/projects/norte-flyer-seminario.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/norte-flyer-seminario.png" alt="Flyer de seminario abierto de Norte Obras Civiles" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Flyer</span>
-                <h3>Seminario abierto</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Norte Obras Civiles — Historia de entrevista" data-tag="Historias"
-                      data-desc="Historia de Instagram anunciando una entrevista para el canal de YouTube de Norte Obras Civiles, con el periodista invitado y la fuente de la nota."
-                      data-img="assets/projects/norte-historia-entrevista.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/norte-historia-entrevista.png" alt="Historia de entrevista de Norte Obras Civiles" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Historias</span>
-                <h3>Historia de entrevista</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Norte Obras Civiles — Diplomado Estructuras Sismorresistentes" data-tag="Flyer"
-                      data-desc="Flyer para la 6ta edición del Diplomado Internacional en Diseño de Estructuras Sismorresistentes, avalado por la UCV y ESRE: fechas, modalidad y facilidades de pago."
-                      data-img="assets/projects/norte-flyer-sismo.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/norte-flyer-sismo.png" alt="Flyer del Diplomado en Estructuras Sismorresistentes de Norte Obras Civiles" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Flyer</span>
-                <h3>Diplomado Estructuras Sismorresistentes</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Norte Obras Civiles — Diplomado Técnicas de Desarrollo" data-tag="Flyer"
-                      data-desc="Flyer para la 8va edición del Diplomado Internacional en Técnicas para el Desarrollo de Proyectos y Construcción, con integración de ingeniería y arquitectura."
-                      data-img="assets/projects/norte-flyer-tecnicas.png" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/norte-flyer-tecnicas.png" alt="Flyer del Diplomado en Técnicas de Desarrollo de Norte Obras Civiles" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Flyer</span>
-                <h3>Diplomado Técnicas de Desarrollo</h3>
-              </div>
-            </article>
-          </div>
-        </article>
-
-        <article class="client-block" data-client="xilapost">
-          <div class="client-block__head">
+        <a href="#contacto" class="portfolio-card reveal" data-cat="redes">
+          <div class="portfolio-card__media"><img src="assets/projects/xilapost-post-halloween.jpg" alt="Post de Xila Post" loading="lazy"></div>
+          <div class="portfolio-card__body">
+            <span class="portfolio-card__tag">Redes Sociales</span>
             <h3>Xila Post</h3>
-            <p class="client-block__services">Piezas puntuales — Post · Video</p>
           </div>
-          <div class="client-block__grid">
-            <article class="project-card" data-title="Xila Post — Fabricado con pasión" data-tag="Post"
-                      data-desc="Post estilo mensaje de chat para Xila Post, fábrica de closets y muebles a medida: 'Donde hay calidad, hay buenos proyectos. Aquí se fabrica con pasión.'"
-                      data-img="assets/projects/xilapost-post-closet.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/xilapost-post-closet.jpg" alt="Post de closets a medida de Xila Post" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Fabricado con pasión</h3>
-              </div>
-            </article>
+        </a>
 
-            <article class="project-card" data-title="Xila Post — ¿Te atreves a abrirla?" data-tag="Post"
-                      data-desc="Post de temporada (Halloween) para Xila Post: una puerta iluminada con el mensaje 'Puertas que transforman espacios... incluso los más escalofriantes'."
-                      data-img="assets/projects/xilapost-post-halloween.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/xilapost-post-halloween.jpg" alt="Post de Halloween de Xila Post" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Post de temporada</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Xila Post — Día del trabajador" data-tag="Post"
-                      data-desc="Post ilustrado en 3D para celebrar el Día del Trabajador, con un personaje representando al equipo de Xila Post."
-                      data-img="assets/projects/xilapost-post-trabajador.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/xilapost-post-trabajador.jpg" alt="Post del Día del Trabajador de Xila Post" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Día del trabajador</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Xila Post — No importa dónde te encuentres" data-tag="Post"
-                      data-desc="Post publicitario de Xila Post: un camión de carga en ruta con el mensaje 'No importa donde te encuentres, XilaPost llega a ti'."
-                      data-img="assets/projects/xilapost-post-camion.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/xilapost-post-camion.jpg" alt="Post de entregas de Xila Post" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>No importa dónde te encuentres</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Xila Post — Cómo muestras tus productos" data-tag="Post"
-                      data-desc="Post de contenido de valor para Xila Post: una vitrina de ferretería con el mensaje 'Cómo muestras tus productos, sí importa'."
-                      data-img="assets/projects/xilapost-post-ferreteria.jpg" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-image">
-                <img src="assets/projects/xilapost-post-ferreteria.jpg" alt="Post de exhibición de productos de Xila Post" loading="lazy">
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Post</span>
-                <h3>Cómo muestras tus productos</h3>
-              </div>
-            </article>
-
-            <article class="project-card" data-title="Xila Post — Video de marca" data-tag="Video"
-                      data-desc="Edición de video para Xila Post: '¿Quién llama? Es Xila Post, la fábrica que convierte cada llamada en soluciones para tu espacio.'"
-                      data-video="assets/projects/xilapost-video.mp4" tabindex="0" role="button" aria-haspopup="dialog">
-              <div class="project-card__media has-video">
-                <video src="assets/projects/xilapost-video.mp4" preload="metadata" muted playsinline></video>
-                <span class="project-card__play" aria-hidden="true">▶</span>
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__tag">Video</span>
-                <h3>Video de marca</h3>
-              </div>
-            </article>
+        <a href="#contacto" class="portfolio-card reveal" data-cat="video">
+          <div class="portfolio-card__media"><img src="assets/projects/nextcore-carrusel-1.jpg" alt="Carrusel de NextCore" loading="lazy"></div>
+          <div class="portfolio-card__body">
+            <span class="portfolio-card__tag">Video</span>
+            <h3>NextCore — Manejo de redes</h3>
           </div>
-        </article>
-
+        </a>
       </div>
-      <p class="projects__empty" id="projectsEmpty" hidden>Todavía no hay clientes en este filtro.</p>
+      <p class="portfolio__empty" id="portfolioEmpty" hidden>No hay proyectos en esta categoría todavía.</p>
+    </div>
+  </section>
 
-      <div class="web-projects">
-        <div class="client-block__head">
-          <h3>Diseño de páginas web</h3>
-          <p class="client-block__services">Sitios reales, hechos a medida — dale clic a cualquiera para verlo en vivo</p>
+  <!-- PROCESO -->
+  <section class="section" id="proceso">
+    <div class="wrap">
+      <p class="pill">Proceso</p>
+      <h2 class="section__title">Del concepto<br>al resultado.</h2>
+      <p class="section__sub">Trabajo con un método claro para que cada proyecto fluya, se mantenga en enfoque y cumpla sus objetivos.</p>
+      <a href="#contacto" class="btn btn--ghost">Cómo trabajo</a>
+
+      <div class="timeline">
+        <div class="timeline__step reveal">
+          <span class="timeline__num">01</span>
+          <h3>Descubrimos</h3>
+          <p>Entendemos tu negocio, audiencia y objetivos.</p>
         </div>
-
-        <div class="web-projects__grid">
-          <a class="web-project-card" href="https://esteban-tenreiro.vercel.app/#inicio" target="_blank" rel="noopener">
-            <div class="web-project-card__preview">
-              <iframe src="https://esteban-tenreiro.vercel.app/" loading="lazy" tabindex="-1" aria-hidden="true" sandbox="allow-scripts allow-same-origin"></iframe>
-            </div>
-            <div class="web-project-card__body">
-              <span class="project-card__tag">Diseño de páginas web</span>
-              <h3>Esteban Tenreiro</h3>
-              <p>Sitio para un despacho de ingeniería estructural: servicios, proceso de trabajo y proyectos ejecutados.</p>
-              <span class="web-project-card__cta">Ver sitio en vivo <span class="btn__arrow">→</span></span>
-            </div>
-          </a>
-
-          <a class="web-project-card" href="https://agenda-red-theta.vercel.app/" target="_blank" rel="noopener">
-            <div class="web-project-card__preview">
-              <iframe src="https://agenda-red-theta.vercel.app/" loading="lazy" tabindex="-1" aria-hidden="true" sandbox="allow-scripts allow-same-origin"></iframe>
-            </div>
-            <div class="web-project-card__body">
-              <span class="project-card__tag">Diseño de páginas web</span>
-              <h3>Agenda</h3>
-              <p>Panel personal de gestión: resumen de tareas, finanzas, calendario y contenido, todo en un solo lugar.</p>
-              <span class="web-project-card__cta">Ver sitio en vivo <span class="btn__arrow">→</span></span>
-            </div>
-          </a>
-
-          <a class="web-project-card" href="proyectos/dashboard-unefa.html" target="_blank" rel="noopener">
-            <div class="web-project-card__preview">
-              <iframe src="proyectos/dashboard-unefa.html" loading="lazy" tabindex="-1" aria-hidden="true" sandbox="allow-scripts allow-same-origin"></iframe>
-            </div>
-            <div class="web-project-card__body">
-              <span class="project-card__tag">Diseño de páginas web</span>
-              <h3>Sistema de Postgrado — UNEFA</h3>
-              <p>Dashboard de registro de postgrado: inscripción de materias, pagos, expediente académico y documentos.</p>
-              <span class="web-project-card__cta">Ver sitio en vivo <span class="btn__arrow">→</span></span>
-            </div>
-          </a>
+        <div class="timeline__step reveal">
+          <span class="timeline__num">02</span>
+          <h3>Diseñamos</h3>
+          <p>Construimos la identidad visual y la experiencia.</p>
+        </div>
+        <div class="timeline__step reveal">
+          <span class="timeline__num">03</span>
+          <h3>Desarrollamos</h3>
+          <p>Convertimos el concepto en una solución funcional.</p>
+        </div>
+        <div class="timeline__step reveal">
+          <span class="timeline__num">04</span>
+          <h3>Lanzamos</h3>
+          <p>Probamos, optimizamos y dejamos todo listo.</p>
         </div>
       </div>
     </div>
@@ -572,8 +266,8 @@
   <!-- CONTACTO -->
   <section class="section section--dark" id="contacto">
     <div class="wrap contact__inner">
-      <div class="contact__intro">
-        <p class="eyebrow">Contacto</p>
+      <div class="contact__intro reveal">
+        <p class="pill">Contacto</p>
         <h2 class="section__title">¿Hablamos de tu <span class="hl">proyecto</span>?</h2>
         <p class="section__sub" style="margin-left:0">
           Cuéntame qué necesitas y te respondo lo antes posible. También puedes
@@ -590,15 +284,21 @@
             <span>@anainnova_</span>
           </a>
         </div>
+
+        <p class="script-note" style="margin-top:36px;" aria-hidden="true">Tu idea<br>también<br>importa</p>
       </div>
 
-      <form class="contact__form" id="contactForm">
+      <form class="contact__form reveal" id="contactForm">
         <label>
           Nombre
           <input type="text" name="nombre" id="fNombre" placeholder="Tu nombre" required>
         </label>
         <label>
-          ¿Qué necesitas?
+          Correo electrónico
+          <input type="email" name="correo" id="fCorreo" placeholder="tu@email.com">
+        </label>
+        <label>
+          ¿Qué estás buscando?
           <select name="servicio" id="fServicio">
             <option value="Diseño y desarrollo web">Diseño y desarrollo web</option>
             <option value="Diseño gráfico / Community Manager">Diseño gráfico / Community Manager</option>
@@ -611,7 +311,7 @@
           Mensaje
           <textarea name="mensaje" id="fMensaje" rows="4" placeholder="Contame un poco de tu proyecto..." required></textarea>
         </label>
-        <button type="submit" class="btn btn--pink btn--block">Enviar por WhatsApp</button>
+        <button type="submit" class="btn btn--pink btn--block">Enviar mensaje <span class="btn__arrow">→</span></button>
         <p class="contact__hint">Se abre WhatsApp con tu mensaje ya escrito, listo para enviar.</p>
       </form>
     </div>
@@ -621,28 +321,69 @@
 
 <footer class="footer">
   <div class="wrap footer__inner">
-    <a href="#top" class="logo logo--sm">ana<span>innova</span></a>
-    <p>© <span id="year"></span> AnaInnova. Todos los derechos reservados.</p>
+    <a href="#top" class="logo logo--sm">ANA<span>INNOVA</span></a>
+    <p>© <span id="year"></span> AnaInnova · Diseño · Desarrollo · Tecnología · Creatividad</p>
     <a href="#top" class="footer__top">Volver arriba ↑</a>
   </div>
 </footer>
 
-<div class="project-modal" id="projectModal" aria-hidden="true">
-  <div class="project-modal__scrim" data-modal-close></div>
-  <div class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
-    <button class="project-modal__close" type="button" data-modal-close aria-label="Cerrar">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+<!-- VENTANA EMERGENTE: ¡Hablemos! -->
+<div class="lead-modal" id="leadModal" aria-hidden="true">
+  <div class="lead-modal__scrim" data-lead-close></div>
+  <div class="lead-modal__panel" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+    <button class="lead-modal__close" type="button" data-lead-close aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
-    <div class="project-modal__media" id="projectModalMedia"></div>
-    <div class="project-modal__body">
-      <span class="project-modal__tag" id="projectModalTag"></span>
-      <h3 id="projectModalTitle"></h3>
-      <p id="projectModalDesc"></p>
-      <a href="#contacto" class="btn btn--pink" data-modal-close>Quiero un proyecto así</a>
+
+    <div class="lead-modal__left">
+      <p class="pill pill--outline">¡Hablemos!</p>
+      <h2 id="leadModalTitle">¿En qué puedo trabajar <span class="hl">contigo?</span></h2>
+      <p>Cuéntame qué necesitas y te ayudaré a encontrar la mejor solución para tu proyecto.</p>
+
+      <div class="lead-modal__services" id="leadServices">
+        <button type="button" data-service="Diseño Web"><span class="svc-icon">🖥️</span><span>Diseño Web</span><span class="svc-check">✓</span></button>
+        <button type="button" data-service="Edición de Video"><span class="svc-icon">▶️</span><span>Edición de Video</span><span class="svc-check">✓</span></button>
+        <button type="button" data-service="Diseño Gráfico"><span class="svc-icon">✏️</span><span>Diseño Gráfico</span><span class="svc-check">✓</span></button>
+        <button type="button" data-service="Community Manager"><span class="svc-icon">👥</span><span>Community Manager</span><span class="svc-check">✓</span></button>
+        <button type="button" data-service="Branding"><span class="svc-icon">💎</span><span>Branding</span><span class="svc-check">✓</span></button>
+        <button type="button" data-service="Ciberseguridad"><span class="svc-icon">🛡️</span><span>Ciberseguridad</span><span class="svc-check">✓</span></button>
+        <button type="button" data-service="Otro"><span class="svc-icon">💬</span><span>Otro</span><span class="svc-check">✓</span></button>
+      </div>
+
+      <p class="script-note" aria-hidden="true">Tu idea<br>también<br>importa</p>
     </div>
+
+    <form class="lead-modal__form" id="leadForm">
+      <label>Nombre completo *
+        <input type="text" id="lName" placeholder="Tu nombre" required>
+      </label>
+      <label>Número de teléfono *
+        <input type="tel" id="lPhone" placeholder="+1 234 567 8900" required>
+      </label>
+      <label>Correo electrónico *
+        <input type="email" id="lEmail" placeholder="tu@email.com" required>
+      </label>
+      <label>¿Qué necesitas? *
+        <select id="lNeed" required>
+          <option value="">Selecciona una opción</option>
+          <option>Diseño Web</option>
+          <option>Edición de Video</option>
+          <option>Diseño Gráfico</option>
+          <option>Community Manager</option>
+          <option>Branding</option>
+          <option>Ciberseguridad</option>
+          <option>Otro</option>
+        </select>
+      </label>
+      <label>Cuéntame más sobre tu proyecto *
+        <textarea id="lDetails" rows="2" placeholder="Escribe aquí los detalles, ideas o lo que tienes en mente..." required></textarea>
+      </label>
+      <button type="submit" class="btn btn--pink btn--block">Enviar solicitud <span class="btn__arrow">→</span></button>
+      <p class="lead-modal__privacy">🔒 Tus datos están seguros. No comparto tu información.</p>
+    </form>
   </div>
 </div>
 
-<script src="js/script.js"></script>
+<script src="js/script.js?v=2"></script>
 </body>
 </html>
