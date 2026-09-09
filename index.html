@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=13">
+<link rel="stylesheet" href="css/style.css?v=14">
 </head>
 <body>
 
@@ -48,15 +48,15 @@
       <span class="hero__rail" aria-hidden="true">01</span>
       <span class="hero__rail-label" aria-hidden="true">Portafolio</span>
 
-      <div class="hero__text reveal">
-        <p class="pill pill--outline">Diseño + Tecnología</p>
-        <h1 class="hero__title">
+      <div class="hero__text">
+        <p class="pill pill--outline reveal hero-stagger">Diseño + Tecnología</p>
+        <h1 class="hero__title reveal hero-stagger">
           <span>ANA</span>
           <span class="hl">INNOVA</span>
           <span>STUDIO</span>
         </h1>
-        <p class="hero__sub">Diseño digital, desarrollo y tecnología para marcas que quieren destacar.</p>
-        <div class="hero__cta">
+        <p class="hero__sub reveal hero-stagger">Diseño digital, desarrollo y tecnología para marcas que quieren destacar.</p>
+        <div class="hero__cta reveal hero-stagger">
           <a href="#proyectos" class="btn btn--pink">Ver proyectos <span class="btn__arrow">→</span></a>
           <a href="#servicios" class="btn btn--ghost">Conoce más</a>
         </div>
@@ -72,6 +72,24 @@
           <span>Ciberseguridad</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Diseño Web</span><span class="dot">•</span>
+      <span>Desarrollo</span><span class="dot">•</span>
+      <span>Identidad Visual</span><span class="dot">•</span>
+      <span>Community Management</span><span class="dot">•</span>
+      <span>Video</span><span class="dot">•</span>
+      <span>Ciberseguridad</span><span class="dot">•</span>
+      <span>Diseño Web</span><span class="dot">•</span>
+      <span>Desarrollo</span><span class="dot">•</span>
+      <span>Identidad Visual</span><span class="dot">•</span>
+      <span>Community Management</span><span class="dot">•</span>
+      <span>Video</span><span class="dot">•</span>
+      <span>Ciberseguridad</span><span class="dot">•</span>
     </div>
   </section>
 
@@ -92,12 +110,12 @@
         </p>
         <a href="#contacto" class="btn btn--ghost">Conoce más sobre mí</a>
       </div>
-      <ol class="about__list reveal">
-        <li><span>01</span>Ingeniería de Sistemas</li>
-        <li><span>02</span>Diseño &amp; Dirección Visual</li>
-        <li><span>03</span>Desarrollo Web</li>
-        <li><span>04</span>Contenido Digital</li>
-        <li><span>05</span>Ciberseguridad</li>
+      <ol class="about__list">
+        <li class="reveal"><span>01</span>Ingeniería de Sistemas</li>
+        <li class="reveal"><span>02</span>Diseño &amp; Dirección Visual</li>
+        <li class="reveal"><span>03</span>Desarrollo Web</li>
+        <li class="reveal"><span>04</span>Contenido Digital</li>
+        <li class="reveal"><span>05</span>Ciberseguridad</li>
       </ol>
     </div>
   </section>
@@ -105,10 +123,10 @@
   <!-- STATS -->
   <section class="stats">
     <div class="wrap stats__inner">
-      <div class="stat"><strong>+05</strong><span>Clientes satisfechos</span></div>
-      <div class="stat"><strong>+20</strong><span>Proyectos completados</span></div>
-      <div class="stat"><strong>04</strong><span>Áreas de especialización</span></div>
-      <div class="stat"><strong>100%</strong><span>Compromiso</span></div>
+      <div class="stat"><strong data-count-to="5" data-prefix="+">0</strong><span>Clientes satisfechos</span></div>
+      <div class="stat"><strong data-count-to="20" data-prefix="+">0</strong><span>Proyectos completados</span></div>
+      <div class="stat"><strong data-count-to="4">0</strong><span>Áreas de especialización</span></div>
+      <div class="stat"><strong data-count-to="100" data-suffix="%">0</strong><span>Compromiso</span></div>
       <p class="script-note stats__note" aria-hidden="true">Grandes ideas<br>se construyen<br>juntas</p>
     </div>
   </section>
@@ -384,6 +402,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=2"></script>
+<script src="js/script.js?v=3"></script>
 </body>
 </html>
