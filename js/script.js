@@ -50,7 +50,7 @@
   }
   stagger('.hero__text', '.hero-stagger');
   stagger('.services-grid', '.service-card');
-  stagger('.portfolio-grid', '.portfolio-card');
+  stagger('.proyectos__category-grid', '.portfolio-card, .social-card, .web-card, .video-card');
   stagger('.timeline', '.timeline__step');
   stagger('.about__list', 'li');
 
@@ -120,11 +120,9 @@
     }
   }
 
-  /* Portfolio filters */
+  /* Portfolio filters — toggle whole category blocks */
   var filters = document.getElementById('filters');
-  var portfolioGrid = document.getElementById('portfolioGrid');
-  var cards = document.querySelectorAll('.portfolio-card');
-  var emptyMsg = document.getElementById('portfolioEmpty');
+  var categoryBlocks = document.querySelectorAll('.proyectos__category');
 
   if (filters) {
     filters.addEventListener('click', function (e) {
@@ -137,18 +135,17 @@
 
       var cat = btn.getAttribute('data-filter');
 
-      if (portfolioGrid) portfolioGrid.classList.add('is-filtering');
+      categoryBlocks.forEach(function (block) {
+        block.style.opacity = 0;
+      });
 
       setTimeout(function () {
-        var visibleCount = 0;
-        cards.forEach(function (card) {
-          var match = cat === 'all' || card.getAttribute('data-cat') === cat;
-          card.classList.toggle('is-hidden', !match);
-          if (match) visibleCount++;
+        categoryBlocks.forEach(function (block) {
+          var match = cat === 'all' || block.getAttribute('data-cat-group') === cat;
+          block.classList.toggle('is-hidden', !match);
+          block.style.opacity = '';
         });
-        if (emptyMsg) emptyMsg.hidden = visibleCount !== 0;
-        if (portfolioGrid) portfolioGrid.classList.remove('is-filtering');
-      }, reduceMotion ? 0 : 220);
+      }, reduceMotion ? 0 : 200);
     });
   }
 

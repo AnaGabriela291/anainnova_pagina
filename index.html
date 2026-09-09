@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/style.css?v=15">
 </head>
 <body>
 
@@ -184,20 +184,69 @@
   <!-- PROYECTOS -->
   <section class="section" id="proyectos">
     <div class="wrap">
-      <p class="pill">Proyectos</p>
-      <h2 class="section__title">Lo que he construido<br>para marcas reales.</h2>
-      <p class="section__sub">Cada proyecto es una historia de estrategia, diseño y tecnología. Aquí algunos de mis trabajos más recientes.</p>
+      <div class="proyectos__head">
+        <div class="proyectos__intro">
+          <p class="pill">Mis Proyectos</p>
+          <p class="script-note proyectos__note-left reveal" aria-hidden="true">Convertimos ideas<br>en experiencias</p>
+          <h2 class="section__title">Ideas que se convierten<br>en <span class="hl">resultados.</span></h2>
+          <p class="section__sub" style="margin-left:0">
+            Aquí puedes ver algunos de los proyectos en los que he trabajado. Desde marcas
+            que crecen en redes, hasta webs que conectan y videos que cuentan historias.
+          </p>
+        </div>
+
+        <div class="proyectos__stats">
+          <div class="stat"><strong data-count-to="0">0</strong><span>Diseños de post<br>para redes sociales</span></div>
+          <div class="stat"><strong data-count-to="0">0</strong><span>Páginas web<br>creadas</span></div>
+          <div class="stat"><strong data-count-to="0">0</strong><span>Ediciones de video<br>realizadas</span></div>
+          <div class="stat"><strong data-count-to="0" data-suffix="%">0</strong><span>Clientes<br>satisfechos</span></div>
+        </div>
+
+        <p class="script-note proyectos__note-right reveal" aria-hidden="true">Cada proyecto es un paso más<br>hacia lo que quieres lograr</p>
+      </div>
 
       <div class="filters" id="filters">
         <button class="filter is-active" data-filter="all">Todos</button>
-        <button class="filter" data-filter="branding">Branding</button>
         <button class="filter" data-filter="redes">Redes Sociales</button>
-        <button class="filter" data-filter="video">Video</button>
+        <button class="filter" data-filter="web">Páginas Web</button>
+        <button class="filter" data-filter="video">Edición de Video</button>
       </div>
 
-      <div class="portfolio-grid" id="portfolioGrid">
+      <div class="proyectos__category reveal" data-cat-group="redes">
+        <div class="proyectos__category-info">
+          <span class="proyectos__category-icon">📷</span>
+          <h3>Diseños para Redes Sociales</h3>
+          <p>Contenido visual que conecta, comunica y genera resultados.</p>
+          <a href="#contacto" class="btn btn--pink btn--sm">Ver todos <span class="btn__arrow">→</span></a>
+        </div>
+        <div class="proyectos__category-grid">
+          <div class="category-placeholder">+ Aquí irán tus diseños para redes sociales</div>
+        </div>
       </div>
-      <p class="portfolio__empty" id="portfolioEmpty">Muy pronto — proyectos en camino.</p>
+
+      <div class="proyectos__category reveal" data-cat-group="web">
+        <div class="proyectos__category-info">
+          <span class="proyectos__category-icon">🌐</span>
+          <h3>Páginas Web</h3>
+          <p>Sitios modernos, funcionales y diseñados para hacer crecer tu negocio.</p>
+          <a href="#contacto" class="btn btn--pink btn--sm">Ver todos <span class="btn__arrow">→</span></a>
+        </div>
+        <div class="proyectos__category-grid">
+          <div class="category-placeholder">+ Aquí irán tus páginas web</div>
+        </div>
+      </div>
+
+      <div class="proyectos__category reveal" data-cat-group="video">
+        <div class="proyectos__category-info">
+          <span class="proyectos__category-icon">▶️</span>
+          <h3>Edición de Video</h3>
+          <p>Videos dinámicos, creativos y estratégicos que dan vida a tus ideas.</p>
+          <a href="#contacto" class="btn btn--pink btn--sm">Ver todos <span class="btn__arrow">→</span></a>
+        </div>
+        <div class="proyectos__category-grid">
+          <div class="category-placeholder">+ Aquí irán tus videos</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -355,6 +404,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=3"></script>
+<script src="js/script.js?v=4"></script>
 </body>
 </html>
