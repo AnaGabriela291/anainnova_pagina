@@ -20,7 +20,7 @@ html { scroll-behavior: smooth; }
   --pink-2: #ff6fb0;
   --radius: 20px;
   --radius-sm: 12px;
-  --maxw: 1220px;
+  --maxw: 1400px;
   --ff-head: 'Sora', 'Manrope', sans-serif;
   --ff-body: 'Manrope', sans-serif;
   --ff-script: 'Caveat', cursive;
@@ -174,7 +174,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   font-size: .78rem; letter-spacing: .12em; color: var(--text-dim); font-weight: 700;
   border-left: 1px solid var(--border); padding-left: 10px;
 }
-.hero__text { max-width: 560px; }
+.hero__text { max-width: 640px; }
 .hero__title {
   font-family: var(--ff-display);
   font-weight: 800;
@@ -187,7 +187,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   margin-bottom: 22px;
 }
 .hero__title .hl { color: var(--pink); }
-.hero__sub { color: var(--text-dim); font-size: 1.05rem; max-width: 400px; margin-bottom: 30px; }
+.hero__sub { color: var(--text-dim); font-size: 1.05rem; max-width: 460px; margin-bottom: 30px; }
 .hero__cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 
 .hero__media { position: relative; }
@@ -267,6 +267,11 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .service-card:hover .service-card__arrow { background: var(--pink); border-color: var(--pink); color: #1a0010; }
 
 /* ============ Portfolio ============ */
+.proyectos__brush { position: absolute; top: -30px; right: -10px; width: 300px; height: 160px; pointer-events: none; }
+.proyectos__brush .brush { position: absolute; opacity: .9; }
+.proyectos__brush .brush--1 { width: 260px; top: 0; right: 0; transform: rotate(6deg); }
+.proyectos__brush .brush--2 { width: 200px; top: 70px; right: 50px; transform: rotate(-10deg); }
+
 .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
 .filter {
   background: var(--surface); border: 1px solid var(--border); color: var(--text-dim);
@@ -405,6 +410,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   .hero__rail-label, .hero__rail { display: none; }
   .hero__inner { padding-left: 0; grid-template-columns: 1fr; }
   .hero__media { margin-top: 40px; }
+  .proyectos__brush { display: none; }
   .lead-modal__panel { flex-direction: column; padding: 32px 26px; }
 }
 
