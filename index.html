@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/style.css?v=16">
 </head>
 <body>
 
@@ -315,25 +315,47 @@
           <a href="#contacto" class="btn btn--pink btn--sm">Ver todos <span class="btn__arrow">→</span></a>
         </div>
         <div class="proyectos__category-grid">
-          <div class="video-card reveal">
+          <button type="button" class="video-card reveal"
+            data-title="NextCore — Video de redes"
+            data-desc="Edición de video para el manejo de redes de NextCore."
+            data-video="assets/projects/nextcore-video.mp4">
             <div class="video-card__media">
-              <video src="assets/projects/nextcore-video.mp4" preload="metadata" muted playsinline controls></video>
+              <video src="assets/projects/nextcore-video.mp4" preload="metadata" muted playsinline></video>
+              <span class="video-card__play" aria-hidden="true">▶</span>
             </div>
             <div class="video-card__body">
               <span class="card-tag">Video</span>
               <h4>NextCore — Video de redes</h4>
             </div>
-          </div>
+          </button>
 
-          <div class="video-card reveal">
+          <button type="button" class="video-card reveal"
+            data-title="Xilapost — Video de redes"
+            data-desc="Edición de video para redes sociales de Xilapost."
+            data-video="assets/projects/xilapost-video.mp4">
             <div class="video-card__media">
-              <video src="assets/projects/xilapost-video.mp4" preload="metadata" muted playsinline controls></video>
+              <video src="assets/projects/xilapost-video.mp4" preload="metadata" muted playsinline></video>
+              <span class="video-card__play" aria-hidden="true">▶</span>
             </div>
             <div class="video-card__body">
               <span class="card-tag">Video</span>
               <h4>Xilapost — Video de redes</h4>
             </div>
-          </div>
+          </button>
+
+          <button type="button" class="video-card reveal"
+            data-title="Greyber — Edición de video"
+            data-desc="Edición de video para Greyber."
+            data-video="assets/projects/greyber-video.mp4">
+            <div class="video-card__media">
+              <video src="assets/projects/greyber-video.mp4" preload="metadata" muted playsinline></video>
+              <span class="video-card__play" aria-hidden="true">▶</span>
+            </div>
+            <div class="video-card__body">
+              <span class="card-tag">Video</span>
+              <h4>Greyber — Edición de video</h4>
+            </div>
+          </button>
         </div>
       </div>
     </div>
@@ -445,7 +467,7 @@
     </button>
     <div class="project-modal__media" id="projectModalMedia"></div>
     <div class="project-modal__body">
-      <span class="card-tag" id="projectModalTag">Redes Sociales</span>
+      <span class="card-tag" id="projectModalTag"></span>
       <h3 id="projectModalTitle"></h3>
       <p id="projectModalDesc"></p>
       <a href="#contacto" class="btn btn--pink" data-modal-close>Quiero un proyecto así</a>
@@ -510,6 +532,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=4"></script>
+<script src="js/script.js?v=5"></script>
 </body>
 </html>

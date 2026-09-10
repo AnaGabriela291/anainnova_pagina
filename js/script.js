@@ -149,12 +149,12 @@
     });
   }
 
-  /* Project modal (image lightbox for social-card items) */
+  /* Project modal (image/video lightbox for social-card and video-card items) */
   var projectModal = document.getElementById('projectModal');
   var projectModalMedia = document.getElementById('projectModalMedia');
   var projectModalTitle = document.getElementById('projectModalTitle');
   var projectModalDesc = document.getElementById('projectModalDesc');
-  var projectCards = document.querySelectorAll('.social-card');
+  var projectCards = document.querySelectorAll('.social-card, .video-card');
 
   function sizeProjectModalMedia(naturalW, naturalH) {
     if (!naturalW || !naturalH) {
@@ -175,14 +175,26 @@
 
   function openProjectModal(card) {
     var imgSrc = card.getAttribute('data-img');
-    projectModalMedia.innerHTML = '<img src="' + imgSrc + '" alt="">';
-    var modalImg = projectModalMedia.querySelector('img');
-    if (modalImg.complete && modalImg.naturalWidth) {
-      sizeProjectModalMedia(modalImg.naturalWidth, modalImg.naturalHeight);
-    } else {
-      modalImg.addEventListener('load', function () {
-        sizeProjectModalMedia(this.naturalWidth, this.naturalHeight);
+    var videoSrc = card.getAttribute('data-video');
+
+    projectModalTag.textContent = card.classList.contains('video-card') ? 'Video' : 'Redes Sociales';
+
+    if (videoSrc) {
+      projectModalMedia.innerHTML = '<video src="' + videoSrc + '" controls autoplay playsinline></video>';
+      var modalVideo = projectModalMedia.querySelector('video');
+      modalVideo.addEventListener('loadedmetadata', function () {
+        sizeProjectModalMedia(this.videoWidth, this.videoHeight);
       });
+    } else {
+      projectModalMedia.innerHTML = '<img src="' + imgSrc + '" alt="">';
+      var modalImg = projectModalMedia.querySelector('img');
+      if (modalImg.complete && modalImg.naturalWidth) {
+        sizeProjectModalMedia(modalImg.naturalWidth, modalImg.naturalHeight);
+      } else {
+        modalImg.addEventListener('load', function () {
+          sizeProjectModalMedia(this.naturalWidth, this.naturalHeight);
+        });
+      }
     }
 
     projectModalTitle.textContent = card.getAttribute('data-title') || '';
@@ -195,6 +207,8 @@
   }
 
   function closeProjectModal() {
+    var video = projectModalMedia.querySelector('video');
+    if (video) video.pause();
     projectModal.classList.remove('is-open');
     projectModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('is-locked');
@@ -215,8 +229,10 @@
 
     window.addEventListener('resize', function () {
       if (!projectModal.classList.contains('is-open')) return;
-      var img = projectModalMedia.querySelector('img');
-      if (img) sizeProjectModalMedia(img.naturalWidth, img.naturalHeight);
+      var content = projectModalMedia.querySelector('img, video');
+      if (!content) return;
+      if (content.tagName === 'VIDEO') sizeProjectModalMedia(content.videoWidth, content.videoHeight);
+      else sizeProjectModalMedia(content.naturalWidth, content.naturalHeight);
     });
   }
 

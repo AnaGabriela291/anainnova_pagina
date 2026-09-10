@@ -380,8 +380,17 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .social-card__media img, .web-card__media img, .video-card__media img {
   width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease;
 }
+.video-card__media { position: relative; }
 .video-card__media video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
-.video-card { cursor: default; }
+.video-card__play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(10,10,12,.65); border: 1px solid rgba(255,255,255,.4);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; padding-left: 3px; backdrop-filter: blur(4px);
+  transition: background .2s ease, transform .2s ease;
+}
+.video-card:hover .video-card__play { background: var(--pink); transform: translate(-50%, -50%) scale(1.08); }
 .social-card:hover img, .web-card:hover img, .video-card:hover img { transform: scale(1.05); }
 .card-tag { display: inline-block; font-size: .72rem; font-weight: 700; color: var(--pink-2); margin-bottom: 6px; }
 .social-card__body, .web-card__body, .video-card__body { padding: 16px 18px 20px; }
@@ -481,7 +490,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   background: #050505; position: relative;
   display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-.project-modal__media img {
+.project-modal__media img,
+.project-modal__media video {
   width: 100%; height: 100%; object-fit: contain; display: block;
 }
 .project-modal__body {
