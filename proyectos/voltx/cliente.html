@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal del cliente — VOLTX</title>
+<meta name="description" content="Portal del cliente VOLTX: solicita servicios, aprueba presupuestos, sigue tus trabajos, descarga documentos y paga tus facturas.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/voltx.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#E85D04">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M17 5 9 17h6l-1 10 9-13h-7l1-9Z' fill='%23F97316'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="shell" id="shell">
+  <div class="backdrop" id="backdrop"></div>
+
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <span class="logo-mark" id="lm"></span>
+      <span class="logo-txt" id="brand"></span>
+    </div>
+    <nav class="nav" id="nav" aria-label="Navegación del portal"></nav>
+    <div class="sb-foot">
+      <div class="banner banner-brand" style="padding:10px">
+        <span id="hi"></span>
+        <div class="xs">¿Necesitas ayuda? Escríbenos desde <b>Soporte</b>.</div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <button class="icon-btn" id="burger" aria-label="Abrir menú" style="display:none"></button>
+      <div class="grow"></div>
+      <div class="row gap2">
+        <a class="btn btn-primary btn-sm" href="#solicitar">+ Solicitar servicio</a>
+        <div style="position:relative">
+          <button class="row gap2" id="userbtn" style="border:0;background:none;cursor:pointer;padding:3px">
+            <span class="av" id="uav"></span>
+            <span class="col" style="gap:0;align-items:flex-start" id="uinfo"></span>
+          </button>
+          <div id="userMenu"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/cliente.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iniciar sesión — VOLTX</title>
+<meta name="description" content="Acceso a la plataforma VOLTX: panel administrativo, PWA del técnico y portal del cliente.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/voltx.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M17 5 9 17h6l-1 10 9-13h-7l1-9Z' fill='%23F97316'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="auth">
+  <aside class="auth-side">
+    <div>
+      <a href="index.html" class="row gap2" style="text-decoration:none">
+        <span class="logo-mark" id="lm" style="background:var(--primary-600);color:#fff"></span>
+        <span class="logo-txt" style="color:#fff">VOL<em style="color:var(--primary-500)">TX</em></span>
+      </a>
+      <h2 class="mt6" style="margin-top:56px">Todo tu negocio eléctrico<br>en una sola plataforma.</h2>
+      <div id="puntos"></div>
+    </div>
+    <div>
+      <div class="banner banner-brand" style="background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.3);color:#FDBA74">
+        <span id="ib"></span>
+        <div><b>Demo con datos de ejemplo.</b><br>Elige un perfil para entrar sin contraseña. Todo se guarda solo en tu navegador.</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="auth-form">
+    <div class="box" id="box"></div>
+  </main>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script>
+(function(){
+  var I = UI.icon, box = document.getElementById('box');
+  document.getElementById('lm').innerHTML = I('zap',17);
+  document.getElementById('ib').innerHTML = I('info',17);
+  document.getElementById('puntos').innerHTML = [
+    ['clipboard','Órdenes de trabajo con estados, checklist, evidencias y firma del cliente.'],
+    ['file','Presupuestos versionados con aprobación digital y anticipo.'],
+    ['hardhat','PWA para el técnico: su día, su checklist y sus materiales.'],
+    ['user','Portal del cliente para solicitar, aprobar, pagar y descargar.']
+  ].map(function(p){
+    return '<div class="pt"><span class="ic">'+I(p[0],15)+'</span><span>'+p[1]+'</span></div>';
+  }).join('');
+
+  var tenants = VOLTX.db().tenants;
+  var selTenant = tenants[0].id;
+  var selUser = null;
+
+  function usersOf(t){ return VOLTX.db().users.filter(function(u){return u.tenant_id===t;}); }
+
+  function renderLogin(){
+    var us = usersOf(selTenant);
+    box.innerHTML =
+      '<h2>Inicia sesión</h2>'+
+      '<p class="muted small mt2">Selecciona la empresa y el perfil con el que quieres recorrer la plataforma.</p>'+
+
+      '<div class="field mt6"><label for="tn">Empresa (tenant)</label>'+
+        '<select class="select" id="tn">'+tenants.map(function(t){
+          return '<option value="'+t.id+'"'+(t.id===selTenant?' selected':'')+'>'+UI.esc(t.name)+' — '+t.country+'</option>';
+        }).join('')+'</select>'+
+        '<span class="hint">Cada empresa tiene sus propios datos completamente aislados (tenant_id).</span></div>'+
+
+      '<div class="field mt4"><label>Perfil</label><div class="role-pick" id="rp">'+
+        us.map(function(u){
+          var r = VOLTX.ROLES[u.role];
+          return '<button type="button" data-u="'+u.id+'"'+(selUser===u.id?' class="on"':'')+'>'+
+            '<span class="av'+(u.role==='owner'?' dark':'')+'">'+UI.esc(VOLTX.initials(u.name))+'</span>'+
+            '<span style="min-width:0"><span class="bold small" style="display:block">'+UI.esc(u.name)+'</span>'+
+            '<span class="xs muted">'+r.label+'</span></span>'+
+            '<span style="margin-left:auto" class="muted">'+I('chevR',15)+'</span></button>';
+        }).join('')+'</div></div>'+
+
+      '<div class="field mt4"><label for="em">Correo electrónico</label>'+
+        '<input class="input" id="em" type="email" placeholder="tu@empresa.com" autocomplete="username"></div>'+
+      '<div class="field mt2"><label for="pw">Contraseña</label>'+
+        '<input class="input" id="pw" type="password" placeholder="••••••••" autocomplete="current-password">'+
+        '<span class="hint">En la demo no se valida la contraseña.</span></div>'+
+
+      '<div class="spread mt4"><label class="check"><input type="checkbox" checked><span>Recordar este dispositivo</span></label>'+
+        '<a href="#" id="fg" class="small">¿Olvidaste tu contraseña?</a></div>'+
+
+      '<button class="btn btn-primary btn-lg btn-block mt4" id="go">Entrar</button>'+
+      '<p class="small center mt4 muted">¿Tu empresa aún no usa VOLTX? <a href="#" id="reg">Crear cuenta</a></p>'+
+      '<p class="xs center mt4"><a href="#" id="rst" class="muted">Restablecer los datos de la demo</a></p>';
+
+    document.getElementById('tn').addEventListener('change', function(){ selTenant=this.value; selUser=null; renderLogin(); });
+    box.querySelectorAll('[data-u]').forEach(function(b){
+      b.addEventListener('click', function(){
+        selUser = this.dataset.u;
+        var u = VOLTX.db().users.filter(function(x){return x.id===selUser;})[0];
+        renderLogin();
+        document.getElementById('em').value = u.email;
+        document.getElementById('pw').value = 'demo1234';
+      });
+    });
+    document.getElementById('go').addEventListener('click', enter);
+    document.getElementById('pw').addEventListener('keydown', function(e){ if(e.key==='Enter') enter(); });
+    document.getElementById('fg').addEventListener('click', function(e){
+      e.preventDefault();
+      UI.modal({ title:'Recuperar contraseña',
+        body:'<div class="field"><label for="rem">Correo de tu cuenta</label><input class="input" id="rem" type="email" placeholder="tu@empresa.com"></div>'+
+             '<p class="hint mt2">Te enviaremos un enlace temporal de restablecimiento válido por 30 minutos.</p>',
+        footer:'<button class="btn btn-outline" data-close>Cancelar</button><button class="btn btn-primary" data-close id="snd">Enviar enlace</button>',
+        onMount:function(w){ w.querySelector('#snd').addEventListener('click',function(){ UI.toast('Si el correo existe, recibirás el enlace de restablecimiento.','ok'); }); }});
+    });
+    document.getElementById('reg').addEventListener('click', function(e){ e.preventDefault(); location.hash='registro'; renderRegister(1,{}); });
+    document.getElementById('rst').addEventListener('click', function(e){
+      e.preventDefault();
+      UI.confirm({title:'¿Restablecer la demo?',body:'Se borrarán todos los cambios que hayas hecho y se cargarán de nuevo los datos de ejemplo.',ok:'Restablecer',danger:true},function(){
+        VOLTX.reset(); VOLTX.logout(); UI.toast('Datos de la demo restablecidos.','ok'); setTimeout(function(){location.reload();},700);
+      });
+    });
+  }
+
+  function enter(){
+    var em = document.getElementById('em').value.trim();
+    var s = selUser ? VOLTX.login(null, selUser) : VOLTX.login(em);
+    if(!s){ UI.toast('No encontramos una cuenta con ese correo. Elige un perfil de la lista.','err'); return; }
+    var u = VOLTX.db().users.filter(function(x){return x.id===s.user_id;})[0];
+    if (u.twoFA) {
+      UI.modal({ title:'Verificación en dos pasos', subtitle:'Tu cuenta de administrador tiene 2FA activo.',
+        body:'<div class="field"><label for="otp">Código de 6 dígitos</label>'+
+             '<input class="input" id="otp" inputmode="numeric" maxlength="6" placeholder="123456" value="123456">'+
+             '<span class="hint">En la demo, cualquier código de 6 dígitos es válido.</span></div>',
+        footer:'<button class="btn btn-outline" data-close>Cancelar</button><button class="btn btn-primary" id="vf">Verificar</button>',
+        onMount:function(w){ w.querySelector('#vf').addEventListener('click', function(){
+          if((w.querySelector('#otp').value||'').length<6){ UI.toast('Introduce los 6 dígitos.','err'); return; }
+          go(u);
+        });}});
+      return;
+    }
+    go(u);
+  }
+  function go(u){
+    VOLTX.logAudit('LOGIN','user',u.id,'Inicio de sesión como '+VOLTX.ROLES[u.role].label);
+    location.href = VOLTX.ROLES[u.role].home;
+  }
+
+  /* ---------- Registro de empresa §5.1 (onboarding en stepper) ---------- */
+  var STEPS = ['Cuenta','Empresa','Operación','Plan','Equipo'];
+  function renderRegister(step, data){
+    var h = '<div class="row gap2 mb4"><a href="#" id="back" class="btn btn-ghost btn-sm">'+I('arrowL',15)+' Volver</a></div>'+
+      '<h2>Crear tu cuenta en VOLTX</h2>'+
+      '<p class="muted small mt2">Tu empresa queda operativa sin intervención manual. Paso '+step+' de '+STEPS.length+'.</p>'+
+      '<div class="stepper mt4">'+STEPS.map(function(s,i){
+        var n=i+1, cls = n<step?'done':(n===step?'on':'');
+        return '<span class="step '+cls+'"><span class="n">'+(n<step?'✓':n)+'</span>'+s+'</span>'+(i<STEPS.length-1?'<span class="step-sep"></span>':'');
+      }).join('')+'</div><div class="mt6" id="stepbody"></div>';
+    box.innerHTML = h;
+    document.getElementById('back').addEventListener('click',function(e){
+      e.preventDefault();
+      if(step>1) renderRegister(step-1,data); else { location.hash=''; renderLogin(); }
+    });
+    var b = document.getElementById('stepbody');
+
+    if(step===1){
+      b.innerHTML =
+        '<div class="field"><label for="f1">Nombre y apellido <span class="req">*</span></label><input class="input" id="f1" value="'+UI.esc(data.name||'')+'"></div>'+
+        '<div class="field mt4"><label for="f2">Correo electrónico <span class="req">*</span></label><input class="input" id="f2" type="email" value="'+UI.esc(data.email||'')+'"><span class="hint">Te enviaremos un código de verificación.</span></div>'+
+        '<div class="field mt4"><label for="f3">Contraseña <span class="req">*</span></label><input class="input" id="f3" type="password"><span class="hint">Mínimo 8 caracteres, una mayúscula y un número.</span></div>'+
+        '<button class="btn btn-primary btn-block mt6" id="next">Continuar</button>';
+      document.getElementById('next').addEventListener('click',function(){
+        var n=v('f1'), e=v('f2'), p=v('f3');
+        if(!n||!e||!p){ UI.toast('Completa los campos obligatorios.','err'); return; }
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){ UI.toast('El correo no tiene un formato válido.','err'); return; }
+        if(p.length<8){ UI.toast('La contraseña debe tener al menos 8 caracteres.','err'); return; }
+        data.name=n; data.email=e;
+        UI.modal({title:'Verifica tu correo',body:'<p>Enviamos un código de 6 dígitos a <b>'+UI.esc(e)+'</b>.</p>'+
+          '<div class="field mt4"><label for="vc">Código</label><input class="input" id="vc" value="482913" maxlength="6"></div>',
+          footer:'<button class="btn btn-primary" id="ok">Verificar</button>',
+          onMount:function(w){w.querySelector('#ok').addEventListener('click',function(){UI.closeTop();renderRegister(2,data);});}});
+      });
+    }
+    if(step===2){
+      b.innerHTML =
+        '<div class="field"><label for="f1">Nombre de la empresa <span class="req">*</span></label><input class="input" id="f1" value="'+UI.esc(data.company||'')+'"></div>'+
+        '<div class="grid g2 mt4">'+
+          '<div class="field"><label for="f2">País</label><select class="select" id="f2"><option>Venezuela</option><option>Colombia</option><option>México</option><option>Panamá</option><option>España</option><option>Chile</option><option>Perú</option></select></div>'+
+          '<div class="field"><label for="f3">Moneda</label><select class="select" id="f3"><option>USD</option><option>EUR</option><option>COP</option><option>MXN</option><option>CLP</option></select></div>'+
+        '</div>'+
+        '<div class="grid g2 mt4">'+
+          '<div class="field"><label for="f4">Zona horaria</label><select class="select" id="f4"><option>America/Caracas</option><option>America/Bogota</option><option>America/Mexico_City</option><option>Europe/Madrid</option></select></div>'+
+          '<div class="field"><label for="f5">Teléfono</label><input class="input" id="f5" placeholder="+58 212 000 0000"></div>'+
+        '</div>'+
+        '<div class="field mt4"><label for="f6">Identificación fiscal</label><input class="input" id="f6" placeholder="J-00000000-0"></div>'+
+        '<div class="field mt4"><label for="f7">Dirección</label><textarea class="textarea" id="f7" style="min-height:64px"></textarea></div>'+
+        '<button class="btn btn-primary btn-block mt6" id="next">Continuar</button>';
+      document.getElementById('next').addEventListener('click',function(){
+        if(!v('f1')){ UI.toast('El nombre de la empresa es obligatorio.','err'); return; }
+        data.company=v('f1'); data.country=v('f2'); data.currency=v('f3'); renderRegister(3,data);
+      });
+    }
+    if(step===3){
+      b.innerHTML =
+        '<div class="field"><label>Tipo de empresa</label><div class="role-pick" id="tp">'+
+        [['instalador','Instalador independiente','Orden, presupuestos, clientes y agenda'],
+         ['empresa_pequena','Empresa pequeña','Coordinar varios técnicos y materiales'],
+         ['empresa_mediana','Empresa mediana','Múltiples equipos y control financiero'],
+         ['industrial','Contratista industrial','Documentación, permisos y trazabilidad']]
+        .map(function(o){return '<button type="button" data-t="'+o[0]+'"'+(data.type===o[0]?' class="on"':'')+'>'+
+          '<span class="kpi-ico">'+I('building',16)+'</span><span><span class="bold small" style="display:block">'+o[1]+'</span><span class="xs muted">'+o[2]+'</span></span></button>';}).join('')+
+        '</div></div>'+
+        '<div class="field mt4"><label for="f2">Número aproximado de técnicos</label>'+
+          '<select class="select" id="f2"><option>1 (solo yo)</option><option>2 a 5</option><option>6 a 15</option><option>16 a 50</option><option>Más de 50</option></select></div>'+
+        '<div class="field mt4"><label>Servicios que ofreces</label>'+
+          '<div class="grid g2" style="gap:6px">'+['Instalaciones residenciales','Comercial e industrial','Tableros y circuitos','Mantenimiento preventivo','Inspecciones y diagnóstico','Puesta a tierra','Iluminación','Generadores y UPS']
+            .map(function(s,i){return '<label class="check"><input type="checkbox" '+(i<4?'checked':'')+'><span>'+s+'</span></label>';}).join('')+'</div></div>'+
+        '<button class="btn btn-primary btn-block mt6" id="next">Continuar</button>';
+      b.querySelectorAll('[data-t]').forEach(function(btn){
+        btn.addEventListener('click',function(){ data.type=this.dataset.t; renderRegister(3,data); });
+      });
+      document.getElementById('next').addEventListener('click',function(){
+        if(!data.type){ UI.toast('Selecciona el tipo de empresa.','err'); return; }
+        renderRegister(4,data);
+      });
+    }
+    if(step===4){
+      var plans = VOLTX.db().plans;
+      b.innerHTML = '<div class="role-pick">'+
+        plans.map(function(p){return '<button type="button" data-p="'+p.id+'"'+(data.plan===p.id?' class="on"':'')+'>'+
+          '<span class="kpi-ico">'+I('star',16)+'</span><span><span class="bold small" style="display:block">'+p.name+' — $'+p.price+'/mes</span>'+
+          '<span class="xs muted">'+p.users+' usuarios · '+p.orders+' órdenes/mes</span></span></button>';}).join('')+
+        '<button type="button" data-p="trial"'+(data.plan==='trial'?' class="on"':'')+'>'+
+          '<span class="kpi-ico">'+I('clock',16)+'</span><span><span class="bold small" style="display:block">Prueba gratis 14 días</span>'+
+          '<span class="xs muted">Sin tarjeta de crédito</span></span></button></div>'+
+        '<button class="btn btn-primary btn-block mt6" id="next">Continuar</button>';
+      b.querySelectorAll('[data-p]').forEach(function(btn){
+        btn.addEventListener('click',function(){ data.plan=this.dataset.p; renderRegister(4,data); });
+      });
+      document.getElementById('next').addEventListener('click',function(){
+        if(!data.plan){ UI.toast('Elige un plan o la prueba gratuita.','err'); return; }
+        renderRegister(5,data);
+      });
+    }
+    if(step===5){
+      b.innerHTML =
+        '<p class="small muted">Invita a tu equipo. Puedes hacerlo después desde Usuarios y permisos.</p>'+
+        '<div id="inv" class="col mt4">'+
+          ['coordinador','tecnico','ventas'].map(function(r,i){
+            return '<div class="row gap2"><input class="input" placeholder="correo@empresa.com" value="">'+
+              '<select class="select" style="width:150px">'+Object.keys(VOLTX.ROLES).filter(function(k){return k!=='owner';})
+                .map(function(k){return '<option value="'+k+'"'+(k===r?' selected':'')+'>'+VOLTX.ROLES[k].label.split(' /')[0]+'</option>';}).join('')+'</select></div>';
+          }).join('')+
+        '</div>'+
+        '<button class="btn btn-outline btn-sm mt2" id="add">'+I('plus',14)+' Agregar otra invitación</button>'+
+        '<div class="banner banner-brand mt6">'+I('info',16)+'<div>Al finalizar cargaremos un catálogo inicial de servicios y materiales que podrás editar.</div></div>'+
+        '<button class="btn btn-primary btn-lg btn-block mt4" id="fin">Crear mi empresa</button>'+
+        '<button class="btn btn-ghost btn-block mt2" id="skip">Omitir por ahora</button>';
+      document.getElementById('add').addEventListener('click',function(){
+        var d=document.createElement('div'); d.className='row gap2';
+        d.innerHTML='<input class="input" placeholder="correo@empresa.com">'+
+          '<select class="select" style="width:150px">'+Object.keys(VOLTX.ROLES).filter(function(k){return k!=='owner';})
+            .map(function(k){return '<option value="'+k+'">'+VOLTX.ROLES[k].label.split(' /')[0]+'</option>';}).join('')+'</select>';
+        document.getElementById('inv').appendChild(d);
+      });
+      document.getElementById('fin').addEventListener('click', finish);
+      document.getElementById('skip').addEventListener('click', finish);
+    }
+    function finish(){
+      UI.modal({title:'¡Tu empresa está lista!',
+        body:'<div class="center col" style="align-items:center;gap:12px">'+
+          '<span class="kpi-ico" style="width:52px;height:52px">'+I('checkCircle',26)+'</span>'+
+          '<h3>'+UI.esc(data.company||'Tu empresa')+'</h3>'+
+          '<p class="small muted">Creamos tu tenant, tu usuario propietario, el catálogo inicial de servicios y materiales, y las numeraciones de documentos.</p>'+
+          '<div class="banner banner-warn" style="text-align:left">'+I('info',16)+'<div>Esta demo no persiste empresas nuevas: para recorrer la plataforma con datos completos entrarás como <b>Ana Guerrero</b> de Electro Andes C.A.</div></div></div>',
+        footer:'<button class="btn btn-primary btn-block" id="ent">Entrar al panel</button>',
+        onMount:function(w){ w.querySelector('#ent').addEventListener('click',function(){
+          VOLTX.login(null,'usr_ana'); location.href='app.html';
+        });}});
+    }
+    function v(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  }
+
+  if(location.hash==='#registro') renderRegister(1,{}); else renderLogin();
+})();
+</script>
+</body>
+</html>

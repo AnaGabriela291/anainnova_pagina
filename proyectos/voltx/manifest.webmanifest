@@ -1,0 +1,31 @@
+{
+  "name": "VOLTX — SaaS para instaladores eléctricos",
+  "short_name": "VOLTX",
+  "description": "Plataforma multiempresa para gestionar clientes, presupuestos, órdenes de trabajo, técnicos, inventario, facturación y mantenimiento de una empresa de sistemas eléctricos.",
+  "lang": "es",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F7F8FA",
+  "theme_color": "#E85D04",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23111111'/%3E%3Cpath d='M104 26 52 104h38l-7 62 57-80h-44l8-60Z' fill='%23F97316'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='108' fill='%23111111'/%3E%3Cpath d='M278 70 138 278h102l-19 164 152-212H255l23-160Z' fill='%23F97316'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Panel administrativo", "url": "app.html" },
+    { "name": "Mi día (técnico)", "url": "tecnico.html" },
+    { "name": "Portal del cliente", "url": "cliente.html" }
+  ]
+}

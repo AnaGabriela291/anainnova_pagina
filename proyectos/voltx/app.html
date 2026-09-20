@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel — VOLTX</title>
+<meta name="description" content="Panel administrativo y operativo de VOLTX: dashboard, CRM, presupuestos, órdenes de trabajo, agenda, inventario, facturación y reportes.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/voltx.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#E85D04">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M17 5 9 17h6l-1 10 9-13h-7l1-9Z' fill='%23F97316'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="shell" id="shell">
+  <div class="backdrop" id="backdrop"></div>
+
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <span class="logo-mark" id="lm"></span>
+      <span class="logo-txt">VOL<em>TX</em></span>
+    </div>
+    <nav class="nav" id="nav" aria-label="Navegación principal"></nav>
+    <div class="sb-foot">
+      <button class="btn btn-ghost btn-sm btn-block" id="collapse" style="justify-content:flex-start">
+        <span id="cico"></span><span class="m">Contraer menú</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="header">
+      <button class="icon-btn" id="burger" aria-label="Abrir menú" style="display:none"></button>
+      <div class="gsearch">
+        <span id="gsi"></span>
+        <input class="input" id="gs" placeholder="Buscar clientes, órdenes, presupuestos, facturas…" autocomplete="off" aria-label="Buscador global">
+        <div id="gsr"></div>
+      </div>
+      <div class="row gap2" style="margin-left:auto">
+        <div style="position:relative">
+          <button class="btn btn-primary btn-sm" id="create">+ Crear</button>
+          <div id="createMenu"></div>
+        </div>
+        <div style="position:relative">
+          <button class="icon-btn" id="bell" aria-label="Notificaciones"></button>
+          <div id="bellMenu"></div>
+        </div>
+        <div style="position:relative">
+          <button class="row gap2" id="userbtn" style="border:0;background:none;cursor:pointer;padding:3px">
+            <span class="av dark" id="uav"></span>
+            <span class="col" style="gap:0;align-items:flex-start" id="uinfo"></span>
+          </button>
+          <div id="userMenu"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+<script src="js/views-core.js"></script>
+<script src="js/views-ops.js"></script>
+<script src="js/views-back.js"></script>
+<script src="js/views-admin.js"></script>
+<script>APP.start();</script>
+</body>
+</html>

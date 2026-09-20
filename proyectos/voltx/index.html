@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOLTX — SaaS para instaladores y empresas de sistemas eléctricos</title>
+<meta name="description" content="VOLTX centraliza clientes, presupuestos, órdenes de trabajo, técnicos, inventario, facturación y mantenimiento de tu empresa eléctrica en una sola plataforma multiempresa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/voltx.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#E85D04">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Cpath d='M17 5 9 17h6l-1 10 9-13h-7l1-9Z' fill='%23F97316'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="lp-nav">
+  <div class="wrap row" style="height:62px;justify-content:space-between">
+    <a href="index.html" class="row gap2" style="text-decoration:none">
+      <span class="logo-mark" id="lm"></span>
+      <span class="logo-txt">VOL<em>TX</em></span>
+    </a>
+    <nav class="row gap4 hide-sm" id="lpnav">
+      <a href="#producto" class="small bold" style="color:var(--text)">Producto</a>
+      <a href="#modulos" class="small bold" style="color:var(--text)">Módulos</a>
+      <a href="#roles" class="small bold" style="color:var(--text)">Roles</a>
+      <a href="#planes" class="small bold" style="color:var(--text)">Planes</a>
+    </nav>
+    <div class="row gap2">
+      <a href="login.html" class="btn btn-ghost btn-sm">Iniciar sesión</a>
+      <a href="login.html#registro" class="btn btn-primary btn-sm">Crear cuenta</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow" id="eyebrow">Plataforma SaaS multiempresa</span>
+    <h1 class="mt4">El sistema operativo digital de tu <em>empresa eléctrica</em></h1>
+    <p>Desde la solicitud del cliente hasta la entrega y el mantenimiento de la instalación eléctrica,
+       todo controlado desde un único sistema: CRM, inspecciones, presupuestos, órdenes de trabajo,
+       técnicos en campo, inventario, facturación y postventa.</p>
+    <div class="row gap2 mt6" style="justify-content:center;flex-wrap:wrap">
+      <a href="login.html" class="btn btn-primary btn-lg">Entrar a la demo</a>
+      <a href="#modulos" class="btn btn-outline btn-lg">Ver los módulos</a>
+    </div>
+    <p class="small muted mt4">Demo funcional con datos de ejemplo · dos empresas de prueba · 7 roles</p>
+  </div>
+</section>
+
+<!-- vista previa del panel -->
+<section class="wrap" style="padding-bottom:48px">
+  <div class="card" style="overflow:hidden">
+    <div class="row" style="padding:10px 14px;border-bottom:1px solid var(--border);gap:6px">
+      <span style="width:10px;height:10px;border-radius:50%;background:#FF5F57"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:#FEBC2E"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:#28C840"></span>
+      <span class="small muted" style="margin-left:10px">app.voltx.com/dashboard</span>
+    </div>
+    <div style="background:var(--bg);padding:20px" id="preview"></div>
+  </div>
+</section>
+
+<section class="sect" id="producto">
+  <div class="wrap">
+    <h2>Lo que VOLTX resuelve</h2>
+    <p class="muted mt2" style="max-width:640px">Ocho problemas reales de una empresa instaladora que hoy se resuelven con WhatsApp, hojas de cálculo y llamadas.</p>
+    <div class="grid g3 mt6" id="problemas"></div>
+  </div>
+</section>
+
+<section class="sect" id="modulos">
+  <div class="wrap">
+    <h2>21 módulos operativos</h2>
+    <p class="muted mt2" style="max-width:640px">Ninguna pantalla decorativa: cada vista corresponde a una operación real del negocio.</p>
+    <div class="grid g4 mt6" id="modulos-grid"></div>
+  </div>
+</section>
+
+<section class="sect" id="roles">
+  <div class="wrap">
+    <h2>Un perfil para cada persona del equipo</h2>
+    <p class="muted mt2" style="max-width:640px">Control de acceso por rol (RBAC) configurable por módulo y acción: ver, crear, editar, eliminar, aprobar, asignar, exportar y administrar.</p>
+    <div class="grid g3 mt6" id="roles-grid"></div>
+  </div>
+</section>
+
+<section class="sect" id="flujo">
+  <div class="wrap">
+    <h2>El flujo completo, sin saltos</h2>
+    <p class="muted mt2">Flujo comercial estándar de extremo a extremo.</p>
+    <div class="card mt6"><div class="card-b">
+      <div class="row wrap gap2" id="flujo-chips"></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="sect" id="planes">
+  <div class="wrap">
+    <h2>Planes</h2>
+    <p class="muted mt2">Los precios mostrados son de referencia para la demo; deben validarse con el mercado objetivo.</p>
+    <div class="grid g3 mt6" id="planes-grid"></div>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="wrap center">
+    <h2>Prueba la plataforma completa</h2>
+    <p class="muted mt2">Entra como propietario, coordinador, técnico o cliente y recorre el flujo real.</p>
+    <a href="login.html" class="btn btn-primary btn-lg mt6">Entrar a la demo</a>
+  </div>
+</section>
+
+<footer class="lp-foot">
+  <div class="wrap">
+    <div class="grid g4">
+      <div>
+        <div class="row gap2 mb4">
+          <span class="logo-mark" id="lm2"></span>
+          <span class="logo-txt" style="color:#fff">VOL<em>TX</em></span>
+        </div>
+        <p>SaaS B2B multiempresa para instaladores y empresas de sistemas eléctricos.</p>
+      </div>
+      <div><h4>Producto</h4>
+        <ul class="col gap1"><li><a href="#modulos">Módulos</a></li><li><a href="#roles">Roles y permisos</a></li><li><a href="#planes">Planes</a></li></ul></div>
+      <div><h4>Accesos de la demo</h4>
+        <ul class="col gap1"><li><a href="app.html">Panel administrativo</a></li><li><a href="tecnico.html">PWA del técnico</a></li><li><a href="cliente.html">Portal del cliente</a></li></ul></div>
+      <div><h4>Aviso</h4>
+        <p>Demostración funcional con datos ficticios almacenados en tu navegador. Ninguna información sale de tu equipo.</p></div>
+    </div>
+    <p class="mt6 small" style="border-top:1px solid #2b2b2b;padding-top:20px">© <span id="y"></span> VOLTX · Especificación maestra de producto v1.0</p>
+  </div>
+</footer>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script>
+(function(){
+  var I = UI.icon;
+  document.getElementById('y').textContent = new Date().getFullYear();
+  document.getElementById('lm').innerHTML = I('zap',17);
+  document.getElementById('lm2').innerHTML = I('zap',17);
+  document.getElementById('eyebrow').insertAdjacentHTML('afterbegin', I('zap',13));
+
+  /* problemas §1.1 */
+  var problemas = [
+    ['inbox','Información fragmentada','WhatsApp, hojas de cálculo, llamadas y notas sueltas sin una sola fuente de verdad.'],
+    ['hardhat','No saber dónde está cada técnico','Qué técnico está disponible, dónde está y qué trabajo ejecuta en este momento.'],
+    ['file','Presupuestos lentos','Cotizaciones sin trazabilidad de versiones, aprobación ni vencimiento.'],
+    ['box','Materiales sin control','Pérdidas por sobrantes, devoluciones y consumos que nunca se registran.'],
+    ['camera','Evidencias informales','Fotos y certificados técnicos guardados en el teléfono de alguien.'],
+    ['dollar','Rentabilidad a ciegas','Sin vista consolidada por proyecto, cliente, técnico o tipo de servicio.'],
+    ['wrench','Mantenimiento reactivo','Poca comunicación posterior y preventivos que nadie programa.'],
+    ['users','Cliente sin autoservicio','No hay portal donde revise avances, documentos, pagos y solicitudes.']
+  ];
+  document.getElementById('problemas').innerHTML = problemas.map(function(p){
+    return '<div class="feat"><div class="ic">'+I(p[0],19)+'</div><h4>'+p[1]+'</h4><p class="small muted mt2">'+p[2]+'</p></div>';
+  }).join('');
+
+  /* módulos §3.1 */
+  var mods = [
+    ['home','Dashboard ejecutivo'],['users','CRM y clientes'],['inbox','Solicitudes / leads'],
+    ['search','Visitas e inspecciones'],['file','Presupuestos'],['layers','Proyectos'],
+    ['clipboard','Órdenes de trabajo'],['calendar','Agenda y despacho'],['map','Mapa operativo'],
+    ['hardhat','Técnicos y equipos'],['box','Inventario'],['cart','Compras y proveedores'],
+    ['receipt','Facturación y pagos'],['wrench','Mantenimientos'],['bolt','Activos eléctricos'],
+    ['folder','Documentos y certificados'],['alert','Incidencias y garantías'],['chart','Reportes y analítica'],
+    ['workflow','Automatizaciones'],['shield','Usuarios y permisos'],['settings','Configuración y plan']
+  ];
+  document.getElementById('modulos-grid').innerHTML = mods.map(function(m){
+    return '<div class="card"><div class="card-b tight row gap2">'+
+      '<span class="kpi-ico">'+I(m[0],16)+'</span><span class="bold small">'+m[1]+'</span></div></div>';
+  }).join('');
+
+  /* roles §2.1 */
+  var R = VOLTX.ROLES, ico = {owner:'shield',coordinador:'calendar',ventas:'trend',almacen:'box',finanzas:'dollar',tecnico:'hardhat',cliente:'user'};
+  document.getElementById('roles-grid').innerHTML = Object.keys(R).map(function(k){
+    var r=R[k], n=Object.keys(r.perms).length;
+    return '<div class="feat"><div class="ic">'+I(ico[k],19)+'</div><h4>'+r.label+'</h4>'+
+      '<p class="small muted mt2">'+r.desc+'</p>'+
+      '<p class="xs muted mt2">'+(k==='cliente'?'Portal de autoservicio':n+' módulos habilitados')+'</p></div>';
+  }).join('');
+
+  /* flujo §9.1 */
+  var flujo = ['Solicitud','Lead','Contacto','Visita técnica','Presupuesto','Enviado','Aprobado','Anticipo','Proyecto / Orden','Programación','Ejecución','Validación','Factura','Pago','Garantía / Mantenimiento'];
+  document.getElementById('flujo-chips').innerHTML = flujo.map(function(f,i){
+    return '<span class="chip" style="'+(i===0?'background:var(--primary-100);color:#9A3412':'')+'">'+f+'</span>'+
+      (i<flujo.length-1?'<span class="muted">'+I('chevR',13)+'</span>':'');
+  }).join('');
+
+  /* planes §16.2 */
+  var planes = VOLTX.db().plans;
+  document.getElementById('planes-grid').innerHTML = planes.map(function(p,i){
+    return '<div class="price '+(i===1?'hot':'')+'">'+
+      (i===1?'<span class="badge b-orange no-dot" style="align-self:flex-start">Más elegido</span>':'')+
+      '<h3>'+p.name+'</h3>'+
+      '<div class="amt">$'+p.price+'<span class="muted" style="font-size:14px;font-weight:500">/mes</span></div>'+
+      '<p class="small muted">Hasta '+p.users+' usuarios · '+p.orders+' órdenes/mes · '+p.storage+' GB</p>'+
+      '<ul class="mt2">'+p.features.map(function(f){return '<li>'+I('check',15)+'<span>'+f+'</span></li>';}).join('')+'</ul>'+
+      '<a href="login.html#registro" class="btn '+(i===1?'btn-primary':'btn-outline')+' btn-block mt4">Elegir '+p.name+'</a></div>';
+  }).join('');
+
+  /* preview mini dashboard */
+  document.getElementById('preview').innerHTML =
+    '<div class="grid g4">'+
+      UI.kpi({label:'Trabajos hoy',value:'7',icon:'clipboard',sub:'2 en ejecución'})+
+      UI.kpi({label:'Órdenes atrasadas',value:'1',icon:'alert',sub:'Requiere atención',trend:'down'})+
+      UI.kpi({label:'Por cobrar',value:'$1.086',icon:'dollar',sub:'1 factura vencida',trend:'down'})+
+      UI.kpi({label:'Ingresos del mes',value:'$4.240',icon:'trend',sub:'+18% vs. mes anterior',trend:'up'})+
+    '</div>'+
+    '<div class="grid g-2-1 mt4">'+
+      '<div class="card"><div class="card-h"><h3>Ingresos últimos 6 meses</h3></div><div class="card-b">'+
+        UI.sparkArea([2100,2600,2300,3100,3600,4240],600,110)+'</div></div>'+
+      '<div class="card"><div class="card-h"><h3>Órdenes por estado</h3></div><div class="card-b center">'+
+        UI.donut([{value:2,color:'#E85D04'},{value:3,color:'#2563EB'},{value:4,color:'#16A34A'},{value:1,color:'#DC2626'}],130,'órdenes')+
+      '</div></div>'+
+    '</div>';
+})();
+</script>
+<style>
+@media (max-width:820px){#lpnav{display:none}}
+</style>
+</body>
+</html>
