@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=16">
+<link rel="stylesheet" href="css/style.css?v=17">
 </head>
 <body>
 
@@ -268,42 +268,95 @@
           <p>Sitios modernos, funcionales y diseñados para hacer crecer tu negocio.</p>
           <a href="#contacto" class="btn btn--pink btn--sm">Ver todos <span class="btn__arrow">→</span></a>
         </div>
-        <div class="proyectos__category-grid">
-          <div class="web-card reveal">
-            <div class="web-card__media">
-              <img src="assets/projects/web-esteban-tenreiro-2.png" alt="Página web de Esteban Tenreiro" loading="lazy">
+        <!-- Carrusel: añade más .web-card al track y las flechas se ajustan solas -->
+        <div class="carousel" data-carousel>
+          <div class="carousel__stage">
+            <button class="carousel__nav carousel__nav--prev" type="button" data-carousel-prev aria-label="Ver páginas anteriores">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+
+            <div class="carousel__viewport" data-carousel-viewport>
+              <div class="carousel__track" data-carousel-track>
+                <div class="web-card">
+                  <div class="web-card__media">
+                    <img src="assets/projects/web-nextcore-shot.jpg" alt="Vista de la página web de NextCore" loading="lazy">
+                  </div>
+                  <div class="web-card__body">
+                    <span class="card-tag">Web</span>
+                    <h4>NextCore</h4>
+                    <p>Plataforma ISP con inteligencia artificial</p>
+                    <a href="https://nextcorenow.com/" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
+                  </div>
+                </div>
+
+                <div class="web-card">
+                  <div class="web-card__media">
+                    <img src="assets/projects/web-esteban-tenreiro-shot.jpg" alt="Vista de la página web de Esteban Tenreiro" loading="lazy">
+                  </div>
+                  <div class="web-card__body">
+                    <span class="card-tag">Web</span>
+                    <h4>Esteban Tenreiro</h4>
+                    <p>Profesionales asociados — diseño estructural</p>
+                    <a href="https://esteban-tenreiro.vercel.app/" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
+                  </div>
+                </div>
+
+                <div class="web-card">
+                  <div class="web-card__media">
+                    <img src="assets/projects/web-unefa-dashboard-shot.jpg" alt="Vista del dashboard del sistema de postgrado UNEFA" loading="lazy">
+                  </div>
+                  <div class="web-card__body">
+                    <span class="card-tag">Web</span>
+                    <h4>Sistema de Postgrado — UNEFA</h4>
+                    <p>Dashboard de inscripción, pagos y expediente académico</p>
+                    <a href="proyectos/dashboard-unefa.html" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
+                  </div>
+                </div>
+
+                <div class="web-card">
+                  <div class="web-card__media">
+                    <img src="assets/projects/web-podyum-shot.jpg" alt="Vista de la página web de PODYUM" loading="lazy">
+                  </div>
+                  <div class="web-card__body">
+                    <span class="card-tag">Web</span>
+                    <h4>PODYUM</h4>
+                    <p>Tienda online de camisas oversize premium</p>
+                    <a href="proyectos/podyum/index.html" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
+                  </div>
+                </div>
+
+                <div class="web-card">
+                  <div class="web-card__media">
+                    <img src="assets/projects/web-flowtask-shot.jpg" alt="Vista del dashboard de proyectos Flowtask" loading="lazy">
+                  </div>
+                  <div class="web-card__body">
+                    <span class="card-tag">Web</span>
+                    <h4>Flowtask</h4>
+                    <p>Dashboard de proyectos con tablero Kanban y tiempos</p>
+                    <a href="proyectos/flowtask-dashboard.html" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
+                  </div>
+                </div>
+
+                <div class="web-card">
+                  <div class="web-card__media">
+                    <img src="assets/projects/web-bidworks-shot.jpg" alt="Vista de la página web de BidWorks" loading="lazy">
+                  </div>
+                  <div class="web-card__body">
+                    <span class="card-tag">Web</span>
+                    <h4>BidWorks</h4>
+                    <p>Plataforma de subastas online</p>
+                    <a href="proyectos/bidworks-auction.html" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="web-card__body">
-              <span class="card-tag">Web</span>
-              <h4>Esteban Tenreiro</h4>
-              <p>Profesionales asociados — diseño estructural</p>
-              <a href="https://esteban-tenreiro.vercel.app/" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
-            </div>
+
+            <button class="carousel__nav carousel__nav--next" type="button" data-carousel-next aria-label="Ver más páginas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
 
-          <div class="web-card reveal">
-            <div class="web-card__media">
-              <img src="assets/projects/web-unefa-dashboard-2.png" alt="Dashboard del sistema de postgrado UNEFA" loading="lazy">
-            </div>
-            <div class="web-card__body">
-              <span class="card-tag">Web</span>
-              <h4>Sistema de Postgrado — UNEFA</h4>
-              <p>Dashboard de inscripción, pagos y expediente académico</p>
-              <a href="proyectos/dashboard-unefa.html" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
-            </div>
-          </div>
-
-          <div class="web-card reveal">
-            <div class="web-card__media">
-              <img src="assets/projects/web-bidworks-2.png" alt="Página web de BidWorks" loading="lazy">
-            </div>
-            <div class="web-card__body">
-              <span class="card-tag">Web</span>
-              <h4>BidWorks</h4>
-              <p>Plataforma de subastas online</p>
-              <a href="proyectos/bidworks-auction.html" target="_blank" rel="noopener" class="web-card__link">Visitar página <span class="btn__arrow">→</span></a>
-            </div>
-          </div>
+          <div class="carousel__dots" data-carousel-dots></div>
         </div>
       </div>
 
@@ -532,6 +585,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=5"></script>
+<script src="js/script.js?v=7"></script>
 </body>
 </html>
