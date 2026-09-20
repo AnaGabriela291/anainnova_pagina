@@ -410,9 +410,27 @@
       });
     }
 
-    /* Appears automatically every time the page loads */
-    window.addEventListener('load', function () {
-      setTimeout(openLeadModal, 900);
-    });
+    /* Se muestra una sola vez por visita: recargar la pagina no lo repite */
+    var LEAD_VISTO = "anainnova:lead-visto";
+
+    function leadYaMostrado() {
+      /* En navegacion privada o con el almacenamiento bloqueado esto puede fallar */
+      try { return sessionStorage.getItem(LEAD_VISTO) === "1"; } catch (e) { return false; }
+    }
+    function marcarLeadMostrado() {
+      try { sessionStorage.setItem(LEAD_VISTO, "1"); } catch (e) {}
+    }
+
+    function programarLead() {
+      if (leadYaMostrado()) return;
+      setTimeout(function () {
+        marcarLeadMostrado();
+        openLeadModal();
+      }, 900);
+    }
+
+    /* Si la pagina ya termino de cargar, "load" no vuelve a dispararse */
+    if (document.readyState === "complete") programarLead();
+    else window.addEventListener("load", programarLead);
   }
 })();
