@@ -417,6 +417,10 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .web-card__link:hover .btn__arrow { transform: translateX(3px); }
 .web-card__link .btn__arrow { transition: transform .18s ease; }
 
+/* Toda la tarjeta abre la pagina: el enlace se estira sobre la tarjeta entera */
+.web-card { position: relative; }
+.web-card__link::after { content: ''; position: absolute; inset: 0; z-index: 5; }
+
 .category-placeholder {
   aspect-ratio: 4/3; border: 1px dashed var(--border); border-radius: var(--radius);
   display: flex; align-items: center; justify-content: center; text-align: center;
@@ -444,7 +448,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .carousel__track > * { scroll-snap-align: start; }
 
 .carousel__nav {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
   width: 44px; height: 44px; padding: 0; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   background: rgba(20,18,22,.92); border: 1px solid var(--border); color: var(--text);
