@@ -120,6 +120,101 @@
     }
   }
 
+  /* Card carousels — arrows + dots adapt to however many cards the track holds */
+  var carouselRefreshers = [];
+
+  function setupCarousel(root) {
+    var viewport = root.querySelector('[data-carousel-viewport]');
+    var track = root.querySelector('[data-carousel-track]');
+    var prev = root.querySelector('[data-carousel-prev]');
+    var next = root.querySelector('[data-carousel-next]');
+    var dotsBox = root.querySelector('[data-carousel-dots]');
+    var slides = Array.prototype.slice.call(track ? track.children : []);
+    if (!viewport || !slides.length) return;
+
+    var dots = [];
+    /* Where we are heading, so quick repeat clicks don't read a scroll still in flight */
+    var targetIndex = 0;
+
+    /* Distance from one card to the next, gap included */
+    function step() {
+      if (slides.length > 1) return slides[1].offsetLeft - slides[0].offsetLeft;
+      return slides[0].offsetWidth;
+    }
+    function maxScroll() { return viewport.scrollWidth - viewport.clientWidth; }
+    function perView() {
+      var s = step();
+      return s > 0 ? Math.max(1, Math.round(viewport.clientWidth / s)) : 1;
+    }
+    function positions() { return Math.max(1, slides.length - perView() + 1); }
+    function currentIndex() {
+      var s = step();
+      return s > 0 ? Math.round(viewport.scrollLeft / s) : 0;
+    }
+
+    function goTo(index) {
+      targetIndex = Math.max(0, Math.min(index, positions() - 1));
+      var target = Math.min(targetIndex * step(), maxScroll());
+      if (viewport.scrollTo) {
+        viewport.scrollTo({ left: target, behavior: reduceMotion ? 'auto' : 'smooth' });
+      } else {
+        viewport.scrollLeft = target;
+      }
+    }
+
+    function buildDots() {
+      if (!dotsBox) return;
+      var count = positions();
+      if (dots.length === count) return;
+      dotsBox.innerHTML = '';
+      dots = [];
+      for (var i = 0; i < count; i++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Ir a la posición ' + (i + 1));
+        (function (index) {
+          dot.addEventListener('click', function () { goTo(index); });
+        })(i);
+        dotsBox.appendChild(dot);
+        dots.push(dot);
+      }
+    }
+
+    function sync() {
+      /* Hidden by a filter: nothing to measure yet */
+      if (!viewport.clientWidth) return;
+
+      var scrollable = maxScroll() > 1;
+      root.classList.toggle('is-static', !scrollable);
+      if (!scrollable) return;
+
+      buildDots();
+
+      if (prev) prev.disabled = viewport.scrollLeft <= 1;
+      if (next) next.disabled = viewport.scrollLeft >= maxScroll() - 1;
+
+      /* Scrolling has settled by now (the handler is debounced), so trust the real position */
+      targetIndex = Math.max(0, Math.min(currentIndex(), positions() - 1));
+
+      var active = Math.min(targetIndex, dots.length - 1);
+      dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === active); });
+    }
+
+    if (prev) prev.addEventListener('click', function () { goTo(targetIndex - 1); });
+    if (next) next.addEventListener('click', function () { goTo(targetIndex + 1); });
+
+    viewport.addEventListener('scroll', function () {
+      window.clearTimeout(viewport._syncTimer);
+      viewport._syncTimer = window.setTimeout(sync, 80);
+    });
+    window.addEventListener('resize', sync);
+
+    carouselRefreshers.push(sync);
+    sync();
+  }
+
+  document.querySelectorAll('[data-carousel]').forEach(setupCarousel);
+
   /* Portfolio filters — toggle whole category blocks */
   var filters = document.getElementById('filters');
   var categoryBlocks = document.querySelectorAll('.proyectos__category');
@@ -145,6 +240,8 @@
           block.classList.toggle('is-hidden', !match);
           block.style.opacity = '';
         });
+        /* Tracks measure as 0 while hidden — re-measure once they are back */
+        carouselRefreshers.forEach(function (refresh) { refresh(); });
       }, reduceMotion ? 0 : 200);
     });
   }

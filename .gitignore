@@ -1,2 +1,12 @@
 .DS_Store
 Thumbs.db
+
+# Copias que crea Dropbox cuando se edita desde dos computadoras.
+# Nunca deben publicarse: son duplicados, no la version buena.
+*Copia en conflicto*
+*conflicted copy*
+
+# Carpeta de trabajo local (copias listas para subir a mano, herramientas).
+# No es parte del sitio.
+subir-a-anainnova/
+_herramientas/
